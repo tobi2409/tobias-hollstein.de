@@ -1,0 +1,379 @@
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    --content-background-color: #ede7e3;
+    --blocks-background-color: #253237;
+
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Source Sans 3", sans-serif;
+}
+
+body > header {
+    --align: top;
+    background-color: var(--blocks-background-color);
+    padding: 10px;
+}
+
+body > header > img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body > main {
+    --section-color: #d8cfc4;
+
+    --align: client;
+    background-color: var(--content-background-color);
+    overflow-y: auto;
+    padding: 20px;
+    background-image: radial-gradient(#d9d1cc 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+@media (width <= 1000px) {
+    body > main > section {
+        width: 90%;
+    }
+}
+
+@media (width > 1000px) {
+    body > main > section {
+        width: 950px;
+    }
+}
+
+body > main > section {
+    background-color: var(--section-color);
+    box-shadow: 5px 5px #c0c3c6;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+body > main > section > h2 {
+    text-align: center;
+}
+
+@media (width <= 1000px) {
+    body > main > .develop-and-explain > aside > .large-display {
+        display: none;
+    }
+
+    body > main > .develop-and-explain > aside > .small-display {
+        display: block;
+        text-align: center;
+    }
+
+    body > main > .develop-and-explain > .imgs {
+        --align: bottom;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    @media (width <= 450px) {
+        body > main > .develop-and-explain > aside > .small-display > span {
+            font-size: 16px;
+        }
+    }
+
+    @media (width > 450px) {
+        body > main > .develop-and-explain > aside > .small-display > span {
+            font-size: 20px;
+        }
+    }
+}
+
+@media (width > 1000px) {
+    body > main > .develop-and-explain > aside > .large-display {
+        display: block;
+    }
+
+    body > main > .develop-and-explain > aside > .large-display > span {
+        font-size: 20px;
+    }
+
+    body > main > .develop-and-explain > aside > .small-display {
+        display: none;
+    }
+
+    body > main > .develop-and-explain > .imgs {
+        --align: right;
+    }
+}
+
+body > main > .develop-and-explain > aside {
+    --font-color: #253237;
+    --cursor-color: #253237;
+
+    --align: client;
+}
+
+body > main > .develop-and-explain > aside > .large-display > span,
+body > main > .develop-and-explain > aside > .small-display > span {
+    display: inline-block;
+    width: 0px;
+    height: 25px;
+    overflow: hidden;
+    color: var(--font-color);
+    font-family: 'Schoolbell', arial, serif;
+    border-right: 3px solid transparent;
+    word-break: break-all;
+    animation: cursor-blinking 1s var(--delay) var(--steps),
+        typing 5s var(--delay) forwards;
+}
+
+@keyframes cursor-blinking {
+    0% {
+        border-color: var(--cursor-color);
+    }
+
+    50% {
+        border-color: transparent;
+    }
+
+    100% {
+        border-color: var(--cursor-color);
+    }
+}
+
+@keyframes typing {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: var(--final-width);
+    }
+}
+
+body > main > .develop-and-explain > .imgs {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: auto auto auto;
+    width: 300px;
+    margin-top: 25px;
+}
+
+body > main > .develop-and-explain > .imgs > * {
+    visibility: hidden;
+}
+
+body > main > .develop-and-explain > .imgs > *:nth-child(1) {
+    grid-row: 1;
+    grid-column: 2;
+    animation: show-develop-and-explain-line-img 1s 4.1s forwards;
+}
+
+body > main > .develop-and-explain > .imgs > *:nth-child(2) {
+    grid-row: 2;
+    grid-column: 1;
+    animation: show-develop-and-explain-line-img 1s 8.1s forwards;
+}
+
+body > main > .develop-and-explain > .imgs > *:nth-child(3) {
+    position: relative;
+    grid-row: 2;
+    grid-column: 3;
+    animation: show-develop-and-explain-line-img 1s 12.1s forwards;
+}
+
+body > main > .develop-and-explain > .imgs > *:nth-child(3) > img:nth-child(2) {
+    position: absolute;
+    left: 50px;
+    top: 40px;
+    visibility: hidden;
+    animation: show-develop-and-explain-line-img 1s 16.1s forwards;
+}
+
+@keyframes show-develop-and-explain-line-img {
+    100% {
+        visibility: visible;
+    }
+}
+
+@media (width <= 580px) {
+    body > main > .personal-overview > figure {
+        --align: top;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (width > 580px) {
+    body > main > .personal-overview > figure {
+        --align: left;
+    }
+}
+
+body > main > .personal-overview > figure > img {
+    clip-path: circle(50%);
+}
+
+body > main > .personal-overview > aside {
+    --align: client;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+body > main > .tech-skills > .track {
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body > main > .tech-skills > .track > .group {
+    display: inline-block;
+    animation: tech-skills-scroll 15s linear infinite;
+}
+
+body > main > .tech-skills > .track:hover > .group {
+    animation-play-state: paused;
+}
+
+@keyframes tech-skills-scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+body > main > .tech-skills > .track > .group > figure {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+body > main > .tech-skills > .track > .group > figure > figcaption {
+    text-align: center;
+}
+
+body > main > .projects-info {
+    text-align: center;
+}
+
+body > main > .education-info {
+    text-align: center;
+}
+
+body > main > .contact > form {
+    --element-background-color: #ede7e3;
+
+    max-width: 500px;
+    min-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body > main > .contact > form > div:nth-child(1) {
+    --align: top;
+}
+
+@media (width <= 600px) {
+    body > main > .contact > form > div:nth-child(1) > input:nth-child(1) {
+        --align: top;
+    }
+    
+    body > main > .contact > form > div:nth-child(1) > input:nth-child(2) {
+        --align: top-2;
+    }
+}
+
+@media (width > 600px) {
+    body > main > .contact > form > div:nth-child(1) > input:nth-child(1) {
+        --align: left;
+    }
+    
+    body > main > .contact > form > div:nth-child(1) > input:nth-child(2) {
+        --align: right;
+    }
+}
+
+body > main > .contact > form > div:nth-child(2) {
+    --align: client;
+}
+
+body > main > .contact > form input,
+body > main > .contact > form textarea {
+    width: 100%;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-right: 10px;
+    margin-bottom: 15px;
+    border-style: none;
+    border-radius: 5px;
+    background-color: var(--element-background-color);
+    box-shadow: 2px 2px #c0c3c6;
+    cursor: pointer;
+}
+
+body > main > .contact > form textarea {
+    height: 100px;
+}
+
+body > main > .contact > form > .result {
+    font-weight: bold;
+}
+
+body > main > .contact > form > .result {
+    --align: bottom;
+}
+
+body > main > .contact > form > button[type="submit"] {
+    --align: bottom-2;
+    width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    border-radius: 5px;
+    background-color: #253237;
+    padding: 10px;
+    box-shadow: 2px 2px #c0c3c6;
+    color: white;
+    cursor: pointer;
+}
+
+body > main > .contact > form > button[type="submit"]:hover {
+    animation: contact-submit-hover-animation 0.75s forwards;
+}
+
+@keyframes contact-submit-hover-animation {
+    0% {
+        background-color: #253237;
+    }
+
+    100% {
+        background-color: #3a5057;
+    }
+}
+
+body > main > footer {
+    text-align: right;
+    font-size: 12px;
+}
+
+body > main > footer > nav > a:not(:last-child){
+    margin-right: 10px;
+}
+
+body > footer {
+    --align: bottom;
+    background-color: var(--blocks-background-color);
+    color: white;
+    font-size: 12px;
+    padding: 10px;
+}

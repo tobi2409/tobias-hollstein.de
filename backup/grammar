@@ -1,0 +1,12 @@
+      <h3>Grammatik (vereinfachte Form)</h3>
+      <pre>
+      START -> 'program' PROGRAM 'program-end' START
+
+      PROGRAM -> 'write' ADDRESS ':=' EXPRESSION PROGRAM
+              | 'goto-if' EXPRESSION OPERATOR EXPRESSION ',' ADDRESS PROGRAM
+              | 'goto' ADDRESS PROGRAM
+
+      ADDRESS -> '[' NUMBER ']'
+      EXPRESSION -> '"' STRING '"' | NUMBER | ADDRESS
+      OPERATOR -> '=' | '<' | '<=' | '>' | '>='
+      </pre>

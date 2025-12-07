@@ -1,0 +1,102 @@
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    --content-background-color: #ede7e3;
+    --blocks-background-color: #253237;
+
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Source Sans 3", sans-serif;
+}
+
+body > header {
+    --align: top;
+    background-color: var(--blocks-background-color);
+    padding: 10px;
+}
+
+body > header > img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body > main {
+    --section-color: #d8cfc4;
+
+    --align: client;
+    background-color: var(--content-background-color);
+    overflow-y: auto;
+    padding: 20px;
+    background-image: radial-gradient(#d9d1cc 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+@media (width <= 1000px) {
+    body > main > section {
+        width: 90%;
+    }
+}
+
+@media (width > 1000px) {
+    body > main > section {
+        width: 950px;
+    }
+}
+
+body > main > section {
+    background-color: var(--section-color);
+    box-shadow: 5px 5px #c0c3c6;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+body > main > section > h2 {
+    text-align: center;
+}
+
+body > main > .chapter > header {
+    cursor: pointer;
+}
+
+body > main > .chapter > header > h2 {
+    --align: client;
+    text-align: center;
+}
+
+body > main > .chapter > header > span {
+    --align: right;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 30px;
+}
+
+body > main > .closed-chapter > main {
+    display: none;
+}
+
+body > main > footer {
+    text-align: right;
+    font-size: 12px;
+}
+
+body > main > footer > nav > a:not(:last-child){
+    margin-right: 10px;
+}
+
+body > footer {
+    --align: bottom;
+    background-color: var(--blocks-background-color);
+    color: white;
+    font-size: 12px;
+    padding: 10px;
+}

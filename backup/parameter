@@ -1,0 +1,26 @@
+      <h3>Parameter</h3>
+      <p>Parameter für das Programm werden in dafür dedizierte Zeilen des Notizblocks notiert. Das Programm kann diese Zeilen lesen und verarbeiten.</p>
+
+      <h3>Beispiele</h3>
+      <p><strong>Beispiel 1 – Kaffee zubereiten</strong></p>
+      <pre>
+      program
+      write [1] := 100             ; Wasserkocher.temperatur
+      write [2] := 0               ; Tasse.inhalt
+      write [3] := 10              ; Kaffeepulver.menge
+      write [2] := [2] + [3]       ; Pulver in Tasse
+      write [4] := 200             ; heißes Wasser
+      write [2] := [2] + [4]       ; Tasse enthält Pulver + Wasser
+      program-end
+      </pre>
+
+      <p><strong>Beispiel 2 – Streit schlichten</strong></p>
+      <pre>
+      program
+      write [1] := "offen"         ; Mensch.emotion
+      write [2] := "wahr"          ; Partnerin.fühlt_sich_verstanden
+      write [3] := "mittel"        ; Beziehung.spannung
+      goto-if [3] > "hoch", [10]   ; wenn Spannung noch hoch, springe
+      write [4] := "hoch"          ; Beziehung.vertrauen
+      program-end
+      </pre>

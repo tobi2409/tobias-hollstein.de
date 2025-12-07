@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio mit Webentwicklung, Softwareprojekten und didaktischen Konzepten für den Informatikunterricht. Modern, übersichtlich und praxisnah.">
+  <meta property="og:title" content="Tobias Hollstein - Education">
+  <meta property="og:description" content="Moderne Webprojekte, Softwareideen und Ansätze zur Didaktik in der Informatik – alles in meinem persönlichen Portfolio.">
+  <!--<meta property="og:image" content="https://www.example.com/bild.jpg">-->
+  <meta property="og:url" content="https://www.tobias-hollstein.de/">
+  <meta property="og:type" content="website">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Schoolbell&v1" rel="stylesheet">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/education.css">
+  <title>Tobias Hollstein - Education</title>
+</head>
+<body class="frame">
+
+  <header>
+    <img src="imgs/logo.png"/>
+  </header>
+
+  <main>
+
+    <section style="text-align: center;"><span style="font-size: 16px; font-weight: bold; color: red;">Diese Seite befindet sich im Aufbau.</span></section>
+
+    <section class="chapter closed-chapter">
+      <header class="frame">
+        <h2>Was ist ein System?</h2>
+        <span>&#x25BC;</span>
+      </header>
+
+      <main>
+        <p>Alles, was es in unserer Welt gibt, kann man als ein <strong>System</strong> betrachten.<br>
+          Jedes System hat <strong>Eigenschaften</strong> und kann <strong>Tätigkeiten ausführen</strong>.<br>
+          Viele Tätigkeiten hängen zudem von Parametern oder anderen Systemen ab, was Interaktionen ermöglicht.</p>
+
+        <p>Hier einige Beispiele für Systeme:</p>
+
+        <h3>Baum</h3>
+        <ul>
+          <li><strong>System:</strong> Baum</li>
+          <li><strong>Eigenschaften:</strong> Höhe, Blattform, Alter, Rinde</li>
+          <li><strong>Tätigkeiten / Parameter:</strong>
+            <ul>
+              <li>wachsen(Geschwindigkeit) – z. B. wachsen(5 m pro Jahr)</li>
+              <li>Sauerstoff produzieren(Sauerstoffmenge)</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3>Auto</h3>
+        <ul>
+          <li><strong>System:</strong> Auto</li>
+          <li><strong>Eigenschaften:</strong> Farbe, Marke, Anzahl der Räder, Motorleistung</li>
+          <li><strong>Tätigkeiten / Parameter:</strong>
+            <ul>
+              <li>fahren(Geschwindigkeit)</li>
+              <li>transportieren(Mensch)</li>
+              <li>transportieren(Gegenstand)</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3>Mensch</h3>
+        <ul>
+          <li><strong>System:</strong> Mensch</li>
+          <li><strong>Eigenschaften:</strong> Gewicht, Fähigkeiten, Bedürfnisse</li>
+          <li><strong>Tätigkeiten / Parameter:</strong>
+            <ul>
+              <li>laufen(Geschwindigkeit)</li>
+              <li>sprechen(Wort)</li>
+              <li>essen(Nahrung)</li>
+              <li>fahren(Auto, Geschwindigkeit) – z. B. fahren(Auto, 100 km/h)</li>
+              <li>benutzen(Handy, Aktion) – z. B. benutzen(Handy, Nachricht senden)</li>
+              <li>interagieren(Salamander, Umgebung) – z. B. beobachten(Salamander, Farbwechsel)</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3>Salamander</h3>
+        <ul>
+          <li><strong>System:</strong> Salamander</li>
+          <li><strong>Eigenschaften:</strong> Fähigkeit zur Farbänderung</li>
+          <li><strong>Tätigkeiten / Parameter:</strong>
+            <ul>
+              <li>Farbe ändern(Untergrundfarbe) – z. B. Farbe ändern(grün)</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3>Handy</h3>
+        <ul>
+          <li><strong>System:</strong> Handy</li>
+          <li><strong>Eigenschaften:</strong> Bildschirmgröße, Akku, Betriebssystem</li>
+          <li><strong>Tätigkeiten / Parameter:</strong>
+            <ul>
+              <li>klingeln(Ereignis) – z. B. klingeln(Nachricht)</li>
+              <li>anzeigen(Inhalt) – z. B. anzeigen(Textnachricht)</li>
+              <li>reagieren(Eingabe, Mensch) – z. B. reagieren(Tippen, Mensch)</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p>Viele Tätigkeiten hängen also von Parametern oder anderen Systemen ab.<br>
+          Dieses Denken bildet die Grundlage für die Modellierung in der Informatik:<br>
+          Wir abstrahieren Systeme, halten ihre Eigenschaften, Tätigkeiten und Interaktionen als <strong>Informationen</strong> fest und können damit Probleme analysieren und lösen.</p>
+      </main>
+    </section>
+
+    <section class="chapter closed-chapter">
+
+      <header class="frame">
+        <h2>Was ist ein Modell?</h2>
+        <span>&#x25BC;</span>
+      </header>
+
+      <main>
+        <p>Seht ihr: In unseren Beispielen haben wir über den Menschen, das Auto, den Baum, den Salamander und das Handy gesprochen – also über Dinge aus der realen Welt.<br>
+          Schon dadurch, dass wir ihre <strong>Eigenschaften</strong> und <strong>Tätigkeiten</strong> aufgeschrieben haben,<br>
+          haben wir diese Systeme praktisch schon <strong>modelliert</strong>.<br>
+          Würden wir noch einen Schritt weitergehen, könnten wir beschreiben, wie genau die Tätigkeiten durchgeführt werden.</p>
+      </main>
+
+    </section>
+
+    <section class="chapter closed-chapter">
+
+      <header class="frame">
+        <h2>Wie werden Tätigkeiten beschrieben?</h2>
+        <span>&#x25BC;</span>
+      </header>
+      
+      <main>
+
+        <p>In der Informatik kann man Tätigkeiten von Systemen <strong>rezeptartig beschreiben</strong>.<br>
+          Das bedeutet, dass man genau auflistet, <strong>welche Schritte ein System ausführt</strong>, um eine Tätigkeit durchzuführen.<br>
+          Auf diese Weise wird deutlich, wie ein System agiert, welche Teilschritte involviert sind und welche <strong>Parameter</strong> Einfluss haben.</p>
+
+        <h3>Beispiele für rezeptartig beschriebene Tätigkeiten</h3>
+
+        <ul>
+          <li><strong>Mensch – sprechen(<strong>Wort</strong>)</strong>
+            <ol>
+              <li>Der Mensch wählt das <strong>Wort</strong> aus, das er sagen möchte.</li>
+              <li>Die Lippen formen die Laute.</li>
+              <li>Der Kehlkopf strengt sich an, um die Stimme zu erzeugen.</li>
+              <li>Die Luft aus der Lunge transportiert die Töne nach außen.</li>
+              <li>Das <strong>Wort</strong> wird hörbar.</li>
+            </ol>
+          </li>
+
+          <li><strong>Mensch – laufen(<strong>Geschwindigkeit</strong>)</strong>
+            <ol>
+              <li>Die Beine heben und setzen sich abwechselnd auf den Boden.</li>
+              <li>Muskeln spannen sich an, um Kraft zu erzeugen.</li>
+              <li>Der Oberkörper balanciert, um Stabilität zu halten.</li>
+              <li>Der Mensch bewegt sich mit der gewählten <strong>Geschwindigkeit</strong> vorwärts.</li>
+            </ol>
+          </li>
+
+          <li><strong>Auto – fahren(<strong>Geschwindigkeit</strong>)</strong>
+            <ol>
+              <li>Der Motor wird gestartet, Energie wird bereitgestellt.</li>
+              <li>Die Räder drehen sich entsprechend der Gasstellung.</li>
+              <li>Das Auto bewegt sich auf der Straße vorwärts.</li>
+              <li>Die <strong>Geschwindigkeit</strong> wird durch Gas und Bremse gesteuert.</li>
+            </ol>
+          </li>
+
+          <li><strong>Salamander – Farbe ändern(<strong>Untergrundfarbe</strong>)</strong>
+            <ol>
+              <li>Der Salamander nimmt die <strong>Untergrundfarbe</strong> wahr.</li>
+              <li>Pigmentzellen in der Haut passen sich an.</li>
+              <li>Die neue Farbe erscheint auf der Haut.</li>
+            </ol>
+          </li>
+
+          <li><strong>Handy – klingeln(<strong>Ereignis</strong>)</strong>
+            <ol>
+              <li>Das Handy erkennt das eingehende <strong>Ereignis</strong> (z. B. Nachricht).</li>
+              <li>Es aktiviert den Klingelton.</li>
+              <li>Der Ton wird hörbar abgespielt.</li>
+              <li>Das Handy signalisiert die Aktivität visuell (z. B. Bildschirm blinkt).</li>
+            </ol>
+          </li>
+        </ul>
+      </main>
+
+    </section>
+
+    <section class="chapter closed-chapter">
+
+      <header class="frame">
+        <h2>Tätigkeiten zur Problemlösung</h2>
+        <span>&#x25BC;</span>
+      </header>
+
+      <main>
+        <p>
+        Vorweg: Eine <strong>Situation</strong> beschreibt den Zustand (also die Eigenschaften) eines Systems zu einem bestimmten Zeitpunkt.  
+        Wenn wir eine Tätigkeit nutzen, um ein Problem zu lösen, führen wir dafür die nötigen Handlungen <strong>rezeptartig</strong> durch.  
+        Das bedeutet: Vor der Tätigkeit gibt es eine <strong>Startsituation</strong>, und nach der Tätigkeit entsteht eine <strong>Endsituation</strong>,<br>
+        die im Idealfall der gewünschten <strong>Zielsituation</strong> entspricht.
+        </p>
+
+        <p>
+        Problemlösen bedeutet also: Wir wählen Tätigkeiten so aus und führen sie in einer sinnvollen Reihenfolge aus,<br>
+        damit sich die Eigenschaften der beteiligten Systeme schrittweise in Richtung der Zielsituation verändern.
+        </p>
+
+        <h3>Beispiel 1 – Streit mit der Partnerin schlichten</h3>
+
+        <h4>Beteiligte Systeme mit Startsituation</h4>
+        <ul>
+          <li><strong>System A: du</strong>
+            <ul>
+              <li>emotion = „verärgert“</li>
+              <li>bereitschaft = niedrig</li>
+              <li>empathie = niedrig</li>
+            </ul>
+          </li>
+          <li><strong>System B: Partnerin</strong>
+            <ul>
+              <li>emotion = „verletzt“</li>
+              <li>bereitschaft = niedrig</li>
+              <li>fühlt_sich_verstanden = falsch</li>
+              <li>verständnis = niedrig</li>
+            </ul>
+          </li>
+          <li><strong>System C: Beziehung</strong>
+            <ul>
+              <li>spannung = hoch</li>
+              <li>vertrauen = mittel</li>
+              <li>status = „gestört“</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>Rezeptartige Tätigkeiten mit Parametern und Zustandsänderungen</h4>
+        <ol>
+          <li><code>zuhören(Partnerin)</code>
+            <ul>
+              <li>du.bereitschaft: <strong>niedrig → mittel</strong></li>
+              <li>Partnerin.fühlt_sich_verstanden: <strong>falsch → wahr</strong></li>
+              <li>Beziehung.spannung: <strong>hoch → mittel</strong></li>
+            </ul>
+          </li>
+
+          <li><code>verständnis_zeigen(Partnerin)</code>
+            <ul>
+              <li>du.empathie: <strong>niedrig → hoch</strong></li>
+              <li>Partnerin.emotion: <strong>„verletzt“ → „ruhiger“</strong></li>
+              <li>Beziehung.vertrauen: <strong>mittel → hoch</strong></li>
+            </ul>
+          </li>
+
+          <li><code>eigene_Gefühle_erklären(Partnerin)</code>
+            <ul>
+              <li>du.emotion: <strong>„verärgert“ → „offen“</strong></li>
+              <li>Partnerin.verständnis: <strong>niedrig → hoch</strong></li>
+              <li>Beziehung.spannung: <strong>mittel → niedrig</strong></li>
+            </ul>
+          </li>
+
+          <li><code>lösung_finden(Partnerin)</code>
+            <ul>
+              <li>du.bereitschaft: <strong>mittel → hoch</strong></li>
+              <li>Partnerin.bereitschaft: <strong>niedrig → hoch</strong></li>
+              <li>Beziehung.status: <strong>„gestört“ → „harmonisch“</strong></li>
+            </ul>
+          </li>
+        </ol>
+
+        <h4>Endsituation</h4>
+        <ul>
+          <li><strong>du:</strong> emotion = „offen“, bereitschaft = hoch, empathie = hoch</li>
+          <li><strong>Partnerin:</strong> emotion = „ruhiger“, bereitschaft = hoch, fühlt_sich_verstanden = wahr, verständnis = hoch</li>
+          <li><strong>Beziehung:</strong> spannung = niedrig, vertrauen = hoch, status = „harmonisch“</li>
+        </ul>
+
+        <h3>Beispiel 2 – Kaffee zubereiten</h3>
+
+        <h4>Beteiligte Systeme mit Startsituation</h4>
+        <ul>
+          <li><strong>Mensch</strong>
+            <ul>
+              <li>energiebedarf = hoch</li>
+              <li>ziel = „Kaffee trinken“</li>
+            </ul>
+          </li>
+          <li><strong>Wasserkocher</strong>
+            <ul>
+              <li>temperatur = kalt</li>
+              <li>inhalt = 500 ml</li>
+            </ul>
+          </li>
+          <li><strong>Tasse</strong>
+            <ul>
+              <li>inhalt = leer</li>
+            </ul>
+          </li>
+          <li><strong>Kaffeepulver</strong>
+            <ul>
+              <li>menge = 10 g</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>Rezeptartige Tätigkeiten mit Parametern und Zustandsänderungen</h4>
+        <ol>
+          <li><code>wasser_kochen(Wasserkocher)</code>
+            <ul>
+              <li>Wasserkocher.temperatur: <strong>kalt → 100 °C</strong></li>
+            </ul>
+          </li>
+
+          <li><code>pulver_in_tasse_geben(Kaffeepulver, Tasse)</code>
+            <ul>
+              <li>Tasse.inhalt: <strong>leer → 10 g Kaffeepulver</strong></li>
+              <li>Kaffeepulver.menge: <strong>10 g → 0 g</strong></li>
+            </ul>
+          </li>
+
+          <li><code>heißes_wasser_eingießen(Wasserkocher, Tasse, menge = 200 ml)</code>
+            <ul>
+              <li>Tasse.inhalt: <strong>„Kaffeepulver“ → „Kaffeepulver + 200 ml heißes Wasser“</strong></li>
+              <li>Wasserkocher.inhalt: <strong>500 ml → 300 ml</strong></li>
+            </ul>
+          </li>
+
+          <li><code>umrühren(Tasse)</code>
+            <ul>
+              <li>Tasse.inhalt: <strong>„Kaffeepulver + heißes Wasser“ → „fertiger Kaffee“</strong></li>
+            </ul>
+          </li>
+        </ol>
+
+        <h4>Endsituation</h4>
+        <ul>
+          <li><strong>Mensch:</strong> energiebedarf = hoch, ziel bleibt „Kaffee trinken“, aber Kaffee steht bereit</li>
+          <li><strong>Wasserkocher:</strong> temperatur = 100 °C, inhalt = 300 ml</li>
+          <li><strong>Tasse:</strong> inhalt = „fertiger Kaffee“</li>
+          <li><strong>Kaffeepulver:</strong> menge = 0 g</li>
+        </ul>
+      </main>
+      
+    </section>
+      
+    <section class="chapter closed-chapter">
+
+      <header class="frame">
+        <h2>Übergang natürliche Sprache ➔ Programmiersprache</h2>
+        <span>&#x25BC;</span>
+      </header>
+
+      <main>
+          
+        <p>
+          Wir Menschen nutzen unsere <b>natürliche Sprache</b> – zum Beispiel Deutsch oder Englisch –, um Systeme zu beschreiben,<br>
+          so wie wir es in unseren Beispielen getan haben.<br>
+          Doch viele Sätze (und sogar einzelne Begriffe) können unterschiedlich verstanden werden.<br>
+          Für die Informatik und Mathematik ist das ein Problem, denn dort müssen Beschreibungen eindeutig sein.<br>
+          Deshalb verwendet man Programmiersprachen. Und bevor wir uns großen Sprachen widmen,<br>
+          beginnen wir mit einer sehr einfachen, klar definierten Sprache, mit der sich Systeme mit ihren Eigenschaften und Tätigkeiten präzise und ohne Mehrdeutigkeit beschreiben lassen.
+        </p>
+
+      </main>
+    </section>
+
+    <section class="chapter closed-chapter">
+      <header class="frame">
+        <h2>Einführung in Programmiersprache Micro-Lang</h2>
+        <span>&#x25BC;</span>
+      </header>
+
+      <main>
+        <p>Um Tätigkeiten eindeutig und ohne Mehrdeutigkeit zu beschreiben, führen wir eine sehr einfache Sprache ein. Sie besteht aus drei Elementen:</p>
+
+        <h3>Notizblock – der Speicher</h3>
+
+        <p>Der Notizblock enthält alle Informationen über die Systeme, also ihre <strong>Eigenschaften</strong> und deren <strong>aktuelle Werte</strong>.</p>
+
+        <p>Um die Arbeit mit Mikro-Lang zu erleichtern, ist es sinnvoll, <strong>für jedes System und jede Eigenschaft feste Zeilen zu reservieren</strong>.<br>
+          So weiß man genau, wo welche Information liegt, und Programme können die Zeilen eindeutig lesen, verändern oder vergleichen.</p>
+
+        <pre>
+  # System Mensch (Zeilen 1–10)
+  [1]  # Emotion
+      (0=neutral, 1=traurig, 2=verärgert)
+  [2]  # Bereitschaft
+      (0=niedrig, 1=mittel, 2=hoch)
+
+  # System Partnerin (Zeilen 11–20)
+  [11] # Emotion
+  [12] # Bereitschaft
+
+  # System Beziehung (Zeilen 21–30)
+  [21] # Spannung
+  [22] # Nähe
+        </pre>
+
+        <p>Damit funktioniert der Notizblock wie der Speicher einer einfachen Registermaschine:<br>
+          <strong>klar, nummeriert und maschinenverständlich</strong>, ohne dass Strings oder komplexe Datentypen nötig wären.</p>
+
+        <h3>Tätigkeiten-Blatt – die Programme</h3>
+
+        <p>Eine Tätigkeit ist ein Programm, das aus elementaren Befehlen besteht.<br>
+          Ein Programm beginnt mit <code>program Name</code> und endet mit <code>program-end</code>.<br>
+          Innerhalb des Programms werden die Befehle Schritt für Schritt ausgeführt.</p>
+
+        <p>Beispiel für die Tätigkeit <strong>kuchen_backen</strong>:</p>
+
+        <pre>
+  program kuchen_backen
+  ; Wenn Bäcker bereit ist,
+      Mehl in die Schüssel geben
+  call-if [2] >= 1, mehl_hinzufuegen
+  ; Wenn Zucker bereit, in die Schüssel geben
+  call-if [3] >= 1, zucker_hinzufuegen
+  ; Wenn Eier bereit, in die Schüssel geben
+  call-if [4] >= 1, eier_hinzufuegen
+  ; Backofen auf Temperatur bringen
+  call backofen_einschalten
+  ; Kuchenstatus: 1 = Teig fertig
+  write [5] := 1
+  program-end
+
+  program mehl_hinzufuegen
+  ; Schüssel.mehl = 1 (Mehl hinzugefügt)
+  write [6] := 1
+  program-end
+
+  program zucker_hinzufuegen
+  ; Schüssel.zucker = 1
+  write [7] := 1
+  program-end
+
+  program eier_hinzufuegen
+  ; Schüssel.eier = 1
+  write [8] := 1
+  program-end
+
+  program backofen_einschalten
+  ; Backofen.an = 1
+  write [9] := 1
+  program-end
+        </pre>
+
+        <p>Die Befehle greifen auf die reservierten Zeilen des Notizblocks zu. Übersicht der beteiligten Systeme und ihrer Eigenschaften:</p>
+
+        <pre>
+  # System Bäcker (Zeilen 1–10)
+  [2]  # Bäcker.bereitschaft
+      (0 = niedrig, 1 = mittel, 2 = hoch)
+
+  # System Zucker (Zeilen 11–20)
+  [3]  # Zucker.vorhanden
+      (0 = nicht vorhanden, 1 = vorhanden)
+
+  # System Eier (Zeilen 21–30)
+  [4]  # Eier.vorhanden
+      (0 = nicht vorhanden, 1 = vorhanden)
+
+  # System Kuchen (Zeilen 31–40)
+  [5]  # Kuchen.status
+  (0 = Rohteig, 1 = Teig fertig, 2 = gebacken)
+
+  # System Schüssel (Zeilen 41–50)
+  [6]  # Schüssel.mehl
+  (0 = nicht hinzugefügt, 1 = hinzugefügt)
+  [7]  # Schüssel.zucker
+  (0 = nicht hinzugefügt, 1 = hinzugefügt)
+  [8]  # Schüssel.eier
+  (0 = nicht hinzugefügt, 1 = hinzugefügt)
+
+  # System Backofen (Zeilen 51–60)
+  [9]  # Backofen.an
+  (0 = aus, 1 = an)
+        </pre>
+
+        <p>Dieses Beispiel zeigt, wie Mikro-Lang mehrere Systeme modelliert, wie die Zustände über den Notizblock verwaltet werden<br>
+          und wie Call- und Call-if-Aufrufe die Tätigkeiten Schritt für Schritt ausführen.<br>
+          So lassen sich komplexe Abläufe verständlich und nachvollziehbar darstellen.</p>
+
+        <h3>Elementare Befehle</h3>
+
+        <ul>
+          <li><strong>write</strong> – schreibt einen Wert in eine Speicherzeile.<br>
+              Beispiel: <code>write [4] := 1</code>  <em>(z. B. Beziehung.spannung = 1)</em>
+          </li>
+
+          <li><strong>call</strong> – ruft ein anderes Programm auf. Nach Beendigung des Programms kehrt die Ausführung automatisch zum Aufrufpunkt zurück.<br>
+              Beispiel: <code>call mehl_hinzufuegen</code>
+          </li>
+
+          <li><strong>call-if</strong> – ruft ein anderes Programm nur aus, wenn eine Bedingung erfüllt ist.<br>
+              Beispiel: <code>call-if [2] >= 1, mehl_hinzufuegen</code>  
+              <em>(wenn Bäcker.bereitschaft ≥ mittel, Mehl hinzufügen)</em>
+          </li>
+        </ul>
+
+        <p>Diese Befehle greifen direkt auf die Zeilen des Notizblocks zu.<br>
+          Bedingungen werden über Zahlenwerte ausgedrückt, da Mikro-Lang aktuell keine Strings verarbeitet.<br>
+          Zusammen ermöglichen diese Befehle das schrittweise Ausführen von Tätigkeiten und die Umsetzung von Entscheidungslogik.</p>
+
+        <h3>Prozessor</h3>
+        <p>Der <strong>Prozessor</strong> führt die Befehle einer Tätigkeit <strong>zeilenweise</strong> aus.<br>
+          Bei einem <code>call</code> springt er zu einem anderen Programm und setzt dort die Ausführung fort.</p>
+
+        <p>Mit dieser Sprache lassen sich beliebige Tätigkeiten Schritt für Schritt und ohne Mehrdeutigkeit modellieren.<br>
+          Arithmetische oder logische Ausdrücke können ebenfalls mit den Befehlen realisiert werden,<br>
+          indem kleine Programme zur Berechnung aufgebaut werden.<br>
+          Man bringt Micro-Lang wie einem Grundschüler die Grundrechenarten bei.</p>
+
+        <a href="js/micro-lang.js">Interpreter von Micro-Lang</a><br>
+
+        <b>TODOs: Laufzeitkomplexität, Datenstrukturen, sachter Umstieg auf eine aktuelle Hochsprache, bekannte Algorithmen, Intelligenz (Problemlösung) ist auch nur Routine, Übungen, Übungen, Übungen</b>
+
+      </main>
+    </section>
+
+    <section class="chapter closed-chapter">
+
+      <header class="frame">
+        <h2>Zusammenhang Informatik - Mathematik</h2>
+        <span>&#x25BC;</span>
+      </header>
+
+      <main>
+        <p>In Bearbeitung ...</p>
+
+        <p>Die Schulmathematik – Arithmetik, Algebra, Analysis, Stochastik, Statistik – scheint nur bedingt was mit Informatik zu tun zu haben. Dennoch lassen sich alle diese Probleme prinzipiell auf einer Registermaschine lösen.</p>
+
+        <p>Die Idee dahinter:</p>
+        <ul>
+          <li>Eine Registermaschine hat nur einen Speicher (die „Register“) und elementare Befehle wie Lesen, Schreiben, Vergleichen und Springen.</li>
+          <li>Komplexe Rechenoperationen wie Addition, Subtraktion, Multiplikation oder Division lassen sich Schritt für Schritt aus diesen einfachen Befehlen aufbauen.</li>
+          <li>Variablen der Mathematik entsprechen dabei Speicheradressen (Register), Bedingungen und Schleifen werden über Vergleichs- und Sprungbefehle umgesetzt.</li>
+        </ul>
+
+        <p><strong>Mächtigkeit:</strong> Eine Registermaschine ist Turing-vollständig – das bedeutet, dass alles, was algorithmisch lösbar ist, auf ihr dargestellt werden kann. Damit kann die gesamte Schulmathematik ausgeführt werden.</p>
+
+        <h4>Gleichungen über Zahlen</h4>
+        <p>Ein typisches Beispiel aus der Schulmathematik ist das Lösen von Gleichungen:</p>
+        <ul>
+          <li>Funktional (algebraisch): x + 3 = 7 → x = 7 − 3</li>
+          <li>Imperativ / programmatisch: Schrittweise Werte testen oder hochzählen, bis die Gleichung erfüllt ist.</li>
+        </ul>
+        <p>Beide Paradigmen können auf Registermaschinen abgebildet werden – entweder durch Umkehrfunktionen oder durch schrittweise Verarbeitung mit Call- und Call-if-Aufrufen.</p>
+
+        <h4>Gleichungen über nicht-numerische Objekte: Farben</h4>
+        <p>Gleichungen müssen nicht nur mit Zahlen gelöst werden. Wir können auch andere Objekte betrachten, z. B. Farben.</p>
+        <ul>
+          <li>Funktion <strong>f</strong>: vertauscht Rot und Cyan, Gelb und Blau, Grün und Magenta etc.</li>
+          <li>Umkehrfunktion <strong>f<sup>-1</sup></strong>: kehrt die Vertauschung wieder um.</li>
+        </ul>
+        <p>Beispiel:</p>
+        <pre>
+  f(f(x)) = gelb | f<sup>-1</sup> auf beide Seiten
+  f(x)     = f<sup>-1</sup>(gelb) = blau | f<sup>-1</sup> erneut
+  x        = f<sup>-1</sup>(blau) = gelb
+        </pre>
+
+        <p>Ergebnis: <code>x = gelb</code></p>
+
+        <p>Dieses Beispiel zeigt, dass Gleichungen auch über nicht-numerische Objekte gelöst werden können, solange die Funktion bijektiv ist.</p>
+
+        <h4>Gleichungssysteme über bewegende Objekte</h4>
+        <p>Betrachten wir zwei Autos auf einer Straße, die unterschiedliche Startpositionen und Geschwindigkeiten haben. Wir möchten bestimmen, wann sie sich treffen.</p>
+
+        <h5>1. Mathematisch-algebraisch (funktional)</h5>
+        <ul>
+          <li>Auto A: Weg<sub>A</sub>(t) = v<sub>A</sub> * t + s<sub>A,0</sub></li>
+          <li>Auto B: Weg<sub>B</sub>(t) = v<sub>B</sub> * t + s<sub>B,0</sub></li>
+          <li>Gleichungssystem: Weg<sub>A</sub>(t) = Weg<sub>B</sub>(t)</li>
+          <li>Lösung über Umkehrfunktionen: t = (s<sub>B,0</sub> − s<sub>A,0</sub>) / (v<sub>A</sub> − v<sub>B</sub>)</li>
+        </ul>
+
+        <h5>2. Imperativ / programmatisch</h5>
+        <ul>
+          <li>Wir starten bei t = 0 und erhöhen die Zeit schrittweise (hochzählen).</li>
+          <li>In jedem Schritt wird Weg<sub>A</sub>(t) und Weg<sub>B</sub>(t) berechnet.</li>
+          <li>Wenn Weg<sub>A</sub>(t) = Weg<sub>B</sub>(t), haben wir die Lösung gefunden.</li>
+          <li>Dies entspricht dem klassischen Programmierparadigma, wie wir es z. B. mit <code>call</code>-Schleifen in Mikro-Lang umsetzen könnten.</li>
+        </ul>
+
+        <p>Dieses Beispiel illustriert:</p>
+        <ul>
+          <li>Gleichungssysteme können sowohl algebraisch über Umkehrfunktionen gelöst werden als auch imperativ durch Schritt-für-Schritt-Berechnung.</li>
+          <li>Die imperativen Schritte lassen sich auf eine Registermaschine übertragen, da jeder Schritt nur elementare Befehle benötigt (Werte lesen, schreiben, vergleichen, springen).</li>
+          <li>So wird deutlich, dass Mikro-Lang oder Registermaschinen auch dynamische, zeitabhängige Probleme modellieren können.</li>
+          <li>mit Mikro-Lang (bzw. Register- und Turingmaschinen) können sowohl **funktionale (Umkehrfunktionen)** als auch **imperative Lösungen** umgesetzt werden</li>
+        </ul>
+
+        <p>Für Lernende bedeutet dies: Mikro-Lang und Registermaschinen sind universelle Werkzeuge, die weit über einfache Zahlenoperationen hinausgehen. Sie können auch Aufgaben lösen, die abstrakte Strukturen oder zeitabhängige Systeme betreffen, solange diese als Registerwerte modelliert werden.</p>
+      </main>
+
+    </section>
+
+    <section class="chapter closed-chapter">
+      <header class="frame">
+        <h2>Tipps zur Didaktik</h2>
+        <span>&#x25BC;</span>
+      </header>
+
+      <main>
+        <ul>
+          <li>Bei Übungen ist es wichtig, dass der Lernende seinen eigenen Weg nutzt, um zum Ziel zu kommen.
+              Der Lehrende muss erkennen, dass trotzdem der Weg unkonventionell und ggf. auch umständlich ist, dieser auch zum Ziel führen könnte.
+              Beispiel: Wenn der Schüler für den Anfang folgendes definiert:
+              <code>var produktUndPreis = 'Brot für 1,99€'</code>
+              und er das Produkt und den Preis ermitteln möchte, dann kann er das trotzdem herausfinden, auch wenn Produkt und Preis nicht in getrennte Variablen ausgewiesen ist.
+          </li>
+        </ul>
+      </main>
+    </section>
+
+    <footer>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+    </footer>
+
+  </main>
+
+  <footer>
+    <span class="copyright">© Tobias Hollstein 2025 Alle Rechte vorbehalten</span>
+  </footer>
+
+  <script src="js/education.js"></script>
+
+</body>
+</html>
