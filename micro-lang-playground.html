@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interaktiver Playground für die Micro-Lang Programmiersprache - experimentiere mit kariertem Papier und minimalistischen Befehlen.">
+  <meta property="og:title" content="Tobias Hollstein - Micro-Lang Playground">
+  <meta property="og:description" content="Lerne programmieren mit Micro-Lang: kariertes Papier, 3 Befehle, unendliche Möglichkeiten.">
+  <meta property="og:url" content="https://www.tobias-hollstein.de/micro-lang-playground.html">
+  <meta property="og:type" content="website">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Schoolbell&v1" rel="stylesheet">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/micro-lang-playground.css">
+  <title>Tobias Hollstein - Micro-Lang Playground</title>
+</head>
+<body class="frame">
+
+  <header>
+    <img src="imgs/logo.png"/>
+  </header>
+
+  <main>
+    <h1>Micro-Lang Playground</h1>
+    <p>Experimentiere mit Micro-Lang: kariertes Papier, 3 Befehle (write, call, call-if), endlose Möglichkeiten.</p>
+
+    <div class="playground frame">
+      <section class="memory-display" style="--align: left;">
+        <h2>Kariertes Papier (Speicher)</h2>
+        <div id="memory-grid"></div>
+      </section>
+
+      <section class="code-editor" style="--align: client;">
+        <h2>Code-Editor</h2>
+        <textarea id="code-input" spellcheck="false">program kuchen_backen
+; Wenn Bäcker bereit ist (Zeile 1, Spalte 1), springe zu Programm mehl_hinzufuegen
+call-if [1,1] >= 1, mehl_hinzufuegen
+; Wenn Zucker vorhanden (Zeile 2, Spalte 1), springe zu Programm zucker_hinzufuegen
+call-if [2,1] >= 1, zucker_hinzufuegen
+; Wenn Eier vorhanden (Zeile 3, Spalte 1), springe zu Programm eier_hinzufuegen
+call-if [3,1] >= 1, eier_hinzufuegen
+; Springe zu Programm backofen_einschalten
+call backofen_einschalten
+; Kuchenstatus (Zeile 4, Spalte 1): 1 = Teig fertig
+write [4,1] := 1
+program-end
+
+program mehl_hinzufuegen
+; Schüssel.mehl (Zeile 5, Spalte 1) = 1
+write [5,1] := 1
+program-end
+
+program zucker_hinzufuegen
+; Schüssel.zucker (Zeile 5, Spalte 2) = 1
+write [5,2] := 1
+program-end
+
+program eier_hinzufuegen
+; Schüssel.eier (Zeile 5, Spalte 3) = 1
+write [5,3] := 1
+program-end
+
+program backofen_einschalten
+; Backofen.an (Zeile 6, Spalte 1) = 1
+write [6,1] := 1
+program-end</textarea>
+        
+        <div class="controls frame">
+          <label style="--align: left;">
+            Startprogramm:
+            <input type="text" id="start-program" value="kuchen_backen" placeholder="kuchen_backen">
+          </label>
+          <span style="--align: right;">
+            <button id="run-btn">▶ Ausführen</button>
+            <button id="clear-btn">🗑️ Speicher leeren</button>
+          </span>
+        </div>
+      </section>
+    </div>
+
+    <section class="output">
+      <h2>Status & Fehler</h2>
+      <div id="output"></div>
+    </section>
+
+    <footer>
+      <a href="education.html">← Zurück zur Education-Seite</a>
+      <span style="margin-left: 20px;">|</span>
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+    </footer>
+  </main>
+
+  <footer>
+    <span class="copyright">© Tobias Hollstein 2025 Alle Rechte vorbehalten</span>
+  </footer>
+
+  <script src="js/micro-lang.js"></script>
+  <script src="js/micro-lang-playground.js"></script>
+
+</body>
+</html>

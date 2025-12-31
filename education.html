@@ -378,31 +378,64 @@
       <main>
         <p>Um Tätigkeiten eindeutig und ohne Mehrdeutigkeit zu beschreiben, führen wir eine sehr einfache Sprache ein. Sie besteht aus drei Elementen:</p>
 
-        <h3>Notizblock – der Speicher</h3>
+        <h3>Notizblock – der Speicher (kariertes Papier)</h3>
 
         <p>Der Notizblock enthält alle Informationen über die Systeme, also ihre <strong>Eigenschaften</strong> und deren <strong>aktuelle Werte</strong>.</p>
+        <p>Grundsätzlich kann man die Informationen an beliebigen Positionen auf dem karierten Papier notieren.
+          Es kann genauso wie ein herkömmlicher Notizblock genutzt werden.
+        </p>
 
-        <p>Um die Arbeit mit Mikro-Lang zu erleichtern, ist es sinnvoll, <strong>für jedes System und jede Eigenschaft feste Zeilen zu reservieren</strong>.<br>
-          So weiß man genau, wo welche Information liegt, und Programme können die Zeilen eindeutig lesen, verändern oder vergleichen.</p>
+        <p>Wir nutzen <strong>kariertes Papier</strong>, auf dem wir Informationen an beliebigen Positionen notieren können.<br>
+          Jede Zelle hat eine Adresse <code>[Zeile, Spalte]</code> – genau wie beim handschriftlichen Schreiben auf kariertem Papier.</p>
+
+        <p><strong>Beispiel für eine mögliche Organisation:</strong><br>
+          Man könnte die Systeme und ihre Eigenschaften tabellarisch strukturieren – das ist übersichtlich und erleichtert das Auffinden von Informationen:</p>
 
         <pre>
-  # System Mensch (Zeilen 1–10)
-  [1]  # Emotion
-      (0=neutral, 1=traurig, 2=verärgert)
-  [2]  # Bereitschaft
-      (0=niedrig, 1=mittel, 2=hoch)
-
-  # System Partnerin (Zeilen 11–20)
-  [11] # Emotion
-  [12] # Bereitschaft
-
-  # System Beziehung (Zeilen 21–30)
-  [21] # Spannung
-  [22] # Nähe
+  # Kariertes Papier - Beispiel einer Tabellenstruktur
+  # (Man könnte die Informationen aber auch ganz anders anordnen)
+  # Jedes System (Zeile) hat eigene Eigenschaften (Spalten)
+  
+           | Spalte 1    | Spalte 2       | Spalte 3
+  ---------+-------------+----------------+----------
+  Zeile 1  | [1,1]       | [1,2]          | [1,3]
+  (Mensch) | Emotion     | Bereitschaft   | Empathie
+           | 0=neutral   | 0=niedrig      | 0=niedrig
+           | 1=traurig   | 1=mittel       | 1=mittel
+           | 2=verärgert | 2=hoch         | 2=hoch
+  
+  Zeile 2  | [2,1]       | [2,2]          | [2,3]
+  (Partner)| Emotion     | Bereitschaft   | Verständnis
+  
+  Zeile 3  | [3,1]       | [3,2]          | [3,3]
+  (Bezieh.)| Spannung    | Vertrauen      | Status
         </pre>
 
-        <p>Damit funktioniert der Notizblock wie der Speicher einer einfachen Registermaschine:<br>
-          <strong>klar, nummeriert und maschinenverständlich</strong>, ohne dass Strings oder komplexe Datentypen nötig wären.</p>
+        <p>Diese tabellarische Organisation ist nur eine von vielen Möglichkeiten.<br>
+          Wichtig ist: Jede Zelle hat eine eindeutige Adresse <code>[Zeile, Spalte]</code>, sodass Programme die Informationen gezielt lesen und schreiben können.<br>
+          Das karierte Papier funktioniert damit wie der Speicher einer Maschine – <strong>flexibel, übersichtlich und maschinenverständlich</strong>.</p>
+
+        <h3>Elementare Befehle</h3>
+
+        <ul>
+          <li><strong>write</strong> – schreibt einen Wert in eine Matrix-Zelle.<br>
+              Beispiel: <code>write [3,1] := 2</code>  <em>(Beziehung.spannung = hoch)</em>
+          </li>
+
+          <li><strong>call</strong> – ruft ein anderes Programm auf. Nach Beendigung kehrt die Ausführung automatisch zum Aufrufpunkt zurück.<br>
+              Beispiel: <code>call mehl_hinzufuegen</code>
+          </li>
+
+          <li><strong>call-if</strong> – ruft ein anderes Programm nur auf, wenn eine Bedingung erfüllt ist.<br>
+              Beispiel: <code>call-if [1,1] >= 1, mehl_hinzufuegen</code>  
+              <em>(wenn Bäcker.bereitschaft [Zeile 1, Spalte 1] ≥ mittel, dann Mehl hinzufügen)</em>
+          </li>
+        </ul>
+
+        <p>Diese Befehle greifen direkt auf die Zellen <code>[Zeile, Spalte]</code> des karierten Papiers zu.<br>
+          Die freie Positionierung ermöglicht es, Informationen so zu organisieren, wie es für das jeweilige Problem am sinnvollsten ist.<br>
+          Bedingungen werden über Zahlenwerte ausgedrückt, da Mikro-Lang aktuell keine Strings verarbeitet.<br>
+          Zusammen ermöglichen diese Befehle das schrittweise Ausführen von Tätigkeiten und die Umsetzung von Entscheidungslogik.</p>
 
         <h3>Tätigkeiten-Blatt – die Programme</h3>
 
@@ -412,101 +445,87 @@
 
         <p>Beispiel für die Tätigkeit <strong>kuchen_backen</strong>:</p>
 
-        <pre>
+        <div class="frame">
+          <pre style="--align: client;">
   program kuchen_backen
-  ; Wenn Bäcker bereit ist,
-      Mehl in die Schüssel geben
-  call-if [2] >= 1, mehl_hinzufuegen
-  ; Wenn Zucker bereit, in die Schüssel geben
-  call-if [3] >= 1, zucker_hinzufuegen
-  ; Wenn Eier bereit, in die Schüssel geben
-  call-if [4] >= 1, eier_hinzufuegen
-  ; Backofen auf Temperatur bringen
+  ; Wenn Bäcker bereit ist (Zeile 1, Spalte 1),
+      springe zu Programm mehl_hinzufuegen
+  call-if [1,1] >= 1, mehl_hinzufuegen
+  ; Wenn Zucker vorhanden (Zeile 2, Spalte 1),
+      springe zu Programm zucker_hinzufuegen
+  call-if [2,1] >= 1, zucker_hinzufuegen
+  ; Wenn Eier vorhanden (Zeile 3, Spalte 1),
+      springe zu Programm eier_hinzufuegen
+  call-if [3,1] >= 1, eier_hinzufuegen
+  ; Springe zu Programm backofen_einschalten
   call backofen_einschalten
-  ; Kuchenstatus: 1 = Teig fertig
-  write [5] := 1
+  ; Kuchenstatus (Zeile 4, Spalte 1): 1 = Teig fertig
+  write [4,1] := 1
   program-end
 
   program mehl_hinzufuegen
-  ; Schüssel.mehl = 1 (Mehl hinzugefügt)
-  write [6] := 1
+  ; Schüssel.mehl (Zeile 5, Spalte 1) = 1
+  write [5,1] := 1
   program-end
 
   program zucker_hinzufuegen
-  ; Schüssel.zucker = 1
-  write [7] := 1
+  ; Schüssel.zucker (Zeile 5, Spalte 2) = 1
+  write [5,2] := 1
   program-end
 
   program eier_hinzufuegen
-  ; Schüssel.eier = 1
-  write [8] := 1
+  ; Schüssel.eier (Zeile 5, Spalte 3) = 1
+  write [5,3] := 1
   program-end
 
   program backofen_einschalten
-  ; Backofen.an = 1
-  write [9] := 1
+  ; Backofen.an (Zeile 6, Spalte 1) = 1
+  write [6,1] := 1
   program-end
-        </pre>
+          </pre>
 
-        <p>Die Befehle greifen auf die reservierten Zeilen des Notizblocks zu. Übersicht der beteiligten Systeme und ihrer Eigenschaften:</p>
+          <pre style="--align: left;">
+  # Kariertes Papier – Speicher für Kuchen-Backen
+  
+           | Spalte 1       | Spalte 2    | Spalte 3
+  ---------+----------------+-------------+----------
+  Zeile 1  | [1,1]          |
+  (Bäcker) | Bereitschaft   |
+           | 0=niedrig      |
+           | 1=mittel       |
+           | 2=hoch         |
+  
+  Zeile 2  | [2,1]          |
+  (Zucker) | vorhanden      |
+           | 0=nein, 1=ja   |
+  
+  Zeile 3  | [3,1]          |
+  (Eier)   | vorhanden      |
+           | 0=nein, 1=ja   |
+  
+  Zeile 4  | [4,1]          |
+  (Kuchen) | Status         |
+           | 0=Rohteig      |
+           | 1=Teig fertig  |
+           | 2=gebacken     |
+  
+  Zeile 5  | [5,1]          | [5,2]       | [5,3]
+  (Schüs.) | mehl           | zucker      | eier
+           | 0=nein, 1=ja   | 0=nein, 1=ja| 0=nein, 1=ja
+  
+  Zeile 6  | [6,1]          |
+  (Ofen)   | eingeschaltet  |
+           | 0=aus, 1=an    |
+          </pre>
+        </div>
 
-        <pre>
-  # System Bäcker (Zeilen 1–10)
-  [2]  # Bäcker.bereitschaft
-      (0 = niedrig, 1 = mittel, 2 = hoch)
-
-  # System Zucker (Zeilen 11–20)
-  [3]  # Zucker.vorhanden
-      (0 = nicht vorhanden, 1 = vorhanden)
-
-  # System Eier (Zeilen 21–30)
-  [4]  # Eier.vorhanden
-      (0 = nicht vorhanden, 1 = vorhanden)
-
-  # System Kuchen (Zeilen 31–40)
-  [5]  # Kuchen.status
-  (0 = Rohteig, 1 = Teig fertig, 2 = gebacken)
-
-  # System Schüssel (Zeilen 41–50)
-  [6]  # Schüssel.mehl
-  (0 = nicht hinzugefügt, 1 = hinzugefügt)
-  [7]  # Schüssel.zucker
-  (0 = nicht hinzugefügt, 1 = hinzugefügt)
-  [8]  # Schüssel.eier
-  (0 = nicht hinzugefügt, 1 = hinzugefügt)
-
-  # System Backofen (Zeilen 51–60)
-  [9]  # Backofen.an
-  (0 = aus, 1 = an)
-        </pre>
-
-        <p>Dieses Beispiel zeigt, wie Mikro-Lang mehrere Systeme modelliert, wie die Zustände über den Notizblock verwaltet werden<br>
-          und wie Call- und Call-if-Aufrufe die Tätigkeiten Schritt für Schritt ausführen.<br>
-          So lassen sich komplexe Abläufe verständlich und nachvollziehbar darstellen.</p>
-
-        <h3>Elementare Befehle</h3>
-
-        <ul>
-          <li><strong>write</strong> – schreibt einen Wert in eine Speicherzeile.<br>
-              Beispiel: <code>write [4] := 1</code>  <em>(z. B. Beziehung.spannung = 1)</em>
-          </li>
-
-          <li><strong>call</strong> – ruft ein anderes Programm auf. Nach Beendigung des Programms kehrt die Ausführung automatisch zum Aufrufpunkt zurück.<br>
-              Beispiel: <code>call mehl_hinzufuegen</code>
-          </li>
-
-          <li><strong>call-if</strong> – ruft ein anderes Programm nur aus, wenn eine Bedingung erfüllt ist.<br>
-              Beispiel: <code>call-if [2] >= 1, mehl_hinzufuegen</code>  
-              <em>(wenn Bäcker.bereitschaft ≥ mittel, Mehl hinzufügen)</em>
-          </li>
-        </ul>
-
-        <p>Diese Befehle greifen direkt auf die Zeilen des Notizblocks zu.<br>
-          Bedingungen werden über Zahlenwerte ausgedrückt, da Mikro-Lang aktuell keine Strings verarbeitet.<br>
-          Zusammen ermöglichen diese Befehle das schrittweise Ausführen von Tätigkeiten und die Umsetzung von Entscheidungslogik.</p>
+        <p>Die Befehle greifen auf die Zellen des karierten Papiers zu.<br>
+          Dieses Beispiel zeigt, wie Mikro-Lang mehrere Systeme auf kariertem Papier organisiert.<br>
+          Die Schüssel nutzt mehrere Spalten für verschiedene Zutaten – aber man könnte die Informationen auch ganz anders verteilen.<br>
+          Wichtig ist nur: Jede Information hat eine eindeutige Adresse <code>[Zeile, Spalte]</code>.</p>
 
         <h3>Prozessor</h3>
-        <p>Der <strong>Prozessor</strong> führt die Befehle einer Tätigkeit <strong>zeilenweise</strong> aus.<br>
+        <p>Der <strong>Prozessor</strong> führt jede Zeile des Tätigkeitsblatts aus.<br>
           Bei einem <code>call</code> springt er zu einem anderen Programm und setzt dort die Ausführung fort.</p>
 
         <p>Mit dieser Sprache lassen sich beliebige Tätigkeiten Schritt für Schritt und ohne Mehrdeutigkeit modellieren.<br>
@@ -514,7 +533,11 @@
           indem kleine Programme zur Berechnung aufgebaut werden.<br>
           Man bringt Micro-Lang wie einem Grundschüler die Grundrechenarten bei.</p>
 
-        <a href="js/micro-lang.js">Interpreter von Micro-Lang</a><br>
+        <p style="text-align: center; margin: 30px 0;">
+          <a href="micro-lang-playground.html" style="display: inline-block; padding: 12px 24px; background-color: #5a8a9f; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px;">
+            🚀 Jetzt im Playground ausprobieren!
+          </a>
+        </p>
 
         <b>TODOs: Laufzeitkomplexität, Datenstrukturen, sachter Umstieg auf eine aktuelle Hochsprache, bekannte Algorithmen, Intelligenz (Problemlösung) ist auch nur Routine, Übungen, Übungen, Übungen</b>
 

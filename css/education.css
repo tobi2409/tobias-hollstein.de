@@ -100,3 +100,15 @@ body > footer {
     font-size: 12px;
     padding: 10px;
 }
+
+/* Mobilansicht: Matrix und Code untereinander statt nebeneinander */
+@media (width <= 1000px) {
+    body > main .frame {
+        display: block;
+    }
+
+    body > main .frame > pre {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
