@@ -758,20 +758,20 @@
       </p>
 
       <p>
-        Verkompliziert: <code>t(n) = n</code>, <code>t'(n) = n</code><br>
+        Beispiel etwas verkompliziert: <code>t(n) = n</code>, <code>t'(n) = n</code><br>
         <code>t(5) = 5, t'(9) = 9</code><br>
         <code>5 ≡ 9 (mod 4)</code> → beide Restklasse 1, Struktur bleibt parallel.
       </p>
 
       <p>
-        nochmals verkompliziert: <code>t(n) = 2n</code>, <code>t'(n) = 2n</code><br>
+        Beispiel nochmals verkompliziert: <code>t(n) = 2n</code>, <code>t'(n) = 2n</code><br>
         <code>t(5) = 10, t'(9) = 18</code><br>
         <code>10 ≡ 18 (mod 4)</code> → beide Restklasse 2, Struktur bleibt parallel.
       </p>
 
-      <p>
+      <b>
         Merksatz: Wenn die Struktur gleich bleibt, genügt es, die Variable durch ihren Vertreter der Restklasse zu ersetzen.
-      </p>
+      </b>
 
       <p>
         Formal gilt:
@@ -796,6 +796,37 @@
 
       <p>
         Mit den Werkzeugen <strong>Übersetzen in arithmetische Sprache</strong> und <strong>Polynom-Kongruenz</strong> konnten wir die Teilbarkeit vollständig nachvollziehen und ohne aufwendige algebraische Tricks prüfen.
+      </p>
+
+      <h3>Beispiel 4 - Prüfung der Geradzahligkeit</h3>
+
+      <p>
+        Ausgangsbehauptung: <strong>Wenn 2n² − 3n + 6 durch 4 teilbar ist (siehe Beispiel 3), dann ist n gerade</strong>.
+      </p>
+
+      <p>
+        Aus der Restklassen-Analyse in Beispiel 3 wissen wir: Nur <code>n ≡ 2 (mod 4)</code> liefert Teilbarkeit durch 4.
+      </p>
+
+      <h4>Geradzahligkeit prüfen mit Modulo 2</h4>
+      <p>
+        Eine Zahl ist gerade, genau dann, wenn <code>n % 2 = 0</code>.
+      </p>
+
+      <p>
+        Wir setzen die Restklasse für die Teilbarkeit ein. Wichtig: Wir müssen <strong>nicht alle Zahlen</strong> prüfen, sondern nur die Vertreter der Restklassen. (siehe Polynom-Kongruenz), nämlich <code>n = 2</code> für <code>n ≡ 2 (mod 4)</code>.
+      </p>
+
+      <p style="margin-left: 20px;">
+        <code>(2 * 2² - 3 * 2 + 6) % 2 = (8 - 6 + 6) % 2 = 8 % 2 = 0</code>
+      </p>
+
+      <p>
+        <strong>Fazit:</strong> Das Ergebnis ist 0 → die Zahl ist gerade. Damit gilt die Behauptung.
+      </p>
+
+      <p>
+        Mit <strong>Modulo 4</strong> haben wir die Teilbarkeit ermittelt, mit <strong>Modulo 2</strong> die Geradzahligkeit überprüft. Dank der Restklassenanalyse ist das Verfahren übersichtlich und vollständig.
       </p>
     </main>
   </section>
