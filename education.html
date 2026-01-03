@@ -748,29 +748,50 @@
         <code>(2n² − 3n + 6) % 4 = 0</code>
       </p>
 
-      <h4>Werkzeuganwendung: Polynom-Kongruenz / Restklassen</h4>
-      <p>
-        Wichtig: Beim Rechnen mit Modulo zählt nicht die ganze Zahl, sondern nur ihr <strong>Rest</strong>.
-      </p>
+      <h4>Werkzeuganwendung: Polynom-Kongruenz / Restklassen (Strukturerhalt des Terms)</h4>
 
-      <p>
-        Beispiel einfach: <code>5 ≡ 9 (mod 4)</code> → beide Zahlen Rest 1 → gleiche Restklasse.
-      </p>
+      <h5>
+        Strukturgleichheit bei Modulo-Rechnungen
+      </h5>
 
-      <p>
-        Beispiel etwas verkompliziert: <code>t(n) = n</code>, <code>t'(n) = n</code><br>
-        <code>t(5) = 5, t'(9) = 9</code><br>
-        <code>5 ≡ 9 (mod 4)</code> → beide Restklasse 1, Struktur bleibt parallel.
-      </p>
+      <ul>
+        <li><code>5 ≡ 9 (mod 4)</code> → beide Zahlen Rest 1 → gleiche Restklasse.</li>
+        <li><code>t(n) = n</code>, <code>t'(n) = n</code></li>
+        <li>
+          <ul>
+            <li><code>t(5) = 5, t'(9) = 9</code></li>
+            <li><code>5 ≡ 9 (mod 4)</code> → beide Restklasse 1, Struktur bleibt parallel.</li>
+          </ul>
+        </li>
+        <li><code>t(n) = 2n</code>, <code>t'(n) = 2n</code></li>
+        <li>
+          <ul>
+            <li><code>t(5) = 10, t'(9) = 18</code></li>
+            <li><code>5 ≡ 9 (mod 4)</code></li>
+            <li><code>10 ≡ 18 (mod 4)</code> → beide Restklasse 2, Struktur bleibt parallel.</li>
+          </ul>
+        </li>
+      </ul>
 
-      <p>
-        Beispiel nochmals verkompliziert: <code>t(n) = 2n</code>, <code>t'(n) = 2n</code><br>
-        <code>t(5) = 10, t'(9) = 18</code><br>
-        <code>10 ≡ 18 (mod 4)</code> → beide Restklasse 2, Struktur bleibt parallel.
-      </p>
+      <p>Wie bei diesen Modulo-Rechnungen erkennbar, kann man nur anhand von n (ohne die Terme zu kennen) die Restklasse für mod 4 bestimmen.</p>
+
+      <p>Anders verhält es sich bei diesem Beispiel:</p>
+
+      <ul>
+        <li><code>t(n) = 2n</code>, <code>t'(n) = 3n</code></li>
+        <li>
+          <ul>
+            <li><code>t(5) = 10, t'(9) = 27</code></li>
+            <li><code>obwohl 5 ≡ 9 (mod 4), ist 10 nicht ≡ 27 (mod 4)</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Hier unterscheidet sich die Restklasse zwischen den bloßen n-Werten und der Ausführung der Terme.</p>
+      <p>Die Struktur bleibt hier also nicht erhalten.</p>
 
       <b>
-        Merksatz: Wenn die Struktur gleich bleibt, genügt es, die Variable durch ihren Vertreter der Restklasse zu ersetzen.
+        Merksatz: Wenn die Struktur gleich bleibt, genügt es, die Variable durch ihren Vertreter der Restklasse zu ersetzen anstelle des gesamten Terms.
       </b>
 
       <p>
@@ -789,6 +810,11 @@
         <li><code>n ≡ 2 (mod 4)</code> → <code>2·2² − 3·2 + 6 = 8</code> → <code>8 % 4 = 0</code> → teilbar</li>
         <li><code>n ≡ 3 (mod 4)</code> → <code>2·3² − 3·3 + 6 = 15</code> → <code>15 % 4 = 3</code> → nicht teilbar</li>
       </ul>
+
+      <b>Frage: Warum brauchen wir nur die Restklassen testen und nicht alle Zahlen?</b>
+      <p>Zur Erinnerung: Modulo gibt den Rest einer Division aus. (in unserem Beispiel zwischen einschließlich 0 und 3)</p>
+      <p>Auch wenn wir ein n > 3 testen, bekommen wir auch nur ein Modulo-Ergebnis (einen Rest) zwischen einschließlich 0 und 3.</p>
+      <p>Nur im Falle der Resteklasse 0 wissen wir, dass es sich um eine Zahl handelt, die durch 4 teilbar ist.</p>
 
       <p>
         <strong>Fazit:</strong> Nur für <code>n ≡ 2 (mod 4)</code> (also bspw. für <code>n = 2, 6, 10, ...</code>) ist der Term durch 4 teilbar.
