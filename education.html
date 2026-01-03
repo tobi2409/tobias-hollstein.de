@@ -752,6 +752,11 @@
 
       <h4>Werkzeuganwendung: Polynom-Kongruenz / Restklassen (Strukturerhalt des Terms)</h4>
 
+      <h5>Vorweg: Was bedeutet Kongruenz für mod 4?</h5>
+      <p style="margin-left: 20px;">
+        <code>n ≡ r (mod 4)</code> genau dann, wenn <code>n = r + 4·m</code> für ein ganzzahliges <code>m</code>.
+      </p>
+
       <h5>
         Strukturgleichheit bei Modulo-Rechnungen
       </h5>
@@ -796,12 +801,19 @@
         Merksatz: Wenn die Struktur gleich bleibt, genügt es, die Variable durch ihren Vertreter der Restklasse zu ersetzen anstelle des gesamten Terms.
       </b>
 
-      <p>
-        Formal gilt:
+      <p>In unserem Fall geht es darum zu wissen, wann der Term durch 4 teilbar ist.
       </p>
-      <p style="margin-left: 20px;">
-        <code>n ≡ r (mod 4)</code> genau dann, wenn <code>n = r + 4·m</code> für ein ganzzahliges <code>m</code>.
-      </p>
+
+      <p>Folgendes funktioniert für <code>(2n² − 3n + 6) % 4 = 0</code> leider nicht, weil dadurch der Term nicht mehr bekannt ist:</p>
+
+      <ul>
+        <li><code>0 % 4 = 0</code></li>
+        <li><code>1 % 4 = 1</code></li>
+        <li><code>2 % 4 = 2</code></li>
+        <li>...</li>
+      </ul>
+
+      <p><b>ABER:</b> Wir wissen ja, dass wir n zum Testen verwenden können ohne dass die Struktur verloren geht.</p>
 
       <h4>Beweisführung: Prüfung aller Restklassen</h4>
       <p>Wir prüfen jede Restklasse <code>n ≡ r (mod 4)</code>:</p>
