@@ -29,7 +29,7 @@
 
     <section class="chapter closed-chapter">
       <header class="frame">
-        <h2>Was ist ein System?</h2>
+        <h2>mögliche Beschreibung eines Systems</h2>
         <span>&#x25BC;</span>
       </header>
 
@@ -378,7 +378,7 @@
       </header>
 
       <main>
-        <p>Um Tätigkeiten eindeutig und ohne Mehrdeutigkeit zu beschreiben, führen wir eine sehr einfache Sprache ein. Sie besteht aus drei Elementen:</p>
+        <p>Um Tätigkeiten eindeutig zu beschreiben, führen wir eine sehr einfache Sprache ein. Sie besteht aus drei Elementen:</p>
 
         <h3>Notizblock – der Speicher (kariertes Papier)</h3>
 
@@ -397,6 +397,8 @@
   # Kariertes Papier - Beispiel einer Tabellenstruktur
   # (Man könnte die Informationen aber auch ganz anders anordnen)
   # Jedes System (Zeile) hat eigene Eigenschaften (Spalten)
+  # In diesem Beispiel haben wir menschliche Emotionen aufgelistet, inkl. Bereitschaft und Empathie
+  # wie gesagt: Alles was auf einem normalen karierten Papier erfassbar ist, kann auch hier erfasst werden
   
            | Spalte 1    | Spalte 2       | Spalte 3
   ---------+-------------+----------------+----------
@@ -408,20 +410,97 @@
   
   Zeile 2  | [2,1]       | [2,2]          | [2,3]
   (Partner)| Emotion     | Bereitschaft   | Verständnis
+           | 0=neutral   | 0=niedrig      | 0=niedrig
+           | 1=traurig   | 1=mittel       | 1=mittel
+           | 2=verärgert | 2=hoch         | 2=hoch
   
   Zeile 3  | [3,1]       | [3,2]          | [3,3]
   (Bezieh.)| Spannung    | Vertrauen      | Status
+           | 0=keine     | 0=niedrig      |
+           | 1=angespannt| 1=hoch         |
+
+        Beispiel:
+
+           | Spalte 1    | Spalte 2       | Spalte 3
+  ---------+-------------+----------------+----------
+  Zeile 1  | [1,1]       | [1,2]          | [1,3]
+  (Mensch) | 1           | 0              | 0
+  
+  Zeile 2  | [2,1]       | [2,2]          | [2,3]
+  (Partner)| 0           | 1              | 0
+  
+  Zeile 3  | [3,1]       | [3,2]          | [3,3]
+  (Bezieh.)| 0           | 1              | 1
+
+          Das bedeutet also, der Mensch ist traurig, seine Bereitschaft niedrig und die Empathie ebenso niedrig.
         </pre>
 
         <p>Diese tabellarische Organisation ist nur eine von vielen Möglichkeiten.<br>
           Wichtig ist: Jede Zelle hat eine eindeutige Adresse <code>[Zeile, Spalte]</code>, sodass Programme die Informationen gezielt lesen und schreiben können.<br>
           Das karierte Papier funktioniert damit wie der Speicher einer Maschine – <strong>flexibel, übersichtlich und maschinenverständlich</strong>.</p>
 
+        <h3>Hilfsblatt – Hilfsvariablen (ebenfalls kariertes Papier)</h3>
+
+        <p>Beim Programmieren braucht man oft <strong>zusätzliche Variablen</strong>, die nicht direkt zum Problem gehören, aber für die Berechnung notwendig sind.<br>
+          Beispiele: <em>Zähler</em> in Schleifen, <em>Zwischenergebnisse</em> bei Berechnungen oder <em>Flags</em>, um sich zu merken, ob etwas gefunden wurde.</p>
+
+        <p>Um diese <strong>Hilfsvariablen</strong> klar von den eigentlichen <strong>Daten</strong> zu trennen, nutzt Micro-Lang ein zweites kariertes Papier – das <strong>Hilfsblatt</strong>.<br>
+          Zugriff erfolgt mit <code>h[Zeile, Spalte]</code> (h = Hilfsspeicher).</p>
+
+        <p><strong>Drei typische Nutzfelder im Hilfsblatt:</strong></p>
+        <ul>
+          <li><strong>Zähler & Zeiger</strong> (z. B. Zeilen 1-5): <em>„Wo bin ich gerade?"</em><br>
+              Beispiel: Schleifenzähler, Index in einer Liste
+          </li>
+          <li><strong>Zwischenwerte & Berechnungen</strong> (z. B. Zeilen 6-10): <em>„Was berechne ich gerade?"</em><br>
+              Beispiel: Temporäre Summe, Zwischenergebnis bei Division
+          </li>
+          <li><strong>Zustände & Merker</strong> (z. B. Zeilen 11-15): <em>„Was habe ich gefunden/erreicht?"</em><br>
+              Beispiel: Flag für "gefunden", aktuelles Minimum/Maximum
+          </li>
+          <li><strong>Werkzeuge & Konstanten</strong> (z. B. Zeilen 16-25): <em>„Was brauche ich immer wieder?"</em><br>
+              Beispiel: Ziffern 0-9 für Grundrechenarten, mathematische Konstanten
+          </li>
+        </ul>
+
+        Beispiel (Liste aller Freunde):
+
+        <pre>
+
+           | Spalte 1
+  ---------+---------
+  Zeile 1  | [1,1] = Tobias
+  Zeile 2  | [2,1] = Erik
+  Zeile 3  | [3,1] = Leon
+
+          Wir wollen jede Zeile dieser Liste durchgehen.
+          Dazu müssen wir aber wissen, was die letzte Zeilennummer war, um mit der nächsten Zeile fortzufahren.
+          Daher speichern wir uns die aktuelle Zeilennummer im Hilfsspeicher und können nachher ab dieser fortsetzen.
+
+        Hilfsspeicher:
+
+           | Spalte 1
+  ---------+---------
+  Zeile 1  | 1 -> d.h. wir sind bei Tobias
+
+           | Spalte 1
+  ---------+---------
+  Zeile 1  | 2 -> d.h. wir sind bei Erik
+
+           | Spalte 1
+  ---------+---------
+  Zeile 1  | 3 -> d.h. wir sind bei Leon
+
+        </pre>
+
+        <p>Diese Trennung macht Programme <strong>übersichtlicher</strong> und hilft Anfängern zu verstehen, welche Daten zum Problem gehören und welche nur Hilfsmittel sind.</p>
+
         <h3>Elementare Befehle</h3>
 
         <ul>
           <li><strong>write</strong> – schreibt einen Wert in eine Matrix-Zelle.<br>
-              Beispiel: <code>write [3,1] := 2</code>  <em>(Beziehung.spannung = hoch)</em>
+              Beispiel: <code>write [3,1] := 2</code>  <em>(Beziehung.spannung = hoch)</em><br>
+              Beispiel: <code>write h[1,1] := 0</code>  <em>(Zähler auf 0 setzen)</em>
           </li>
 
           <li><strong>call</strong> – ruft ein anderes Programm auf. Nach Beendigung kehrt die Ausführung automatisch zum Aufrufpunkt zurück.<br>
@@ -430,11 +509,13 @@
 
           <li><strong>call-if</strong> – ruft ein anderes Programm nur auf, wenn eine Bedingung erfüllt ist.<br>
               Beispiel: <code>call-if [1,1] >= 1, mehl_hinzufuegen</code>  
-              <em>(wenn Bäcker.bereitschaft [Zeile 1, Spalte 1] ≥ mittel, dann Mehl hinzufügen)</em>
+              <em>(wenn Bäcker.bereitschaft [Zeile 1, Spalte 1] ≥ mittel, dann Mehl hinzufügen)</em><br>
+              Beispiel: <code>call-if h[1,1] < 10, weiterzaehlen</code>
+              <em>(wenn Zähler < 10, dann weiterzählen)</em>
           </li>
         </ul>
 
-        <p>Diese Befehle greifen direkt auf die Zellen <code>[Zeile, Spalte]</code> des karierten Papiers zu.<br>
+        <p>Diese Befehle greifen auf die Zellen <code>[Zeile, Spalte]</code> des Notizblocks oder <code>h[Zeile, Spalte]</code> des Hilfsblatts zu.<br>
           Die freie Positionierung ermöglicht es, Informationen so zu organisieren, wie es für das jeweilige Problem am sinnvollsten ist.<br>
           Bedingungen werden über Zahlenwerte ausgedrückt, da Mikro-Lang aktuell keine Strings verarbeitet.<br>
           Zusammen ermöglichen diese Befehle das schrittweise Ausführen von Tätigkeiten und die Umsetzung von Entscheidungslogik.</p>
@@ -541,7 +622,173 @@
           </a>
         </p>
 
-        <b>TODOs: Laufzeitkomplexität, Datenstrukturen, sachter Umstieg auf eine aktuelle Hochsprache, bekannte Algorithmen, Intelligenz (Problemlösung) ist auch nur Routine (Startsituation -> Anwendung von geeigneten Werkzeugen -> Zielsituation), Übungen, Übungen, Übungen</b>
+        <b>TODOs: Datenstrukturen, sachter Umstieg auf eine aktuelle Hochsprache, bekannte Algorithmen, Intelligenz (Problemlösung) ist auch nur Routine (Startsituation -> Anwendung von geeigneten Werkzeugen -> Zielsituation), Übungen, Übungen, Übungen</b>
+        <p><b>Die Didaktik soll darauf beruhen, dass die Schulmathematik mithilfe von Micro-Lang beschrieben werden kann.</b></p>
+
+      </main>
+    </section>
+
+    <section class="chapter closed-chapter">
+
+      <header class="frame">
+        <h2>Laufzeitkomplexität: Schritte zählen</h2>
+        <span>&#x25BC;</span>
+      </header>
+
+      <main>
+
+        <h3>Warum Schritte zählen?</h3>
+
+        <p>In der Informatik geht es oft darum, ein Problem zu lösen – zum Beispiel: <strong>Finde eine bestimmte Person in einem Notizblock</strong>.<br>
+          Doch nicht jeder Lösungsweg ist gleich gut. Manche brauchen viele Schritte, andere kommen schneller ans Ziel.</p>
+
+        <p><strong>Schritte zählen</strong> hilft uns dabei, verschiedene Lösungswege zu vergleichen:</p>
+        <ul>
+          <li>Wie viele Operationen braucht mein Programm mindestens? (Best Case)</li>
+          <li>Wie viele im schlimmsten Fall? (Worst Case)</li>
+          <li>Wie viele im Durchschnitt? (Average Case)</li>
+        </ul>
+
+        <h3>Beispiel 1: Lineare Suche im Notizblock</h3>
+
+        <h4>Startsituation:</h4>
+        <ul>
+          <li>Notizblock mit n Einträgen: <code>[Anna, Ben, Clara, David, Emma, Felix, Greta]</code> (hier: n = 7)</li>
+          <li><strong>Zu suchende Person:</strong> Felix</li>
+        </ul>
+
+        <h4>Tätigkeit (rezeptartig):</h4>
+        <ol>
+          <li>Beginne beim ersten Eintrag.</li>
+          <li>Vergleiche den aktuellen Eintrag mit der <strong>zu suchenden Person</strong>.</li>
+          <li>Falls gefunden → fertig.</li>
+          <li>Falls nicht gefunden → gehe zum nächsten Eintrag.</li>
+          <li>Wiederhole, bis gefunden oder Notizblock zu Ende.</li>
+        </ol>
+
+        <h4>Schritte zählen:</h4>
+        <ul>
+          <li><strong>Best Case:</strong> Die <strong>zu suchende Person</strong> steht am Anfang → <strong>1 Vergleich</strong></li>
+          <li><strong>Worst Case:</strong> Die Person steht am Ende oder fehlt → <strong>n Vergleiche</strong> (hier: 7)</li>
+          <li><strong>Average Case:</strong> Im Durchschnitt müssen wir die Hälfte durchsuchen → <strong>n/2 Vergleiche</strong></li>
+        </ul>
+
+        <p><strong>Asymptotische Laufzeitordnung:</strong> <strong>O(n)</strong> – „linear"<br>
+          Je größer n wird, desto mehr Schritte brauchen wir proportional dazu.</p>
+
+        <h3>Beispiel 2: Suche in Notizblock nach Anfangsbuchstaben gruppiert</h3>
+
+        <h4>Startsituation:</h4>
+        <ul>
+          <li>Notizblock mit n Personen, gruppiert nach <strong>Anfangsbuchstaben</strong>:
+            <ul>
+              <li>A: <code>[Anna, Anton, Andrea]</code></li>
+              <li>B-E: <code>[Ben, Clara, David, Emma]</code></li>
+              <li>F-Z: <code>[Felix, Greta, Hannah]</code></li>
+            </ul>
+          </li>
+          <li>Jede Gruppe hat ca. n/k Personen (hier: k = 3 Gruppen)</li>
+          <li><strong>Zu suchende Person:</strong> Emma</li>
+        </ul>
+
+        <h4>Tätigkeit:</h4>
+        <ol>
+          <li>Durchsuche die Anfangsbuchstaben-Gruppen (z. B. welche Gruppe enthält Personen mit E).</li>
+          <li>Finde die richtige Gruppe (hier: B-E).</li>
+          <li>Durchsuche nur diese Gruppe linear.</li>
+        </ol>
+
+        <h4>Schritte zählen:</h4>
+        <ul>
+          <li><strong>Gruppen-Suche:</strong> k Vergleiche (hier: 3 Gruppen)</li>
+          <li><strong>Innerhalb der Gruppe:</strong> n/k Vergleiche</li>
+          <li><strong>Gesamt:</strong> <strong>k + n/k Vergleiche</strong></li>
+        </ul>
+
+        <p>Bei optimaler Gruppengröße (k ≈ √n) ergibt sich:<br>
+          <strong>Worst Case:</strong> <strong>O(√n)</strong></p>
+
+        <p>Beispiel: n = 100 Personen</p>
+        <ul>
+          <li>Lineare Suche: bis zu 100 Vergleiche</li>
+          <li>Anfangsbuchstaben-Suche: ca. 10 + 10 = 20 Vergleiche</li>
+        </ul>
+
+        <h3>Beispiel 3: Binärsuche (im alphabetisch sortierten Notizblock)</h3>
+
+        <h4>Startsituation:</h4>
+        <ul>
+          <li><strong>Alphabetisch sortierter</strong> Notizblock: <code>[Anna, Ben, Clara, David, Emma, Felix, Greta]</code> (n = 7)</li>
+          <li><strong>Zu suchende Person:</strong> Emma</li>
+        </ul>
+
+        <h4>Tätigkeit:</h4>
+        <ol>
+          <li>Schaue in die Mitte des Notizblocks.</li>
+          <li>Ist die mittlere Person die <strong>zu suchende Person</strong>? → fertig.</li>
+          <li>Kommt die <strong>zu suchende Person</strong> alphabetisch früher? → Suche nur in der linken Hälfte weiter.</li>
+          <li>Kommt sie alphabetisch später? → Suche nur in der rechten Hälfte weiter.</li>
+          <li>Wiederhole, bis gefunden oder keine Einträge mehr übrig.</li>
+        </ol>
+
+        <h4>Schritte zählen:</h4>
+        <ul>
+          <li>Bei jedem Schritt halbiert sich die Suchgröße.</li>
+          <li>n → n/2 → n/4 → n/8 → ... → 1</li>
+          <li>Anzahl der Schritte: <strong>log₂(n)</strong></li>
+        </ul>
+
+        <p>Beispiel: n = 1024 Personen</p>
+        <ul>
+          <li>Lineare Suche: bis zu 1024 Vergleiche</li>
+          <li>Binärsuche: <strong>10 Vergleiche</strong> (weil 2¹⁰ = 1024)</li>
+        </ul>
+
+        <p><strong>Asymptotische Laufzeitordnung:</strong> <strong>O(log n)</strong> – „logarithmisch"<br>
+          Extrem effizient! Selbst bei sehr großen Notizblöcken braucht man nur wenige Schritte.</p>
+
+        <h3>Vergleich der drei Verfahren</h3>
+
+        <table style="border-collapse: collapse; margin: 20px 0;">
+          <tr style="background-color: #f0f0f0;">
+            <th style="border: 1px solid #ccc; padding: 8px; text-align: left;">Verfahren</th>
+            <th style="border: 1px solid #ccc; padding: 8px; text-align: left;">Worst Case</th>
+            <th style="border: 1px solid #ccc; padding: 8px; text-align: left;">Beispiel (n=1000 Personen)</th>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ccc; padding: 8px;">Lineare Suche</td>
+            <td style="border: 1px solid #ccc; padding: 8px;">O(n)</td>
+            <td style="border: 1px solid #ccc; padding: 8px;">1000 Schritte</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ccc; padding: 8px;">Anfangsbuchstaben-Suche</td>
+            <td style="border: 1px solid #ccc; padding: 8px;">O(√n)</td>
+            <td style="border: 1px solid #ccc; padding: 8px;">ca. 32 Schritte</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ccc; padding: 8px;">Binärsuche</td>
+            <td style="border: 1px solid #ccc; padding: 8px;">O(log n)</td>
+            <td style="border: 1px solid #ccc; padding: 8px;">10 Schritte</td>
+          </tr>
+        </table>
+
+        <p><strong>Erkenntnis:</strong><br>
+          Je größer n wird, desto dramatischer ist der Unterschied zwischen den Verfahren.<br>
+          Die asymptotische Laufzeitordnung (O-Notation) hilft uns, die Effizienz von Algorithmen zu verstehen – unabhängig von Hardware oder Programmiersprache.</p>
+
+        <h3>Verbindung zu Micro-Lang</h3>
+
+        <p>Auch in Micro-Lang können wir Schritte zählen, wenn wir auf unserem karierten Papier (Notizblock) suchen:</p>
+        <ul>
+          <li>Jeder <code>call</code> ist ein Schritt</li>
+          <li>Jeder <code>write</code> ist ein Schritt</li>
+          <li>Jeder <code>call-if</code> mit Vergleich ist ein Schritt</li>
+        </ul>
+
+        <p>Ein Programm zur linearen Suche hätte im Worst Case n <code>call-if</code>-Befehle.<br>
+          Ein Programm zur Binärsuche hätte nur log₂(n) <code>call-if</code>-Befehle.</p>
+
+        <p><strong>Fazit:</strong> Problemlösung ist Routine – aber manche Routinen sind effizienter als andere. Schritte zählen und asymptotische Laufzeitordnung helfen uns, die besten Werkzeuge auszuwählen.</p>
 
       </main>
     </section>
@@ -714,6 +961,7 @@
         <li>Induktionswerkzeuge: Für wiederkehrende Strukturen (z. B. Summenformeln)</li>
         <li>Übersetzen in arithmetische Sprache</li>
         <li>Polynom-Kongruenz</li>
+        <li>aus einer unendlich zu testenden Menge eine endliche herbeiführen (Resteklassen, Transitivität)</li>
       </ul>
 
       <h4>Ausgewähltes Werkzeug</h4>

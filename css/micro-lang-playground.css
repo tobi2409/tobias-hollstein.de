@@ -152,6 +152,78 @@ body > main > p {
     padding: 20px;
 }
 
+.memory-description {
+    font-size: 13px;
+    font-style: italic;
+    color: #666;
+    margin: 5px 0 10px 0;
+}
+
+#helper-grid {
+    background-color: white;
+    border: 2px solid #c0c3c6;
+    border-radius: 5px;
+    padding: 10px;
+    min-height: 300px;
+    font-family: "Courier New", monospace;
+    font-size: 13px;
+    overflow: auto;
+}
+
+.helper-category {
+    margin-bottom: 15px;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.category-header strong {
+    font-size: 13px;
+    color: #253237;
+}
+
+.category-question {
+    font-size: 11px;
+    font-style: italic;
+    color: #666;
+}
+
+.category-table {
+    width: 100%;
+    font-size: 12px;
+}
+
+.category-table th,
+.category-table td {
+    padding: 3px;
+    min-width: 60px;
+}
+
+.category-table thead th {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #253237;
+    font-size: 11px;
+}
+
+.category-table tbody th {
+    background-color: rgba(0, 0, 0, 0.05);
+    font-size: 11px;
+}
+
+.category-table .memory-cell {
+    font-size: 12px;
+    padding: 4px;
+}
+
 .memory-table {
     border-collapse: collapse;
     width: 100%;

@@ -11,7 +11,7 @@ function tokenize(text) {
     const cleanedText = cleanedLines.join('\n');
     
     const tokens = []
-    const regex = /\s+|program-end|program|call-if|call|write|\[\d+,\d+\]|:=|<=|>=|=|<|>|,|"[^"]*"|\d+|[A-Za-z_]\w*/g
+    const regex = /\s+|program-end|program|call-if|call|write|h\[\d+,\d+\]|\[\d+,\d+\]|:=|<=|>=|=|<|>|,|"[^"]*"|\d+|[A-Za-z_]\w*/g
 
     let m
     while ((m = regex.exec(cleanedText)) !== null) {
@@ -36,10 +36,18 @@ function parse(tokens) {
             throw new Error("Fehler: Unerwartetes Ende des Ausdrucks")
         }
         
+        // Hilfsspeicher: h[Zeile,Spalte]
+        if (/^h\[\d+,\d+\]$/.test(tok)) {
+            const match = tok.match(/h\[(\d+),(\d+)\]/)
+            return { type: 'helper', row: Number(match[1]), col: Number(match[2]) }
+        }
+        
+        // Notizblock: [Zeile,Spalte]
         if (/^\[\d+,\d+\]$/.test(tok)) {
             const match = tok.match(/\[(\d+),(\d+)\]/)
-            return { row: Number(match[1]), col: Number(match[2]) }
+            return { type: 'memory', row: Number(match[1]), col: Number(match[2]) }
         }
+        
         if (/^\d+$/.test(tok)) return Number(tok)
         if (/^".*"$/.test(tok)) return tok.slice(1, -1)
         return tok // Programmname oder Identifier
@@ -69,8 +77,8 @@ function parse(tokens) {
                 if (!addr) {
                     throw new Error(`Fehler in '${progName}': Adresse fehlt nach 'write'`)
                 }
-                if (!/^\[\d+,\d+\]$/.test(addr)) {
-                    throw new Error(`Fehler in '${progName}': Ungültige Adresse '${addr}'. Erwartet Format [Zeile,Spalte]`)
+                if (!/^(h\[\d+,\d+\]|\[\d+,\d+\])$/.test(addr)) {
+                    throw new Error(`Fehler in '${progName}': Ungültige Adresse '${addr}'. Erwartet Format [Zeile,Spalte] oder h[Zeile,Spalte]`)
                 }
                 
                 const assignment = next()
@@ -86,6 +94,7 @@ function parse(tokens) {
                 const parsed = parseExpression(addr)
                 instructions.push({
                     op: "write",
+                    type: parsed.type,
                     row: parsed.row,
                     col: parsed.col,
                     value: parseExpression(expr)
@@ -154,7 +163,7 @@ function parse(tokens) {
     return programs
 }
 
-function run(programs, start, memory) {
+function run(programs, start, memory, helperMemory = {}) {
     if (!programs[start]) {
         throw new Error(`Fehler: Startprogramm '${start}' existiert nicht`)
     }
@@ -169,9 +178,11 @@ function run(programs, start, memory) {
         if (typeof v === "number") return v
         if (typeof v === "string") return v
         if (typeof v === "object" && v.row !== undefined && v.col !== undefined) {
-            // Kariertes Papier: [row, col]
-            if (!memory[v.row]) memory[v.row] = {}
-            const value = memory[v.row][v.col]
+            // Unterscheide zwischen Notizblock und Arbeitsblatt
+            const targetMemory = v.type === 'helper' ? helperMemory : memory
+            
+            if (!targetMemory[v.row]) targetMemory[v.row] = {}
+            const value = targetMemory[v.row][v.col]
             // Wenn Wert undefined ist, geben wir 0 zurück (Standardverhalten)
             return value !== undefined ? value : 0
         }
@@ -189,15 +200,17 @@ function run(programs, start, memory) {
                 continue
             }
 
-            return memory
+            return { memory, helperMemory }
         }
 
         const ins = instrs[pc]
 
         if (ins.op === "write") {
-            // Kariertes Papier: [row, col]
-            if (!memory[ins.row]) memory[ins.row] = {}
-            memory[ins.row][ins.col] = evalVal(ins.value)
+            // Schreibe in Notizblock oder Arbeitsblatt
+            const targetMemory = ins.type === 'helper' ? helperMemory : memory
+            
+            if (!targetMemory[ins.row]) targetMemory[ins.row] = {}
+            targetMemory[ins.row][ins.col] = evalVal(ins.value)
             pc++
         }
 

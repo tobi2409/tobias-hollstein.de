@@ -5,12 +5,20 @@ let memory = {
     3: { 1: 1 }   // Eier vorhanden
 };
 
+// Hilfsspeicher (Arbeitsblatt)
+let helperMemory = {
+    // Nutzfeld 1: Zähler & Zeiger (Zeilen 1-5)
+    // Nutzfeld 2: Zwischenwerte & Berechnungen (Zeilen 6-10)
+    // Nutzfeld 3: Zustände & Merker (Zeilen 11-15)
+};
+
 // DOM-Elemente
 const codeInput = document.getElementById('code-input');
 const startProgramInput = document.getElementById('start-program');
 const runBtn = document.getElementById('run-btn');
 const clearBtn = document.getElementById('clear-btn');
 const memoryGrid = document.getElementById('memory-grid');
+const helperGrid = document.getElementById('helper-grid');
 const output = document.getElementById('output');
 
 // Event Listeners
@@ -19,6 +27,7 @@ clearBtn.addEventListener('click', clearMemory);
 
 // Initial Memory anzeigen
 displayMemory();
+displayHelperMemory();
 
 function runProgram() {
     try {
@@ -39,12 +48,15 @@ function runProgram() {
         const tokens = tokenize(code);
         const programs = parse(tokens);
         
-        // Programm ausführen
-        memory = run(programs, startProgram, memory);
+        // Programm ausführen - gibt beide Speicher zurück
+        const result = run(programs, startProgram, memory, helperMemory);
+        memory = result.memory;
+        helperMemory = result.helperMemory;
         
         // Erfolg anzeigen
         showSuccess(`✓ Programm '${startProgram}' erfolgreich ausgeführt`);
         displayMemory();
+        displayHelperMemory();
         
     } catch (error) {
         showError(error.message);
@@ -57,7 +69,9 @@ function clearMemory() {
         2: { 1: 1 },  // Zucker vorhanden
         3: { 1: 1 }   // Eier vorhanden
     };
+    helperMemory = {};
     displayMemory();
+    displayHelperMemory();
     showSuccess("Speicher auf Startwerte zurückgesetzt");
 }
 
@@ -170,4 +184,78 @@ function showSuccess(message) {
 function showError(message) {
     output.textContent = message;
     output.className = 'error';
+}
+
+function displayHelperMemory() {
+    // Nutzfelder-Kategorien definieren
+    const categories = [
+        { name: 'Zähler & Zeiger', question: 'Wo bin ich gerade?', rows: [1, 2, 3, 4, 5], color: '#e3f2fd' },
+        { name: 'Zwischenwerte & Berechnungen', question: 'Was berechne ich gerade?', rows: [6, 7, 8, 9, 10], color: '#f3e5f5' },
+        { name: 'Zustände & Merker', question: 'Was habe ich gefunden/erreicht?', rows: [11, 12, 13, 14, 15], color: '#fff3e0' }
+    ];
+    
+    let html = '';
+    
+    for (const category of categories) {
+        html += `<div class="helper-category" style="background-color: ${category.color};">`;
+        html += `<div class="category-header">`;
+        html += `<strong>${category.name}</strong>`;
+        html += `<span class="category-question">${category.question}</span>`;
+        html += `</div>`;
+        
+        // Mini-Grid für diese Kategorie
+        const rows = category.rows;
+        const cols = [1, 2, 3]; // Standardmäßig 3 Spalten
+        
+        html += '<table class="memory-table category-table">';
+        html += '<thead><tr><th></th>';
+        for (const col of cols) {
+            html += `<th>Sp. ${col}</th>`;
+        }
+        html += '</tr></thead>';
+        
+        html += '<tbody>';
+        for (const row of rows) {
+            html += `<tr><th>Z. ${row}</th>`;
+            for (const col of cols) {
+                const value = helperMemory[row] && helperMemory[row][col] !== undefined ? helperMemory[row][col] : '';
+                html += `<td><input type="text" class="memory-cell" data-row="${row}" data-col="${col}" data-memory="helper" value="${escapeHtml(value)}" placeholder="·"></td>`;
+            }
+            html += '</tr>';
+        }
+        html += '</tbody></table>';
+        html += '</div>';
+    }
+    
+    helperGrid.innerHTML = html;
+    
+    // Event Listener für alle Input-Felder hinzufügen
+    const inputs = helperGrid.querySelectorAll('.memory-cell');
+    inputs.forEach(input => {
+        input.addEventListener('input', handleHelperMemoryChange);
+    });
+}
+
+function handleHelperMemoryChange(event) {
+    const input = event.target;
+    const row = Number(input.dataset.row);
+    const col = Number(input.dataset.col);
+    const value = input.value.trim();
+    
+    // Hilfsspeicher aktualisieren
+    if (!helperMemory[row]) {
+        helperMemory[row] = {};
+    }
+    
+    // Wert parsen (Zahl oder String)
+    if (value === '') {
+        delete helperMemory[row][col];
+        if (Object.keys(helperMemory[row]).length === 0) {
+            delete helperMemory[row];
+        }
+    } else if (!isNaN(value) && value !== '') {
+        helperMemory[row][col] = Number(value);
+    } else {
+        helperMemory[row][col] = value;
+    }
 }
