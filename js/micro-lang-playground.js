@@ -1,9 +1,5 @@
-// Initialer Speicher mit Beispielwerten für kuchen_backen
-let memory = {
-    1: { 1: 1 },  // Bäcker.bereitschaft = mittel
-    2: { 1: 1 },  // Zucker vorhanden
-    3: { 1: 1 }   // Eier vorhanden
-};
+// Initialer Speicher (leer)
+let memory = {};
 
 // Hilfsspeicher (Arbeitsblatt)
 let helperMemory = {
@@ -64,15 +60,11 @@ function runProgram() {
 }
 
 function clearMemory() {
-    memory = {
-        1: { 1: 1 },  // Bäcker.bereitschaft = mittel
-        2: { 1: 1 },  // Zucker vorhanden
-        3: { 1: 1 }   // Eier vorhanden
-    };
+    memory = {};
     helperMemory = {};
     displayMemory();
     displayHelperMemory();
-    showSuccess("Speicher auf Startwerte zurückgesetzt");
+    showSuccess("Speicher geleert");
 }
 
 function displayMemory() {

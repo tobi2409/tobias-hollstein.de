@@ -1,3 +1,24 @@
+#!/usr/bin/env node
+
+/**
+ * Micro-Lang CLI - Kommandozeilen-Engine für Micro-Lang
+ * 
+ * Verwendung:
+ *   node micro-lang-cli.js <datei.ml> [startprogramm]
+ *   node micro-lang-cli.js --help
+ *   node micro-lang-cli.js --interactive
+ * 
+ * Beispiele:
+ *   node micro-lang-cli.js beispiel.ml kuchen_backen
+ *   node micro-lang-cli.js --interactive
+ */
+
+const fs = require('fs');
+const readline = require('readline');
+
+// Importiere Micro-Lang Interpreter-Funktionen
+// (Für Node.js müssen wir die Funktionen hier kopieren oder als Module exportieren)
+
 function tokenize(text) {
     // Kommentare entfernen: alles nach ; bis Zeilenende
     const lines = text.split('\n');
@@ -12,7 +33,7 @@ function tokenize(text) {
     
     const tokens = []
     // Erweiterte Regex: Unterstützt verschachtelte Ausdrücke wie [h[1,1], 1]
-    const regex = /\s+|program-end|program|call-else-if|call-if|call|write|exit|h\[\d+,\d+\]|\[(?:[^[\]]+|\[[^\]]*\])*\]|:=|<=|>=|=|<|>|,|\(|\)|'[^']*'|\d+|[A-Za-z_]\w*/g
+    const regex = /\s+|program-end|program|call-else-if|call-if|call|write|exit|h\[\d+,\d+\]|\[(?:[^[\]]+|\[[^\]]*\])*\]|:=|<=|>=|=|<|>|,|"[^"]*"|\d+|[A-Za-z_]\w*/g
 
     let m
     while ((m = regex.exec(cleanedText)) !== null) {
@@ -31,10 +52,6 @@ function parse(tokens) {
     function hasNext() { return i < tokens.length }
 
     const programs = {}
-
-    function isIdentifier(tok) {
-        return /^[A-Za-z_]\w*$/.test(tok)
-    }
 
     function parseExpression(tok) {
         if (!tok) {
@@ -86,45 +103,14 @@ function parse(tokens) {
         }
         
         if (/^\d+$/.test(tok)) return Number(tok)
-        if (/^'.*'$/.test(tok)) {
+        if (/^".*"$/.test(tok)) {
             const value = tok.slice(1, -1)
             if (value.length !== 1) {
-                throw new Error("Fehler: Zeichen müssen genau 1 Zeichen enthalten (z.B. 'a')")
+                throw new Error("Fehler: Strings dürfen nur ein einzelnes Zeichen enthalten")
             }
             return value
         }
-        return { type: 'identifier', name: tok }
-    }
-
-    function parseArgList() {
-        const args = []
-        if (peek() !== "(") return args
-
-        next() // '('
-        if (peek() === ")") {
-            next()
-            return args
-        }
-
-        while (hasNext()) {
-            const tok = next()
-            if (!tok) {
-                throw new Error("Fehler: Unerwartetes Ende der Argumentliste")
-            }
-            args.push(parseExpression(tok))
-
-            if (peek() === ",") {
-                next()
-                continue
-            }
-            if (peek() === ")") {
-                next()
-                break
-            }
-            throw new Error(`Fehler: Ungültige Argumentliste, gefunden '${peek()}'`)
-        }
-
-        return args
+        return tok // Programmname oder Identifier
     }
 
     while (i < tokens.length) {
@@ -140,30 +126,8 @@ function parse(tokens) {
             throw new Error(`Fehler: Programm '${progName}' wurde bereits definiert`)
         }
 
-        const params = []
-        if (peek() === "(") {
-            next() // '('
-            if (peek() !== ")") {
-                while (hasNext()) {
-                    const param = next()
-                    if (!param || !isIdentifier(param)) {
-                        throw new Error(`Fehler in '${progName}': Ungültiger Parametername '${param}'`)
-                    }
-                    params.push(param)
-                    if (peek() === ",") {
-                        next()
-                        continue
-                    }
-                    break
-                }
-            }
-            if (next() !== ")") {
-                throw new Error(`Fehler in '${progName}': Fehlende ')' in Parameterliste`)
-            }
-        }
-
         const instructions = []
-        programs[progName] = { params, instructions }
+        programs[progName] = instructions
 
         while (hasNext() && peek() !== "program-end") {
             let t = next()
@@ -173,9 +137,8 @@ function parse(tokens) {
                 if (!addr) {
                     throw new Error(`Fehler in '${progName}': Adresse fehlt nach 'write'`)
                 }
-                // Akzeptiere sowohl einfache als auch verschachtelte Ausdrücke oder Parameter
-                if (!/^(h\[.+,.+\]|\[.+,.+\])$/.test(addr) && !isIdentifier(addr)) {
-                    throw new Error(`Fehler in '${progName}': Ungültige Adresse '${addr}'. Erwartet Format [Zeile,Spalte], h[Zeile,Spalte], verschachtelte Ausdrücke oder Parameter`)
+                if (!/^(h\[\d+,\d+\]|\[.+,.+\])$/.test(addr)) {
+                    throw new Error(`Fehler in '${progName}': Ungültige Adresse '${addr}'. Erwartet Format [Zeile,Spalte] oder h[Zeile,Spalte]`)
                 }
                 
                 const assignment = next()
@@ -191,7 +154,9 @@ function parse(tokens) {
                 const parsed = parseExpression(addr)
                 instructions.push({
                     op: "write",
-                    addr: parsed,
+                    type: parsed.type,
+                    row: parsed.row,
+                    col: parsed.col,
                     value: parseExpression(expr)
                 })
             }
@@ -222,8 +187,6 @@ function parse(tokens) {
                     throw new Error(`Fehler in '${progName}': Zielprogramm fehlt nach ','`)
                 }
 
-                const args = parseArgList()
-
                 const elseIfs = []
                 while (peek() === "call-else-if") {
                     next() // call-else-if
@@ -247,13 +210,11 @@ function parse(tokens) {
                     if (!eTarget) {
                         throw new Error(`Fehler in '${progName}': Zielprogramm fehlt nach 'call-else-if'`)
                     }
-                    const eArgs = parseArgList()
                     elseIfs.push({
                         left: parseExpression(eLeft),
                         opr: eOpr,
                         right: parseExpression(eRight),
-                        target: eTarget,
-                        args: eArgs
+                        target: eTarget
                     })
                 }
 
@@ -263,7 +224,6 @@ function parse(tokens) {
                     opr,
                     right: parseExpression(right),
                     target,
-                    args,
                     elseIfs
                 })
             }
@@ -273,13 +233,10 @@ function parse(tokens) {
                 if (!target) {
                     throw new Error(`Fehler in '${progName}': Zielprogramm fehlt nach 'call'`)
                 }
-
-                const args = parseArgList()
                 
                 instructions.push({
                     op: "call",
-                    target,
-                    args
+                    target
                 })
             }
 
@@ -310,84 +267,49 @@ function run(programs, start, memory, helperMemory = {}) {
     }
     
     let progName = start
-    let instrs = programs[progName].instructions
+    let instrs = programs[progName]
     let pc = 0
     const callStack = []
     const MAX_STACK_DEPTH = 1000
-    let bindings = {}
-
-    function resolveIdentifier(name) {
-        if (!bindings || bindings[name] === undefined) {
-            throw new Error(`Fehler: Unbekannter Parameter '${name}' in '${progName}'`)
-        }
-        return bindings[name]
-    }
-
-    function resolveArg(arg) {
-        if (arg && arg.type === 'identifier') {
-            return resolveIdentifier(arg.name)
-        }
-        return arg
-    }
-
-    function evalAddress(expr) {
-        if (expr && expr.type === 'identifier') {
-            return evalAddress(resolveIdentifier(expr.name))
-        }
-
-        if (expr && expr.type === 'computed') {
-            let row = expr.row
-            let col = expr.col
-            if (typeof row === "object") row = evalVal(row)
-            if (typeof col === "object") col = evalVal(col)
-            if (typeof row !== "number" || typeof col !== "number") {
-                throw new Error(`Fehler: Berechnete Indizes müssen Zahlen sein, erhalten: row=${row}, col=${col}`)
-            }
-            return { type: 'memory', row, col }
-        }
-
-        if (expr && expr.row !== undefined && expr.col !== undefined) {
-            let row = expr.row
-            let col = expr.col
-            if (typeof row === "object") row = evalVal(row)
-            if (typeof col === "object") col = evalVal(col)
-            if (typeof row !== "number" || typeof col !== "number") {
-                throw new Error(`Fehler: Indizes müssen Zahlen sein, erhalten: row=${row}, col=${col}`)
-            }
-            return { type: expr.type === 'helper' ? 'helper' : 'memory', row, col }
-        }
-
-        throw new Error(`Fehler: Ungültige Adresse: ${JSON.stringify(expr)}`)
-    }
 
     function evalVal(v) {
         if (typeof v === "number") return v
         if (typeof v === "string") return v
-        
-        if (typeof v === "object") {
-            if (v.type === 'identifier') {
-                return evalVal(resolveIdentifier(v.name))
-            }
-
-            // Verschachtelter Ausdruck: { type: 'computed', row: expr, col: expr }
-            if (v.type === 'computed') {
-                const addr = evalAddress(v)
-                const targetMemory = addr.type === 'helper' ? helperMemory : memory
-                if (!targetMemory[addr.row]) targetMemory[addr.row] = {}
-                const value = targetMemory[addr.row][addr.col]
-                return value !== undefined ? value : 0
+        if (typeof v === "object" && v.row !== undefined && v.col !== undefined) {
+            // Für berechnete Adressen: erst Zeile und Spalte auflösen
+            let row = v.row
+            let col = v.col
+            
+            if (typeof row === "object") {
+                row = evalVal(row)
+                if (typeof row !== "number") {
+                    throw new Error(`Fehler: Zeilenindex muss eine Zahl sein, gefunden: ${row}`)
+                }
             }
             
-            // Einfacher Adressausdruck: { type: 'memory'/'helper', row: num, col: num }
-            if (v.row !== undefined && v.col !== undefined) {
-                const addr = evalAddress(v)
-                const targetMemory = addr.type === 'helper' ? helperMemory : memory
-                if (!targetMemory[addr.row]) targetMemory[addr.row] = {}
-                const value = targetMemory[addr.row][addr.col]
-                return value !== undefined ? value : 0
+            if (typeof col === "object") {
+                col = evalVal(col)
+                if (typeof col !== "number") {
+                    throw new Error(`Fehler: Spaltenindex muss eine Zahl sein, gefunden: ${col}`)
+                }
             }
+            
+            // Unterscheide zwischen Notizblock, Arbeitsblatt und berechneten Adressen
+            let targetMemory
+            if (v.type === 'helper') {
+                targetMemory = helperMemory
+            } else if (v.type === 'computed') {
+                // Bei berechneten Adressen: Standard ist Notizblock
+                targetMemory = memory
+            } else {
+                targetMemory = memory
+            }
+            
+            if (!targetMemory[row]) targetMemory[row] = {}
+            const value = targetMemory[row][col]
+            // Wenn Wert undefined ist, geben wir 0 zurück (Standardverhalten)
+            return value !== undefined ? value : 0
         }
-        
         throw new Error(`Fehler: Kann Wert nicht auswerten: ${JSON.stringify(v)}`)
     }
 
@@ -397,8 +319,7 @@ function run(programs, start, memory, helperMemory = {}) {
             if (callStack.length > 0) {
                 const frame = callStack.pop()
                 progName = frame.progName
-                instrs = programs[progName].instructions
-                bindings = frame.bindings
+                instrs = programs[progName]
                 pc = frame.pc
                 continue
             }
@@ -409,10 +330,37 @@ function run(programs, start, memory, helperMemory = {}) {
         const ins = instrs[pc]
 
         if (ins.op === "write") {
-            const addr = evalAddress(ins.addr)
-            const targetMemory = addr.type === 'helper' ? helperMemory : memory
-            if (!targetMemory[addr.row]) targetMemory[addr.row] = {}
-            targetMemory[addr.row][addr.col] = evalVal(ins.value)
+            // Schreibe in Notizblock oder Arbeitsblatt
+            let row = ins.row
+            let col = ins.col
+            
+            // Wenn Zeile oder Spalte berechnet werden müssen
+            if (typeof row === "object") {
+                row = evalVal(row)
+                if (typeof row !== "number") {
+                    throw new Error(`Fehler: Zeilenindex muss eine Zahl sein, gefunden: ${row}`)
+                }
+            }
+            
+            if (typeof col === "object") {
+                col = evalVal(col)
+                if (typeof col !== "number") {
+                    throw new Error(`Fehler: Spaltenindex muss eine Zahl sein, gefunden: ${col}`)
+                }
+            }
+            
+            // Bestimme Zielspeicher
+            let targetMemory
+            if (ins.type === 'helper') {
+                targetMemory = helperMemory
+            } else if (ins.type === 'computed') {
+                targetMemory = memory
+            } else {
+                targetMemory = memory
+            }
+            
+            if (!targetMemory[row]) targetMemory[row] = {}
+            targetMemory[row][col] = evalVal(ins.value)
             pc++
         }
 
@@ -420,8 +368,7 @@ function run(programs, start, memory, helperMemory = {}) {
             if (callStack.length > 0) {
                 const frame = callStack.pop()
                 progName = frame.progName
-                instrs = programs[progName].instructions
-                bindings = frame.bindings
+                instrs = programs[progName]
                 pc = frame.pc
             } else {
                 return { memory, helperMemory }
@@ -432,28 +379,14 @@ function run(programs, start, memory, helperMemory = {}) {
             if (!programs[ins.target]) {
                 throw new Error(`Fehler in '${progName}': Programm '${ins.target}' existiert nicht`)
             }
-
-            const callee = programs[ins.target]
-            const args = ins.args || []
-            if (callee.params.length !== args.length) {
-                throw new Error(`Fehler in '${progName}': Programm '${ins.target}' erwartet ${callee.params.length} Argument(e), erhalten ${args.length}`)
-            }
-            const newBindings = {}
-            callee.params.forEach((param, idx) => {
-                newBindings[param] = resolveArg(args[idx])
-            })
             
             if (callStack.length >= MAX_STACK_DEPTH) {
                 throw new Error(`Fehler: Maximale Call-Tiefe (${MAX_STACK_DEPTH}) überschritten. Möglicherweise Endlosrekursion?`)
             }
             
-            const isTail = pc === instrs.length - 1
-            if (!isTail) {
-                callStack.push({ progName, pc: pc + 1, bindings })
-            }
+            callStack.push({ progName, pc: pc + 1 })
             progName = ins.target
-            instrs = programs[progName].instructions
-            bindings = newBindings
+            instrs = programs[progName]
             pc = 0
         }
 
@@ -481,28 +414,14 @@ function run(programs, start, memory, helperMemory = {}) {
                 if (!programs[ins.target]) {
                     throw new Error(`Fehler in '${progName}': Programm '${ins.target}' existiert nicht`)
                 }
-
-                const callee = programs[ins.target]
-                const args = ins.args || []
-                if (callee.params.length !== args.length) {
-                    throw new Error(`Fehler in '${progName}': Programm '${ins.target}' erwartet ${callee.params.length} Argument(e), erhalten ${args.length}`)
-                }
-                const newBindings = {}
-                callee.params.forEach((param, idx) => {
-                    newBindings[param] = resolveArg(args[idx])
-                })
                 
                 if (callStack.length >= MAX_STACK_DEPTH) {
                     throw new Error(`Fehler: Maximale Call-Tiefe (${MAX_STACK_DEPTH}) überschritten. Möglicherweise Endlosrekursion?`)
                 }
                 
-                const isTail = pc === instrs.length - 1
-                if (!isTail) {
-                    callStack.push({ progName, pc: pc + 1, bindings })
-                }
+                callStack.push({ progName, pc: pc + 1 })
                 progName = ins.target
-                instrs = programs[progName].instructions
-                bindings = newBindings
+                instrs = programs[progName]
                 pc = 0
             } else {
                 let jumped = false
@@ -527,25 +446,9 @@ function run(programs, start, memory, helperMemory = {}) {
                             if (!programs[e.target]) {
                                 throw new Error(`Fehler in '${progName}': Programm '${e.target}' existiert nicht`)
                             }
-                            const callee = programs[e.target]
-                            const args = e.args || []
-                            if (callee.params.length !== args.length) {
-                                throw new Error(`Fehler in '${progName}': Programm '${e.target}' erwartet ${callee.params.length} Argument(e), erhalten ${args.length}`)
-                            }
-                            const newBindings = {}
-                            callee.params.forEach((param, idx) => {
-                                newBindings[param] = resolveArg(args[idx])
-                            })
-                            if (callStack.length >= MAX_STACK_DEPTH) {
-                                throw new Error(`Fehler: Maximale Call-Tiefe (${MAX_STACK_DEPTH}) überschritten. Möglicherweise Endlosrekursion?`)
-                            }
-                            const isTail = pc === instrs.length - 1
-                            if (!isTail) {
-                                callStack.push({ progName, pc: pc + 1, bindings })
-                            }
+                            callStack.push({ progName, pc: pc + 1 })
                             progName = e.target
-                            instrs = programs[progName].instructions
-                            bindings = newBindings
+                            instrs = programs[progName]
                             pc = 0
                             jumped = true
                             break
@@ -564,3 +467,226 @@ function run(programs, start, memory, helperMemory = {}) {
         }
     }
 }
+
+// ===== CLI-spezifische Funktionen =====
+
+function printMemory(memory, label) {
+    console.log(`\n${label}:`);
+    const rows = Object.keys(memory).map(Number).sort((a, b) => a - b);
+    
+    if (rows.length === 0) {
+        console.log('  (leer)');
+        return;
+    }
+    
+    for (const row of rows) {
+        const cols = Object.keys(memory[row]).map(Number).sort((a, b) => a - b);
+        for (const col of cols) {
+            const value = memory[row][col];
+            console.log(`  [${row},${col}] = ${JSON.stringify(value)}`);
+        }
+    }
+}
+
+function showHelp() {
+    console.log(`
+Micro-Lang CLI - Kommandozeilen-Engine
+
+VERWENDUNG:
+  node micro-lang-cli.js <datei.ml> [startprogramm]
+  node micro-lang-cli.js --help
+  node micro-lang-cli.js --interactive
+
+OPTIONEN:
+  <datei.ml>          Micro-Lang Quelldatei
+  [startprogramm]     Name des Startprogramms (Standard: erstes Programm)
+  --help, -h          Zeigt diese Hilfe an
+  --interactive, -i   Startet interaktiven Modus (REPL)
+
+BEISPIELE:
+  node micro-lang-cli.js beispiel.ml
+  node micro-lang-cli.js beispiel.ml kuchen_backen
+  node micro-lang-cli.js --interactive
+
+DATEISYNTAX (.ml):
+  program name
+    write [1,1] := 5
+    write h[1,1] := 0
+    call-if [1,1] > 0, next_step
+  program-end
+`);
+}
+
+function runFile(filename, startProgram) {
+    try {
+        // Datei lesen
+        const code = fs.readFileSync(filename, 'utf-8');
+        
+        console.log(`\n🚀 Führe Micro-Lang Programm aus: ${filename}`);
+        console.log('─'.repeat(60));
+        
+        // Tokenize & Parse
+        const tokens = tokenize(code);
+        const programs = parse(tokens);
+        
+        // Bestimme Startprogramm
+        const programNames = Object.keys(programs);
+        if (programNames.length === 0) {
+            throw new Error('Keine Programme in der Datei gefunden');
+        }
+        
+        const start = startProgram || programNames[0];
+        console.log(`Startprogramm: ${start}`);
+        
+        // Initialer Speicher
+        const memory = {};
+        const helperMemory = {};
+        
+        // Ausführen
+        const startTime = Date.now();
+        const result = run(programs, start, memory, helperMemory);
+        const duration = Date.now() - startTime;
+        
+        // Ergebnis anzeigen
+        console.log('\n✓ Programm erfolgreich ausgeführt');
+        console.log(`⏱️  Laufzeit: ${duration}ms`);
+        
+        printMemory(result.memory, '📝 Notizblock (Problemdaten)');
+        printMemory(result.helperMemory, '🔧 Arbeitsblatt (Hilfsvariablen)');
+        
+        console.log('\n' + '─'.repeat(60));
+        
+    } catch (error) {
+        console.error(`\n❌ Fehler: ${error.message}`);
+        process.exit(1);
+    }
+}
+
+function startInteractive() {
+    console.log(`
+╔════════════════════════════════════════════════════════════╗
+║           Micro-Lang Interactive REPL                      ║
+║   Gib Micro-Lang Code ein und drücke Ctrl+D zum Ausführen ║
+║   Befehle: .help, .exit, .clear                           ║
+╚════════════════════════════════════════════════════════════╝
+`);
+
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+        prompt: 'micro-lang> '
+    });
+
+    let buffer = '';
+    let memory = {};
+    let helperMemory = {};
+
+    rl.on('line', (line) => {
+        const trimmed = line.trim();
+        
+        // Spezielle Befehle
+        if (trimmed === '.exit') {
+            console.log('Auf Wiedersehen!');
+            process.exit(0);
+        }
+        
+        if (trimmed === '.help') {
+            console.log(`
+Befehle:
+  .exit         Beendet den REPL
+  .clear        Löscht Speicher und Buffer
+  .show         Zeigt aktuellen Speicher
+  .help         Zeigt diese Hilfe
+  
+Mehrzeiliger Code: Gib mehrere Zeilen ein und drücke Ctrl+D zum Ausführen
+`);
+            rl.prompt();
+            return;
+        }
+        
+        if (trimmed === '.clear') {
+            buffer = '';
+            memory = {};
+            helperMemory = {};
+            console.log('✓ Speicher und Buffer gelöscht');
+            rl.prompt();
+            return;
+        }
+        
+        if (trimmed === '.show') {
+            printMemory(memory, '📝 Notizblock');
+            printMemory(helperMemory, '🔧 Arbeitsblatt');
+            rl.prompt();
+            return;
+        }
+        
+        // Code sammeln
+        buffer += line + '\n';
+        rl.prompt();
+    });
+
+    rl.on('close', () => {
+        if (buffer.trim()) {
+            try {
+                const tokens = tokenize(buffer);
+                const programs = parse(tokens);
+                const programNames = Object.keys(programs);
+                
+                if (programNames.length === 0) {
+                    console.log('⚠️  Keine Programme gefunden');
+                    process.exit(0);
+                }
+                
+                const result = run(programs, programNames[0], memory, helperMemory);
+                memory = result.memory;
+                helperMemory = result.helperMemory;
+                
+                console.log('\n✓ Ausgeführt');
+                printMemory(memory, '📝 Notizblock');
+                printMemory(helperMemory, '🔧 Arbeitsblatt');
+                
+            } catch (error) {
+                console.error(`❌ ${error.message}`);
+            }
+        }
+        
+        console.log('\nAuf Wiedersehen!');
+        process.exit(0);
+    });
+
+    rl.prompt();
+}
+
+// ===== Hauptprogramm =====
+
+function main() {
+    const args = process.argv.slice(2);
+    
+    if (args.length === 0 || args[0] === '--help' || args[0] === '-h') {
+        showHelp();
+        process.exit(0);
+    }
+    
+    if (args[0] === '--interactive' || args[0] === '-i') {
+        startInteractive();
+        return;
+    }
+    
+    const filename = args[0];
+    const startProgram = args[1];
+    
+    if (!fs.existsSync(filename)) {
+        console.error(`❌ Datei nicht gefunden: ${filename}`);
+        process.exit(1);
+    }
+    
+    runFile(filename, startProgram);
+}
+
+// Starte CLI
+if (require.main === module) {
+    main();
+}
+
+// Exportiere für Tests
+module.exports = { tokenize, parse, run };
