@@ -103,3 +103,142 @@ body > main > .karriereweg {
 body > main > .profil {
     --align: right;
 }
+
+.skills {
+    display: grid;
+    gap: 14px;
+}
+
+.skill-item {
+    display: grid;
+    gap: 6px;
+}
+
+.skill-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+}
+
+.skill-item progress {
+    width: 100%;
+    height: 10px;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.skill-item progress::-webkit-progress-bar {
+    background-color: #cfc4b7;
+    border-radius: 999px;
+}
+
+.skill-item progress::-webkit-progress-value {
+    background-color: #8b6f53;
+    border-radius: 999px;
+}
+
+.skill-item progress::-moz-progress-bar {
+    background-color: #8b6f53;
+    border-radius: 999px;
+}
+
+/* Print styles for PDF export */
+@media print {
+    @page {
+        size: A4;
+        margin: 10mm;
+    }
+
+    html {
+        width: auto;
+        height: auto;
+    }
+
+    body {
+        background-color: var(--background-color);
+        height: auto;
+        margin: 0;
+        padding: 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    body > header {
+        margin-top: 0;
+        margin-bottom: 26px;
+    }
+
+    body > header, body > main {
+        width: 100%;
+        max-width: 190mm;
+        margin: 0;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    body > header, body > main > section {
+        background-color: var(--section-color);
+        box-shadow: 3px 3px #c0c3c6;
+        margin-bottom: 26px;
+        border-radius: 5px;
+        padding: 16px;
+    }
+
+    body > header > img {
+        border-radius: 5px;
+        max-width: 110px;
+        height: auto;
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin: 0;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+        margin: 0 0 12px 0;
+    }
+
+    h3 {
+        font-size: 1.08rem;
+        margin: 14px 0 6px 0;
+        font-weight: 600;
+    }
+
+    h4 {
+        font-size: 0.96rem;
+        margin: 0 0 6px 0;
+    }
+
+    p {
+        font-size: 0.96rem;
+        margin: 5px 0;
+        line-height: 1.4;
+    }
+
+    .skills {
+        gap: 14px;
+    }
+
+    .skill-item {
+        gap: 6px;
+    }
+
+    .skill-head {
+        font-size: 0.96rem;
+    }
+
+    .skill-item progress {
+        height: 9px;
+    }
+
+    .person {
+        margin-bottom: 16px;
+    }
+
+    .person p {
+        margin: 4px 0;
+    }
+}
