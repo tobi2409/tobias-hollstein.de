@@ -69,42 +69,46 @@ Wir nutzen \textbf{kariertes Papier}, auf dem wir Informationen an beliebigen Po
   # Kariertes Papier - Beispiel einer Tabellenstruktur
   # (Man könnte die Informationen aber auch ganz anders anordnen)
   # Jede Zeile steht für einen Eintrag, jede Spalte für ein Informationsfeld
-  # Wichtig: Wie beim karierten Zettel kommt jede Ziffer in eine eigene Zelle.
-  # Beispiel: Einkaufszettel (Mengen als Ziffern pro Zelle)
+  # Wichtig: Wie beim karierten Zettel kommt jedes Zeichen (Buchstabe, Ziffer, Symbol) in eine eigene Zelle.
+  # Beispiel: Einkaufszettel (Mengen, Einheiten und Ladennamen zeichenweise pro Zelle)
   
-           | Spalte 1      | Spalte 2     | Spalte 3 | Spalte 4
-  ---------+---------------+--------------+----------+----------
-  Zeile 1  | [1,1]         | [1,2]        | [1,3]    | [1,4]
-  (Mehl)   | MENGE (Z1)    | MENGE (Z2)   | EINHEIT  | LADEN
-           | 1             | 2            | kg       | Edeka
-  
-  Zeile 2  | [2,1]         | [2,2]        | [2,3]    | [2,4]
-  (Zucker) | MENGE (Z1)    | MENGE (Z2)   | EINHEIT  | LADEN
-           | 0             | 5            | kg       | Rewe
-  
-  Zeile 3  | [3,1]         | [3,2]        | [3,3]    | [3,4]
-  (Eier)   | MENGE (Z1)    | MENGE (Z2)   | EINHEIT  | LADEN
-           | 1             | 0            | Stk      | Aldi
+           | Sp.1 | Sp.2 | Sp.3 | Sp.4 | Sp.5 | Sp.6   | Sp.7 | Sp.8 | Sp.9 | Sp.10| Sp.11
+  ---------+------+------+------+------+------+--------+------+------+------+------+------
+  Zeile 1  | [1,1]| [1,2]| [1,3]| [1,4]| [1,5]| [1,6]  | [1,7]| [1,8]| [1,9]|[1,10]|[1,11]
+  (Mehl)   | MG1  | MG2  | EH1  | EH2  | EH3  | (leer) | L1   | L2   | L3   | L4   | L5
+           | 1    | 2    | k    | g    |      |        | E    | d    | e    | k    | a
+
+  Zeile 2  | [2,1]| [2,2]| [2,3]| [2,4]| [2,5]| [2,6]  | [2,7]| [2,8]| [2,9]|[2,10]|[2,11]
+  (Zucker) | MG1  | MG2  | EH1  | EH2  | EH3  | (leer) | L1   | L2   | L3   | L4   | L5
+           | 0    | 5    | k    | g    |      |        | R    | e    | w    | e    |
+
+  Zeile 3  | [3,1]| [3,2]| [3,3]| [3,4]| [3,5]| [3,6]  | [3,7]| [3,8]| [3,9]|[3,10]|[3,11]
+  (Eier)   | MG1  | MG2  | EH1  | EH2  | EH3  | (leer) | L1   | L2   | L3   | L4   | L5
+           | 1    | 0    | S    | t    | k    |        | A    | l    | d    | i    |
 
   Einkaufszettel (Beispiel):
-  Die Mengen werden aus zwei Ziffernspalten zusammengesetzt:
-  [Z1|Z2] = [1|2] -> 12 kg Mehl, [0|5] -> 05 kg Zucker, [1|0] -> 10 Stk Eier
+  Menge aus zwei Ziffernspalten:  [MG1|MG2] = [1|2] -> 12
+  Einheit aus Buchstabenspalten:  [EH1|EH2] = [k|g] -> "kg", [EH1|EH2|EH3] = [S|t|k] -> "Stk"
+  Sp.6 bleibt leer (visuelle Trennung zwischen Einheit und Laden)
+  Laden aus Buchstabenspalten:    [L1|...|L5] = [E|d|e|k|a] -> "Edeka"
+  Hinweis: Leere Zellen (wie EH3 bei Mehl/Zucker, L5 bei Rewe/Aldi) bleiben einfach frei.
 
   # Beispiel: Bibliotheksliste (Nummern und Preis-Ziffern in einzelnen Zellen)
 
            | Spalte 1       | Spalte 2 | Spalte 3 | Spalte 4 | Spalte 5 | Spalte 6 | Spalte 7 | Spalte 8 | Spalte 9
   ---------+----------------+----------+----------+----------+----------+----------+----------+----------+----------
-  Zeile 1  | [1,1]          | [1,2]    | [1,3]    | [1,4]    | [1,5]    | [1,6]    | [1,7]    | [1,8]    | [1,9]
-  (Buch)   | TITEL          | Nr1      | Nr2      | Nr3      | Nr4      | Nr5      | P1       | P2       | P3
-           | Mathe 7        | 9        | 7        | 8        | 3        | 1        | 1        | 9        | 9
+  Zeile 1  | [1,1]| [1,2]| [1,3]| [1,4]| [1,5]| [1,6]| [1,7]| [1,8]| [1,9]| [1,10]| [1,11]| [1,12]| [1,13]| [1,14]
+  (Buch)   | T1   | T2   | T3   | T4   | T5   | T6   | T7   | Nr1  | Nr2  | Nr3   | Nr4   | Nr5   | P1    | P2    | P3
+           | M    | a    | t    | h    | e    |      | 7    | 9    | 7    | 8     | 3     | 1     | 1     | 9     | 9
   
-  Zeile 2  | [2,1]          | [2,2]    | [2,3]    | [2,4]    | [2,5]    | [2,6]    | [2,7]    | [2,8]    | [2,9]
-  (Buch)   | TITEL          | Nr1      | Nr2      | Nr3      | Nr4      | Nr5      | P1       | P2       | P3
-           | Physik 9       | 3        | 4        | 1        | 0        | 2        | 2        | 4        | 9
+  Zeile 2  | [2,1]| [2,2]| [2,3]| [2,4]| [2,5]| [2,6]| [2,7]| [2,8]| [2,9]| [2,10]| [2,11]| [2,12]| [2,13]| [2,14]
+  (Buch)   | T1   | T2   | T3   | T4   | T5   | T6   | T7   | Nr1  | Nr2  | Nr3   | Nr4   | Nr5   | P1    | P2    | P3
+           | P    | h    | y    | s    | i    | k    |      | 9    | 3    | 4     | 1     | 0     | 2     | 2     | 4     | 9
 
   Bibliotheksliste (Beispiel):
-  Nummer aus fünf Ziffernspalten: [Nr1|Nr2|Nr3|Nr4|Nr5] = [9|7|8|3|1] -> 97831
-  Preis aus drei Ziffernspalten: [P1|P2|P3] = [1|9|9] -> 1,99
+  Titel aus Buchstabenspalten: [T1|...|T7] = [M|a|t|h|e| |7] -> "Mathe 7" (Leerzeichen ist auch ein Zeichen!)
+  Nummer aus Ziffernspalten:   [Nr1|...|Nr5] = [9|7|8|3|1] -> 97831
+  Preis aus Ziffernspalten:    [P1|P2|P3] = [1|9|9] -> 1,99
 
   # Beispiel: Kalender (Datum als einzelne Ziffern pro Zelle)
 
@@ -127,9 +131,117 @@ Wir nutzen \textbf{kariertes Papier}, auf dem wir Informationen an beliebigen Po
 \end{verbatim}
 
         
-Diese tabellarische Organisation ist nur eine von vielen Möglichkeiten.\\
+Diese tabellarische Organisation ist nur eine von vielen Möglichkeiten. Entscheidend dabei: \textbf{jedes Zeichen} – ob Buchstabe, Ziffer oder Leerzeichen – belegt genau eine Zelle. Das gilt nicht nur für Ziffern, sondern für alle Inhalte.\\[0.3em]
           Wichtig ist: Jede Zelle hat eine eindeutige Adresse \texttt{[Zeile, Spalte]}, sodass Programme die Informationen gezielt lesen und schreiben können.\\
           Der Notizblock funktioniert damit wie der Speicher einer Maschine – \textbf{flexibel, übersichtlich und maschinenverständlich}.
+
+
+      
+    
+
+    
+
+    
+      
+        \section{Datentypen und Hilfsfunktionen – Was steht in einer Zelle?}
+          \(
+          \blacktriangledown
+          \)
+      
+
+      
+        
+Bisher haben wir Inhalte einfach in Zellen geschrieben, ohne genauer zu sagen, \textbf{was für eine Art von Inhalt} dort steht.\\
+          In der Informatik ist das aber wichtig: Jede Zelle enthält einen Wert eines bestimmten \textbf{Datentyps}.\\
+          Der Datentyp legt fest, welche Werte erlaubt sind und wie mit ihnen gearbeitet werden kann.
+
+
+        \subsection{Einfache Datentypen (ein Zeichen pro Zelle)}
+
+        
+Die drei grundlegenden Typen für eine einzelne Zelle sind:
+
+        \begin{itemize}
+          \item \textbf{char} (Zeichen): Eine Zelle enthält genau \textbf{einen} Buchstaben, eine Ziffer oder ein Symbol.\\
+            Beispiele: \texttt{[1,1] = 'T'}, \texttt{[1,2] = 'o'}, \texttt{[3,3] = '?'}, \texttt{[2,5] = ' '} (Leerzeichen ist auch ein char!)
+
+          \item \textbf{digit} (Ziffer): Eine Zelle enthält genau \textbf{eine} Ziffer von 0 bis 9.\\
+            Beispiele: \texttt{[1,1] = 1}, \texttt{[1,2] = 2}, \texttt{[2,1] = 0}\\
+            Hinweis: digit ist ein Sonderfall von char – eine Ziffer ist auch ein Zeichen.
+
+          \item \textbf{boolean} (Wahrheitswert): Eine Zelle enthält genau \textbf{einen} von zwei möglichen Werten: \texttt{ja} oder \texttt{nein} (bzw. \texttt{wahr} / \texttt{falsch}).\\
+            Beispiele: \texttt{h[11,1] = nein} (Merker „gefunden"), \texttt{h[12,1] = ja} (Merker „fertig")\\
+            Typische Verwendung: Zustände und Merker im Hilfsblock.
+
+        \end{itemize}
+
+        \subsection{Zusammengesetzte Typen (mehrere Zellen)}
+
+        
+Einzelne chars und digits reichen oft nicht aus – wir wollen Wörter, Zahlen oder Kommazahlen speichern.\\
+          Dafür gibt es \textbf{Hilfsfunktionen}, die mehrere Zellen lesen oder befüllen und den Inhalt als Ganzes übergeben.\\
+          Sie sind sozusagen \textbf{Abkürzungen für wiederkehrende Abläufe} auf dem Notizblock.
+
+
+        \begin{itemize}
+          \item \textbf{string(zeile, spalte, zeichenkette)} – Zeichenkette schreiben:\\
+            Verteilt die angegebene Zeichenkette ab der Startzelle Zeichen für Zeichen auf aufeinanderfolgende Zellen.\\
+            \textbf{string(zeile, spalteVon, spalteBis)} – Zeichenkette lesen:\\
+            Liest alle Zellen von \emph{spalteVon} bis \emph{spalteBis} und gibt sie als Zeichenkette zurück.\\
+            Beim Lesen ist die Zeichenkette unbekannt – deshalb gibt man den Bereich explizit an.
+
+          \begin{verbatim}
+
+  string schreiben – string(1, 7, "Edeka"):
+  -> [1,7]='E', [1,8]='d', [1,9]='e', [1,10]='k', [1,11]='a'
+
+  string lesen – string(1, 7, 11):
+  -> liest [1,7] bis [1,11] -> "Edeka"
+          \end{verbatim}
+
+          \item \textbf{integer(zeile, spalte, zahl)} – Ganze Zahl schreiben:\\
+            Verteilt die angegebene Zahl ab der Startzelle Ziffer für Ziffer auf aufeinanderfolgende Zellen.\\
+            \textbf{integer(zeile, spalteVon, spalteBis)} – Ganze Zahl lesen:\\
+            Liest alle Zellen von \emph{spalteVon} bis \emph{spalteBis} und setzt sie zur vollständigen Zahl zusammen.
+
+          \begin{verbatim}
+
+  integer schreiben – integer(1, 8, 97831):
+  -> [1,8]=9, [1,9]=7, [1,10]=8, [1,11]=3, [1,12]=1
+
+  integer lesen – integer(1, 8, 12):
+  -> liest [1,8] bis [1,12] -> 97831
+          \end{verbatim}
+
+          \item \textbf{float(zeile, spalte, zahl)} – Fließkommazahl schreiben:\\
+            Wie integer, aber im Notizblock steht auch das Komma als eigenes Zeichen.\\
+            In manchen Hilfsdarstellungen kann das Komma weggelassen werden; im eigentlichen Notizblock-Modell wird es aber mitgeschrieben.\\
+            	\textbf{float(zeile, spalteVon, spalteBis, kommaPosition)} – Fließkommazahl lesen:\\
+            Liest alle Zellen von \emph{spalteVon} bis \emph{spalteBis} und setzt das Komma an der angegebenen Stelle wieder ein.
+
+          \begin{verbatim}
+
+  float schreiben – float(1, 13, 1,99):
+  -> [1,13]=1, [1,14]=',', [1,15]=9, [1,16]=9
+
+  float lesen – float(1, 13, 16, 1):
+  -> liest [1,13] bis [1,16], Komma nach Stelle 1 -> 1,99
+
+  float-Darstellung ohne Komma (vereinfachte Skizze):
+  -> [1,13]=1, [1,14]=9, [1,15]=9
+          \end{verbatim}
+
+        \end{itemize}
+
+
+\textbf{Hinweis:}\\
+        Wir wollen mit den Zahlen auch rechnen können. Dies müssen wir dem Computer auch beibringen.\\
+        Vorerst stellen wir uns aber vor, dass wir mithilfe unseres eigenen Verstands mit den Zahlen auch rechnen können.
+        
+        	\textbf{Erkenntnis:}\\
+          Der Notizblock kennt selbst keine zusammengesetzten Werte – er enthält nur einzelne chars, digits oder booleans pro Zelle.\\
+          Wörter, Zahlen und Kommazahlen entstehen erst durch das \textbf{gezielte Lesen und Zusammensetzen mehrerer Zellen} mithilfe dieser Hilfsfunktionen.\\
+          Genau das werden wir später auch in JavaScript so umsetzen: Daten zeichenweise im Array ablegen und per Funktion auslesen.
 
 
       
@@ -335,6 +447,94 @@ So wird zunächst in natürlicher Sprache deutlich, \textbf{was} der Prozessor t
 
 
       
+\section{Rechnen mit integers – ein erster Algorithmus}
+            \(
+            \blacktriangledown
+            \)
+
+      
+        
+  In diesem Kapitel geht es nicht um einen Beweis, sondern um einen \textbf{Algorithmus}.\\
+            Wir wollen zeigen, wie man mit \textbf{integers} im Notizblock-Modell rechnen kann.\\
+            Das ist ein kleiner erster Schritt, um zu sehen: Schulmathematik kann durch die Funktionen einer Turing-Maschine (bzw. unserer Notizblock-Maschine) beschrieben werden – also durch \textbf{Lesen}, \textbf{Schreiben}, \textbf{Vergleichen} und \textbf{Springen}.
+
+
+          \subsection{Grundidee}
+
+        
+  Wir legen die Ziffern \textbf{0 bis 9} im Speicher nebeneinander als Bereich an.\\
+            Dadurch kann der Prozessor innerhalb dieses Bereichs zählen, indem er von einer Zelle zur nächsten weitergeht.\\
+            Bei einer Aufgabe wie \texttt{2 + 5} könnte man den Speicherbereich für die Ziffern als Zählbereich verwenden: Die \textbf{3. Spalte} (= die Ziffer 2) wird ausgelesen, und anschließend werden über eine Schleife \textbf{5 weitere Spalten} nacheinander gelesen – also ein wiederholtes Zählen von einer Zelle zur nächsten.\\
+            Für den Anfang betrachten wir nur \textbf{ganze Zahlen} ohne Komma.
+
+
+          \subsection{Beispiel: Addition mit Übertrag}
+
+        
+  Wir addieren zwei integers, zum Beispiel \texttt{478} und \texttt{256}.\\
+            Die Zahlen (478 und 256) stehen zeichenweise im Notizblock, und der Prozessor arbeitet von rechts nach links. \\
+            Genauso wie auch die einzelnen Ziffern (0 bis 9) im Notizblock vermerkt sind, sodass wir wie bereits erwähnt (Beispiel: 2 + 5) wiederholt zählen können. \\
+            Jetzt müssen wir dies für jede Stelle der beiden Zahlen tun und dabei den Übertrag berücksichtigen.\\
+
+        
+  \begin{verbatim}
+
+    A = 478
+    B = 256
+
+    Schritt 1: 8 + 6 = 14
+              -> schreibe 4, merke Übertrag 1
+
+    Schritt 2: 7 + 5 + 1 = 13
+              -> schreibe 3, merke Übertrag 1
+
+    Schritt 3: 4 + 2 + 1 = 7
+              -> schreibe 7, kein weiterer Übertrag
+
+    Ergebnis: 734
+          \end{verbatim}
+
+        
+  Der Algorithmus benutzt also nur drei Dinge:
+
+          \begin{itemize}
+            \item \textbf{Lesen} der aktuellen Ziffern
+            \item \textbf{Schreiben} der Ergebnisziffer
+            \item \textbf{Merken} eines Übertrags im Hilfsblock
+
+          \end{itemize}
+
+
+          \subsection{Beispiel: Subtraktion mit Übertrag / Ausleihen}
+
+        Übung: Wie würde sich der Algorithmus anders beim Subtrahieren verhalten? Beachte dabei auch das wiederholte Zählen.
+        
+  Hier sieht man bereits ein typisches Muster von Algorithmen:
+
+          \begin{itemize}
+            \item aktuelle Stelle ansehen
+            \item Fall unterscheiden
+            \item Hilfswert merken
+            \item zur nächsten Stelle springen
+
+          \end{itemize}
+
+
+          \subsection{Warum ist das ein Notizblock-Maschinen-Schritt?}
+
+        
+  Eine Notizblock-Maschine braucht keine "magische Mathematik.\\
+            Sie arbeitet nur mit sehr einfachen Aktionen: lesen, schreiben, vergleichen und den nächsten Schritt auswählen.\\
+            Genau das machen wir hier auch.\\
+            Die Schulmathematik wird also nicht auf einmal anders – sie wird nur in kleine, ausführbare Schritte zerlegt.
+
+
+          \subsection{Erkenntnis}
+
+        
+  Mit einem Notizblock und einem Prozessor kann man integers nicht nur speichern, sondern auch systematisch verarbeiten.\\
+            Das ist noch nicht die ganze Schulmathematik, aber ein wichtiger erster Baustein.\\
+            Später können wir darauf aufbauen, etwa mit Multiplikation, Division, Gleichungen und weiteren Verfahren.
     
 
     
@@ -388,12 +588,16 @@ Um diese \textbf{Hilfsvariablen} klar von den eigentlichen \textbf{Daten} zu tre
 
         \begin{verbatim}
 
-           | Spalte 1
-  ---------+---------
-  Zeile 1  | [1,1] = Tobias
-  Zeile 2  | [2,1] = Erik
-  Zeile 3  | [3,1] = Leon
+           | Sp.1 | Sp.2 | Sp.3 | Sp.4 | Sp.5 | Sp.6
+  ---------+------+------+------+------+------+------
+  Zeile 1  | [1,1]| [1,2]| [1,3]| [1,4]| [1,5]| [1,6]   <- "Tobias" (6 Zeichen)
+           | T    | o    | b    | i    | a    | s
+  Zeile 2  | [2,1]| [2,2]| [2,3]| [2,4]|      |          <- "Erik"   (4 Zeichen)
+           | E    | r    | i    | k    |
+  Zeile 3  | [3,1]| [3,2]| [3,3]| [3,4]|      |          <- "Leon"   (4 Zeichen)
+           | L    | e    | o    | n    |
 
+          Jeder Buchstabe belegt eine eigene Zelle. Leere Zellen bleiben frei.
           Wir wollen jede Zeile dieser Liste durchgehen.
           Dazu müssen wir aber wissen, was die letzte Zeilennummer war, um mit der nächsten Zeile fortzufahren.
           Daher speichern wir uns die aktuelle Zeilennummer im Hilfsspeicher und können nachher ab dieser fortsetzen.
@@ -676,12 +880,119 @@ Ein Programm zur linearen Suche hätte im Worst Case n Vergleiche.\\
 \textbf{TODOs:} Weitere Beispiele für Laufzeitkomplexität, Übungen zum Schritte zählen, Einführung in O-Notation, Vergleich von Algorithmen, praktische Anwendungen, Verbindung zu späteren JavaScript-Implementierungen.
 
 
+ \section{Sanfter Umstieg in eine Hochsprache (JavaScript)}
+          \(
+          \blacktriangledown
+          \)
+
       
+        
+Bis hierhin haben wir mit Notizblock-Adressen wie \texttt{[Zeile, Spalte]} gearbeitet.\\
+          Das ist didaktisch sehr hilfreich, weil man Speicher direkt "sehen" kann.\\
+          In JavaScript können wir ein Array-of-Arrays – eine \textbf{Matrix} – verwenden, um unser Notizblock-Modell direkt umzusetzen. So verlieren wir nicht die Sichtbarkeit und Nachvollziehbarkeit, sondern gewinnen die Kraft einer echten Programmiersprache hinzu.
+
+
+        \subsection{Erster Übergang: Notizblock wird zur Matrix}
+
+        
+Grundidee:
+
+        \begin{itemize}
+          \item Notizblock: \texttt{[1,1] = 4}
+          \item JavaScript-Matrix: \texttt{notizblock[0][0] = 4;}
+
+        \end{itemize}
+
+        
+Beides meint dasselbe Prinzip: \textbf{ein Speicherplatz erhält einen Wert}.\\
+          Der Unterschied ist minimal – wir nutzen einfach die native Array-Struktur von JavaScript, um unser Notizblock-Konzept direkt abzubilden:
+
+        \begin{itemize}
+          \item Im Notizblock ist die Position sichtbar als \texttt{[Zeile, Spalte]}.
+          \item In JavaScript bleibt das Konzept erhalten: \texttt{notizblock[zeile][spalte]}. Technisch beginnt die Indizierung bei 0.
+
+        \end{itemize}
+
+
+        \subsection{Mini-Beispiel (gleicher Inhalt, zwei Schreibweisen)}
+
+        \begin{verbatim}
+  Notizblock-Idee:
+    [1,1] = 4
+    [1,2] = 7
+    [1,3] = [1,1] + [1,2]
+
+  JavaScript-Idee (mit Matrix):
+
+    // 10x10 Matrix mit unabhängigen Zeilen (für den Anfang ist der konkrete Aufbau dieser Zeile erstmal nicht relevant)
+    let notizblock = Array.from({ length: 10 }, () => Array(10).fill(null));
     
+    notizblock[0][0] = 4;
+    notizblock[0][1] = 7;
+    notizblock[0][2] = notizblock[0][0] + notizblock[0][1];
+        \end{verbatim}
 
     
+    Wichtig zu erkennen ist, dass wir im Gegensatz zu unserem Notizblock nicht mit 1 zu zählen beginnen, sondern mit 0.
 
+
+        \subsection{Unsere Bücherei aus der alten Welt übertragen}
+
+        \begin{verbatim}
+  // Altes Modell: zeichenweise gespeichert (wie auf dem karierten Notizblock)
+  let alt = [
+    ['M','a','t','h','e',' ','7', '9','7','8','3','1', '1','9','9'],
+    ['P','h','y','s','i','k',' ', '9','3','4','1','0', '2','2','4']
+  ];
+
+  // Neues JS-Notizblock-Modell: Matrix + bereits zusammengefasste Werte
+  let notizblock = Array.from({ length: 10 }, () => Array(10).fill(null));
+
+  // Zeile 0 = erstes Buch, Zeile 1 = zweites Buch
+  // Spalte 0 = Titel, Spalte 1 = Nummer, Spalte 2 = Preis
+  notizblock[0][0] = 'Mathe 7';
+  notizblock[0][1] = 97831;
+  notizblock[0][2] = 1.99;
+
+  notizblock[1][0] = 'Physik';
+  notizblock[1][1] = 93410;
+  notizblock[1][2] = 22.49;
+        \end{verbatim}
+
+        
+
+
+        \subsection{Schleifendenken vom Notizblock zu JavaScript}
+
+        \begin{verbatim}
+  // Wir haben die Werte bereits zusammengefasst.
+  // Deshalb sammeln wir nicht mehr Zeichen für Zeichen.
+  // Eine innere Schleife ist hier dadurch nicht mehr nötig.
+
+  for (let zeile = 0; zeile <= 1; zeile++) {      // jedes Buch
+    let titel  = notizblock[zeile][0];
+    let nummer = notizblock[zeile][1];
+    let preis  = notizblock[zeile][2];
+
+    console.log('Zeile', zeile, 'Titel:', titel, 'Nummer:', nummer, 'Preis:', preis); // Ausgabe der Werte
+  }
+        \end{verbatim}
+
+        
+Analog zum Notizblock bleibt die Denkweise gleich: Wir gehen alle Bücher der Reihe nach durch.\\
+Da die Zellen bereits zusammengefasste Werte enthalten (String/Number), entfällt hier die innere Schleife über Einzelzeichen.
+
+        
+Didaktischer Nutzen: Lernende erkennen, dass JavaScript nichts "Neues" zaubert.\\
+          Die Programmiersprache gibt nur die technische Umsetzung unseres Notizblock-Konzepts. Das Modell – adressierter Speicher – bleibt erhalten.\\
+        
+  			\textbf{Hinweis:} Bei unserem Notizblock-Modell haben wir noch zwischen \textbf{Notiz-} und \textbf{Hilfsblock} unterschieden (Daten vs. Hilfsvariablen).\\
+              In JavaScript nutzen wir für beide Kontexte einfach Variablen.\\
+              Der konzeptionelle Unterschied bleibt in unserem Denken – aber die technische Umsetzung ist jetzt vereinheitlicht.\\
       
+
+
+              
         \section{Zusammenhang Informatik - Mathematik}
           \(
           \blacktriangledown
