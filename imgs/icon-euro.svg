@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-label="Euro Icon">
+  <defs>
+    <radialGradient id="coin" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#fff3bf"/>
+      <stop offset="100%" stop-color="#e0b23f"/>
+    </radialGradient>
+  </defs>
+  <circle cx="160" cy="120" r="86" fill="url(#coin)" stroke="#8b6f53" stroke-width="8"/>
+  <circle cx="160" cy="120" r="68" fill="none" stroke="#f7df8a" stroke-width="6"/>
+  <path d="M193 83
+           C183 73 169 68 153 68
+           C124 68 102 88 95 118
+           C91 133 91 133 91 133
+           C98 162 121 182 151 182
+           C169 182 184 176 195 165" 
+        fill="none" stroke="#253237" stroke-width="12" stroke-linecap="round"/>
+  <line x1="86" y1="109" x2="170" y2="109" stroke="#253237" stroke-width="10" stroke-linecap="round"/>
+  <line x1="80" y1="134" x2="165" y2="134" stroke="#253237" stroke-width="10" stroke-linecap="round"/>
+</svg>

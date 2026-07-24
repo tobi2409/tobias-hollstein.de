@@ -1,12 +1,18 @@
+:root {
+    --content-background-color: #ede7e3;
+    --blocks-background-color: #253237;
+    --section-color: #d8cfc4;
+    --font-color: #253237;
+    --cursor-color: #253237;
+    --element-background-color: #ede7e3;
+}
+
 html {
     width: 100%;
     height: 100%;
 }
 
 body {
-    --content-background-color: #ede7e3;
-    --blocks-background-color: #253237;
-
     width: 100%;
     height: 100%;
     margin: 0;
@@ -20,15 +26,15 @@ body > header {
     padding: 10px;
 }
 
-body > header > img {
+body > header > a {
     display: block;
+    width: 100px;
+    height: 100px;
     margin-left: auto;
     margin-right: auto;
 }
 
 body > main {
-    --section-color: #d8cfc4;
-
     --align: client;
     background-color: var(--content-background-color);
     overflow-y: auto;
@@ -63,7 +69,15 @@ body > main > section > h2 {
     text-align: center;
 }
 
+body > main > .develop-and-explain > aside > .large-display {
+    max-width: 550px;
+}
+
 @media (width <= 1000px) {
+    body > main > .develop-and-explain > aside {
+        --align: client;
+    }
+
     body > main > .develop-and-explain > aside > .large-display {
         display: none;
     }
@@ -73,10 +87,37 @@ body > main > section > h2 {
         text-align: center;
     }
 
+    @media (width <= 750px) {
+        body > main > .develop-and-explain > aside > .small-display {
+            text-align: center;
+        }
+    }
+
+    @media (width > 750px) {
+        body > main > .develop-and-explain > aside > .small-display {
+            text-align: left;
+        }
+
+        body > main > .develop-and-explain > aside > .small-display {
+            max-width: 300px;
+        }
+    }
+
     body > main > .develop-and-explain > .imgs {
-        --align: bottom;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    @media (width <= 750px) {
+        body > main > .develop-and-explain > .imgs {
+            --align: bottom;
+        }
+    }
+
+    @media (width > 750px) {
+        body > main > .develop-and-explain > .imgs {
+            --align: right;
+        }
     }
 
     @media (width <= 450px) {
@@ -93,6 +134,10 @@ body > main > section > h2 {
 }
 
 @media (width > 1000px) {
+    body > main > .develop-and-explain > aside {
+        --align: client;
+    }
+
     body > main > .develop-and-explain > aside > .large-display {
         display: block;
     }
@@ -108,13 +153,6 @@ body > main > section > h2 {
     body > main > .develop-and-explain > .imgs {
         --align: right;
     }
-}
-
-body > main > .develop-and-explain > aside {
-    --font-color: #253237;
-    --cursor-color: #253237;
-
-    --align: client;
 }
 
 body > main > .develop-and-explain > aside > .large-display > span,
@@ -261,6 +299,24 @@ body > main > .tech-skills > .track > .group > figure > figcaption {
     text-align: center;
 }
 
+@media (width <= 800px) {
+    body > main > .project-fullsty > .logo {
+        --align: top;
+        margin-bottom: 20px;
+    }
+}
+
+@media (width > 800px) {
+    body > main > .project-fullsty > .logo {
+        --align: left;
+        margin-right: 20px;
+    }
+}
+
+body > main > .project-fullsty > .description {
+    --align: client;
+}
+
 body > main > .projects-info {
     text-align: center;
 }
@@ -270,8 +326,6 @@ body > main > .education-info {
 }
 
 body > main > .contact > form {
-    --element-background-color: #ede7e3;
-
     max-width: 500px;
     min-width: 300px;
     margin-left: auto;
@@ -376,4 +430,9 @@ body > footer {
     color: white;
     font-size: 12px;
     padding: 10px;
+}
+
+body > main > .personal-overview > aside > p,
+body > main > .project-fullsty > .description {
+    text-align: justify;
 }

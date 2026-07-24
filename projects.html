@@ -13,146 +13,178 @@
   <link href="https://fonts.googleapis.com/css?family=Schoolbell&v1" rel="stylesheet">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/projects.css">
+
   <title>Projekte</title>
 </head>
 <body class="frame">
 
   <header>
-    <img src="imgs/logo.png"/>
+    <a href="index.html"><img src="imgs/logo-modern.svg" width="100" height="100" alt="Logo von Tobias Hollstein"/></a>
   </header>
 
   <main>
 
-    <section style="text-align: center;"><span style="font-size: 16px; font-weight: bold; color: red;">Diese Seite befindet sich im Aufbau.</span></section>
-
     <section class="projects-page">
-      <h2>Tobias Hollstein - Meine Projekte</h2>
+      <h2>Meine Projekte</h2>
 
-      <div class="overview">
-        <div class="row frame">
-          <div class="col">
-            <pre><code>
-<b>&lt;each of</b>="food" <b>as</b>="f"<b>&gt;</b><br>
-    <b>&lt;p&gt;</b>{{ f.name }}<b>&lt;/p&gt;</b><br>
-<b>&lt;/each&gt;</b></code></pre>
+      <div class="pagecontrol">
+        <button class="page-button" data-target="fullsty-distro"><img src="imgs/icon-fullsty.svg" alt="">Full-Stack Framework</button>
+        <button class="page-button" data-target="desktop-apps"><img src="imgs/icon-desktop.svg" alt="">Desktop-Anwendungen</button>
+        <button class="page-button" data-target="creative-ideas"><img src="imgs/icon-creative.svg" alt="">Kreative Ideen</button>
+      </div>
+
+      <br>
+
+      <div class="pages">
+
+        <div class="overview fullsty-distro">
+
+          <div class="row frame">
+            <div class="col">
+              <pre><code>
+  <b>&lt;each of</b>="food" <b>as</b>="f"<b>&gt;</b><br>
+      <b>&lt;p&gt;</b><b>&lt;get&gt;</b>f.name<b>&lt;/get&gt;</b><b>&lt;/p&gt;</b><br>
+  <b>&lt;/each&gt;</b></code></pre>
+            </div>
+
+            <div class="col">
+              <h3>Template-Engine</h3>
+
+              <p>Reaktive, leichtgewichtige Template-Engine mit direkter DOM-Manipulation.<br>
+                Unterstützt Listen, Bedingungen und rekursive Templates.<br>
+                Optimiert für schnelle Updates ohne komplettes Neurendern.</p>
+
+              <!--<p>In Bearbeitung ... (Alpha-Phase)</p>-->
+
+              <a target="_blank" href="https://github.com/tobi2409/template-engine">Template-Engine</a>
+            </div>
           </div>
 
-          <div class="col">
-            <h3>Template-Engine</h3>
+          <div class="row frame">
+            <div class="col">
+              <pre><code>
+  <b>.top-element</b> &lcub;
+      --align: top;
+  &rcub;
 
-            <p>Reaktive, leichtgewichtige Template-Engine mit direkter DOM-Manipulation.<br>
-              Unterstützt Listen, Bedingungen und rekursive Templates.<br>
-              Optimiert für schnelle Updates ohne komplettes Neurendern.</p>
+  <b>.left-element</b> &lcub;
+      --align: left;
+  &rcub;</code></pre>
+            </div>
 
-            <!--<p>In Bearbeitung ... (Alpha-Phase)</p>-->
+            <div class="col">
+              <h3>Layout-System</h3>
 
-            <a target="_blank" href="https://github.com/tobi2409/template-engine">Template-Engine</a>
+              <p>Ein sehr einfaches, auf CSS Grid basierendes Layout-System, das es ermöglicht,<br>
+                Elemente flexibel an Top, Bottom, Left, Right oder Client auszurichten.</p>
+
+              <a target="_blank" href="https://github.com/tobi2409/Layout">Layout-System</a>
+            </div>
+          </div>
+
+          <div class="row frame">
+            <div class="col">
+              <pre><code>
+<b>function</b> buttonClick() {
+    Server.fetchData()
+}
+
+<b>function</b> fetchData() {
+    // Database-Access
+}</code></pre>
+            </div>
+
+            <div class="col">
+              <h3>proc2rest</h3>
+
+              <p>Code-Generator, der TypeScript-Funktionen automatisch in REST-Endpunkte umwandelt<br>
+                und passende JavaScript-API-Clients erzeugt (inkl. JSON- und MessagePack-Support).</p>
+
+              <p>In Bearbeitung ...</p>
+            
+              <a target="_blank" href="https://github.com/tobi2409/proc2rest">proc2rest</a>
+            </div>
+          </div>
+
+          <div class="row frame">
+            <div class="col">
+              <img src="imgs/icon-fullsty.svg" width="200" alt="fullsty Logo"/>
+            </div>
+
+            <div class="col">
+              <h3>fullsty als Full-Stack-Framework</h3>
+
+              <p>Die Template-Library, das Layout-System und proc2rest sollen ein umfassendes Full-Stack-Framework werden.<br>
+              Zudem soll das Front-End plattformunabhängig werden (d.h. man soll eine Webanwendung, aber auch eine Mobil-App, Desktop-Anwendung erzeugen können.<br>
+              Desktop-Anwendungen sollen aber <b>native UI-Elemente</b> verwenden, d.h. es sollen für Buttons, Edits, Menüs usw. native Qt- oder Win32-Elemente anstatt HTML-Elemente genutzt werden.</p>
+
+              <p>Backend-Komponenten wie Datenbankzugriffe, Authentifizierung, Zahlungsabwicklung, Chatdienste sollen ebenfalls integriert werden</p>
+
+              <p>In Bearbeitung ...</p>
+
+              <a target="_blank" href="https://github.com/tobi2409/fullsty">Full-Stack - Framework</a>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="overview desktop-apps">
+
+          <div class="row frame">
+            <div class="col">
+              <img src="imgs/icon-calendar.svg" width="180" alt="Kalender Icon"/>
+            </div>
+
+            <div class="col">
+              <h3>Zeiterfassungs-Tool</h3>
+
+              <p>Mit diesem Tool erfassen Mitarbeiter komfortabel ihre Arbeitszeiten.<br>
+                Da jedes Unternehmen eigene Anforderungen – insbesondere in der Lohnabrechnung – hat,<br>
+                ich die Software individuell an Ihre Bedürfnisse an.</p>
+
+              <a href="imgs/zeiterfassungen.png"><img class="project-screenshot" src="imgs/zeiterfassungen.png" alt="Screenshot des Zeiterfassungs-Tools"></a>
+            </div>
+          </div>
+
+          <div class="row frame">
+            <div class="col">
+              <img src="imgs/icon-euro.svg" width="180" alt="Euro Icon"/>
+            </div>
+
+            <div class="col">
+              <h3>Tender-Tool</h3>
+
+              <p>Ein Tool zur Simulation von Zinstendern, wie sie im Banken- und Finanzbereich eingesetzt werden.<br>
+                Durch Eingabe der gewünschten Zuteilung und der Gebote verschiedener Banken berechnet das System<br>
+                automatisch den marginalen Zinssatz und zeigt an, wie die Mittel verteilt würden.</p>
+
+              <a href="imgs/zinstender.PNG"><img class="project-screenshot" src="imgs/zinstender.PNG" alt="Screenshot des Tender-Tools"></a>
+            </div>
           </div>
         </div>
 
-        <div class="row frame">
-          <div class="col">
-            <pre><code>
-<b>.top-element</b> &lcub;
-    --align: top;
-&rcub;
+        <div class="overview creative-ideas">
 
-<b>.left-element</b> &lcub;
-    --align: left;
-&rcub;</code></pre>
+          <div class="row frame">
+            <div class="col">
+              <img src="imgs/icon-recursion.svg" width="200" alt="Rekursive Baumstruktur"/>
+            </div>
+
+            <div class="col">
+              <h3>Recursion-Library</h3>
+
+              <p>Eine flexible Template-Funktion, die rekursive Strukturen vereinheitlicht:<br>
+                Delta-Funktion, Basisfall, Kombination und optionale Callbacks<br>
+                werden in einem klaren Muster zusammengeführt.</p>
+
+              <p>In Bearbeitung ... - aus Performancegründen sollen Deltas in effizientere Form aufgelöst werden</p>
+
+              <a target="_blank" href="https://github.com/tobi2409/VisualRecursion">Visual Recursion</a>
+            </div>
           </div>
 
-          <div class="col">
-            <h3>Layout-System</h3>
-
-            <p>Ein sehr einfaches, auf CSS Grid basierendes Layout-System, das es ermöglicht,<br>
-              Elemente flexibel an Top, Bottom, Left, Right oder Client auszurichten.</p>
-
-            <a target="_blank" href="https://github.com/tobi2409/Layout">Layout-System</a>
-          </div>
         </div>
 
-        <div class="row frame">
-          <div class="col">
-          </div>
-
-          <div class="col">
-            <h3>proc2rest</h3>
-
-            <p>Code-Generator, der TypeScript-Funktionen automatisch in REST-Endpunkte umwandelt<br>
-              und passende JavaScript-API-Clients erzeugt (inkl. JSON- und MessagePack-Support).</p>
-
-            <p>In Bearbeitung ...</p>
-          
-            <a target="_blank" href="https://github.com/tobi2409/proc2rest">proc2rest</a>
-          </div>
-        </div>
-
-        <div class="row frame">
-          <div class="col">
-          </div>
-
-          <div class="col">
-            <h3>Full-Stack - Framework</h3>
-
-            <p>Die Template-Library, das Layout-System und proc2rest sollen ein umfassendes Full-Stack-Framework werden.<br>
-            Zudem soll das Front-End plattformunabhängig werden (d.h. man soll eine Webanwendung, aber auch eine Mobil-App, Desktop-Anwendung erzeugen können.<br>
-            Desktop-Anwendungen sollen aber <b>native UI-Elemente</b> verwenden, d.h. es sollen für Buttons, Edits, Menüs usw. native Qt- oder Win32-Elemente anstatt HTML-Elemente genutzt werden.</p>
-
-            <p>Backend-Komponenten wie Datenbankzugriffe, Authentifizierung, Zahlungsabwicklung, Chatdienste sollen ebenfalls integriert werden</p>
-
-            <p>In Bearbeitung ...</p>
-
-            <a target="_blank" href="https://github.com/tobi2409/fullsty">Full-Stack - Framework</a>
-          </div>
-        </div>
-
-        <div class="row frame">
-          <div class="col">
-          </div>
-
-          <div class="col">
-            <h3>Recursion-Library</h3>
-
-            <p>Eine flexible Template-Funktion, die rekursive Strukturen vereinheitlicht:<br>
-              Delta-Funktion, Basisfall, Kombination und optionale Callbacks<br>
-              werden in einem klaren Muster zusammengeführt.</p>
-
-            <p>In Bearbeitung ... - aus Performancegründen sollen Deltas in effizientere Form aufgelöst werden</p>
-
-            <a target="_blank" href="https://github.com/tobi2409/VisualRecursion">Visual Recursion</a>
-          </div>
-        </div>
-
-        <div class="row frame">
-          <div class="col">
-          </div>
-
-          <div class="col">
-            <h3>Zeiterfassungs-Tool</h3>
-
-            <p>Mit diesem Tool erfassen Mitarbeiter komfortabel ihre Arbeitszeiten.<br>
-              Da jedes Unternehmen eigene Anforderungen – insbesondere in der Lohnabrechnung – hat,<br>
-              ich die Software individuell an Ihre Bedürfnisse an.</p>
-
-            <a href="imgs/zeiterfassungen.png"><img class="project-screenshot" src="imgs/zeiterfassungen.png"></a>
-          </div>
-        </div>
-
-        <div class="row frame">
-          <div class="col">
-          </div>
-
-          <div class="col">
-            <h3>Tender-Tool</h3>
-
-            <p>Ein Tool zur Simulation von Zinstendern, wie sie im Banken- und Finanzbereich eingesetzt werden.<br>
-              Durch Eingabe der gewünschten Zuteilung und der Gebote verschiedener Banken berechnet das System<br>
-              automatisch den marginalen Zinssatz und zeigt an, wie die Mittel verteilt würden.</p>
-
-            <a href="imgs/zinstender.PNG"><img class="project-screenshot" src="imgs/zinstender.PNG"></a>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -169,5 +201,6 @@
     <span class="copyright">© Tobias Hollstein 2025 Alle Rechte vorbehalten</span>
   </footer>
 
+  <script src="js/projects.js"></script>
 </body>
 </html>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-label="Kalender Icon">
+  <defs>
+    <linearGradient id="calBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#eef2f6"/>
+    </linearGradient>
+  </defs>
+  <rect x="28" y="26" width="264" height="188" rx="18" fill="url(#calBg)" stroke="#253237" stroke-width="4"/>
+  <rect x="28" y="26" width="264" height="44" rx="18" fill="#253237"/>
+  <rect x="28" y="52" width="264" height="18" fill="#253237"/>
+  <rect x="72" y="14" width="20" height="34" rx="8" fill="#8b6f53"/>
+  <rect x="228" y="14" width="20" height="34" rx="8" fill="#8b6f53"/>
+
+  <g fill="#d8cfc4">
+    <rect x="54" y="92" width="42" height="28" rx="6"/>
+    <rect x="112" y="92" width="42" height="28" rx="6"/>
+    <rect x="170" y="92" width="42" height="28" rx="6"/>
+    <rect x="228" y="92" width="42" height="28" rx="6"/>
+
+    <rect x="54" y="132" width="42" height="28" rx="6"/>
+    <rect x="112" y="132" width="42" height="28" rx="6"/>
+    <rect x="170" y="132" width="42" height="28" rx="6"/>
+    <rect x="228" y="132" width="42" height="28" rx="6"/>
+
+    <rect x="54" y="172" width="42" height="28" rx="6"/>
+    <rect x="112" y="172" width="42" height="28" rx="6"/>
+    <rect x="170" y="172" width="42" height="28" rx="6" fill="#8b6f53"/>
+    <rect x="228" y="172" width="42" height="28" rx="6"/>
+  </g>
+</svg>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 320" role="img" aria-label="Kreative Ideen Icon">
+  <defs>
+    <radialGradient id="headGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFE0B2"/>
+      <stop offset="100%" stop-color="#FFBF80"/>
+    </radialGradient>
+    <linearGradient id="bulb2Grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE566"/>
+      <stop offset="100%" stop-color="#FFB62E"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Neck -->
+  <rect x="118" y="216" width="44" height="38" rx="10" fill="#FFBF80"/>
+
+  <!-- Shoulders -->
+  <path d="M80 254 Q80 290 140 290 Q200 290 200 254 L200 254 Q180 240 140 238 Q100 240 80 254 Z" fill="#4C8DFF"/>
+
+  <!-- Head -->
+  <ellipse cx="140" cy="190" rx="60" ry="72" fill="url(#headGrad)"/>
+
+  <!-- Eyes -->
+  <ellipse cx="118" cy="185" rx="7" ry="8" fill="#2B2B2B"/>
+  <ellipse cx="162" cy="185" rx="7" ry="8" fill="#2B2B2B"/>
+  <circle cx="121" cy="183" r="2.5" fill="white"/>
+  <circle cx="165" cy="183" r="2.5" fill="white"/>
+
+  <!-- Smile -->
+  <path d="M120 208 Q140 222 160 208" stroke="#C47A40" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+  <!-- Eyebrows slightly raised (thinking) -->
+  <path d="M109 172 Q118 166 127 172" stroke="#8B5C30" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M153 172 Q162 166 171 172" stroke="#8B5C30" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+  <!-- Hair -->
+  <ellipse cx="140" cy="122" rx="58" ry="22" fill="#5C3A1E"/>
+  <path d="M82 140 Q78 115 100 105" stroke="#5C3A1E" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M198 140 Q202 115 180 105" stroke="#5C3A1E" stroke-width="10" fill="none" stroke-linecap="round"/>
+
+  <!-- Bulb glow -->
+  <circle cx="140" cy="58" r="46" fill="#FFF5CC" opacity="0.55"/>
+
+  <!-- Bulb body -->
+  <circle cx="140" cy="58" r="34" fill="url(#bulb2Grad)" stroke="#E3A014" stroke-width="4"/>
+
+  <!-- Bulb filament / inner detail -->
+  <path d="M128 50 C122 38 158 38 152 50 C156 58 150 66 144 70 L144 80 L136 80 L136 70 C130 66 124 58 128 50Z"
+        fill="#FFF4C1" opacity="0.9"/>
+
+  <!-- Bulb base -->
+  <rect x="128" y="82" width="24" height="13" rx="5" fill="#888"/>
+  <rect x="130" y="92" width="20" height="10" rx="4" fill="#666"/>
+
+  <!-- Rays -->
+  <g stroke="#FFD234" stroke-width="4" stroke-linecap="round">
+    <line x1="140" y1="14" x2="140" y2="4"/>
+    <line x1="170" y1="22" x2="178" y2="14"/>
+    <line x1="184" y1="50" x2="194" y2="48"/>
+    <line x1="110" y1="22" x2="102" y2="14"/>
+    <line x1="96" y1="50" x2="86" y2="48"/>
+  </g>
+</svg>

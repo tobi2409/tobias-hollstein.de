@@ -1,0 +1,1249 @@
+\documentclass{article}
+\usepackage[a4paper,landscape,margin=1cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\begin{document}
+
+\begin{center}
+	\textbf{\textcolor{red}{Diese Seite befindet sich im Aufbau.}}\\
+Momentan werden hier nur vereinzelte Gedankengänge festgehalten, die v.a. aufgrund fehlender Visualisierungen, Übungen und Unvollständigkeit eher für Lehrkräfte als für Studierende geeignet sind.\\
+\vspace{0.5em}
+	\textbf{TODOs: Datenstrukturen, sachter Umstieg von Notizblock-Denkweise auf eine aktuelle Hochsprache, bekannte Algorithmen, Intelligenz (Problemlösung) ist auch nur Routine (Startsituation -> Anwendung von geeigneten Werkzeugen -> Zielsituation), Übungen, Übungen, Übungen in jedem Kapitel}
+\end{center}
+
+	\tableofcontents
+\newpage
+
+
+      
+        \section{Natürliche Sprache präzisieren für Informatik}
+          \(
+          \blacktriangledown
+          \)
+      
+
+      
+          
+        
+
+          Wir Menschen nutzen unsere \textbf{natürliche Sprache} – zum Beispiel Deutsch oder Englisch –, um Sachverhalte zu beschreiben.\\
+          Doch viele Sätze (und sogar einzelne Begriffe) können unterschiedlich verstanden werden.\\
+          Für die Informatik und Mathematik ist das ein Problem, denn dort müssen Beschreibungen eindeutig sein.\\
+          Deshalb verwendet man Programmiersprachen. Und bevor wir uns großen Sprachen widmen,\\
+          beginnen wir mit einer sehr einfachen, klar definierten Sprache, mit der sich Inhalte präzise und ohne Mehrdeutigkeit beschreiben lassen.
+        
+
+
+      
+    
+
+    
+      
+        \section{Notizblock – der Speicher}
+          \(
+          \blacktriangledown
+          \)
+      
+
+      
+        
+Der Notizblock ist unser \textbf{Speicher}: Er enthält alle Informationen, die wir geordnet ablegen und wieder auslesen können.
+
+
+        
+Wir nutzen \textbf{kariertes Papier}, auf dem wir Informationen an beliebigen Positionen notieren können.\\
+          Jede Zelle hat eine Adresse \texttt{[Zeile, Spalte]} – genau wie beim handschriftlichen Schreiben auf kariertem Papier.\\
+          Grundsätzlich kann man die Informationen genauso wie auf einem herkömmlichen Notizblock anordnen.
+
+
+        
+\textbf{Beispiel für eine mögliche tabellarische Organisation:}
+
+
+        \begin{verbatim}
+
+  # Kariertes Papier - Beispiel einer Tabellenstruktur
+  # (Man könnte die Informationen aber auch ganz anders anordnen)
+  # Jede Zeile steht für einen Eintrag, jede Spalte für ein Informationsfeld
+  # Wichtig: Wie beim karierten Zettel kommt jede Ziffer in eine eigene Zelle.
+  # Beispiel: Einkaufszettel (Mengen als Ziffern pro Zelle)
+  
+           | Spalte 1      | Spalte 2     | Spalte 3 | Spalte 4
+  ---------+---------------+--------------+----------+----------
+  Zeile 1  | [1,1]         | [1,2]        | [1,3]    | [1,4]
+  (Mehl)   | MENGE (Z1)    | MENGE (Z2)   | EINHEIT  | LADEN
+           | 1             | 2            | kg       | Edeka
+  
+  Zeile 2  | [2,1]         | [2,2]        | [2,3]    | [2,4]
+  (Zucker) | MENGE (Z1)    | MENGE (Z2)   | EINHEIT  | LADEN
+           | 0             | 5            | kg       | Rewe
+  
+  Zeile 3  | [3,1]         | [3,2]        | [3,3]    | [3,4]
+  (Eier)   | MENGE (Z1)    | MENGE (Z2)   | EINHEIT  | LADEN
+           | 1             | 0            | Stk      | Aldi
+
+  Einkaufszettel (Beispiel):
+  Die Mengen werden aus zwei Ziffernspalten zusammengesetzt:
+  [Z1|Z2] = [1|2] -> 12 kg Mehl, [0|5] -> 05 kg Zucker, [1|0] -> 10 Stk Eier
+
+  # Beispiel: Bibliotheksliste (Nummern und Preis-Ziffern in einzelnen Zellen)
+
+           | Spalte 1       | Spalte 2 | Spalte 3 | Spalte 4 | Spalte 5 | Spalte 6 | Spalte 7 | Spalte 8 | Spalte 9
+  ---------+----------------+----------+----------+----------+----------+----------+----------+----------+----------
+  Zeile 1  | [1,1]          | [1,2]    | [1,3]    | [1,4]    | [1,5]    | [1,6]    | [1,7]    | [1,8]    | [1,9]
+  (Buch)   | TITEL          | Nr1      | Nr2      | Nr3      | Nr4      | Nr5      | P1       | P2       | P3
+           | Mathe 7        | 9        | 7        | 8        | 3        | 1        | 1        | 9        | 9
+  
+  Zeile 2  | [2,1]          | [2,2]    | [2,3]    | [2,4]    | [2,5]    | [2,6]    | [2,7]    | [2,8]    | [2,9]
+  (Buch)   | TITEL          | Nr1      | Nr2      | Nr3      | Nr4      | Nr5      | P1       | P2       | P3
+           | Physik 9       | 3        | 4        | 1        | 0        | 2        | 2        | 4        | 9
+
+  Bibliotheksliste (Beispiel):
+  Nummer aus fünf Ziffernspalten: [Nr1|Nr2|Nr3|Nr4|Nr5] = [9|7|8|3|1] -> 97831
+  Preis aus drei Ziffernspalten: [P1|P2|P3] = [1|9|9] -> 1,99
+
+  # Beispiel: Kalender (Datum als einzelne Ziffern pro Zelle)
+
+           | Spalte 1  | Spalte 2 | Spalte 3 | Spalte 4 | Spalte 5 | Spalte 6 | Spalte 7 | Spalte 8
+  ---------+-----------+----------+----------+----------+----------+----------+----------+----------
+  Zeile 1  | [1,1]     | [1,2]    | [1,3]    | [1,4]    | [1,5]    | [1,6]    | [1,7]    | [1,8]
+  (Termin) | T_D1      | T_D2     | M_D1     | M_D2     | J_D1     | J_D2     | J_D3     | J_D4
+           | 2         | 3        | 0        | 5        | 2        | 0        | 2        | 6
+  
+  Zeile 2  | [2,1]     | [2,2]    | [2,3]    | [2,4]    | [2,5]    | [2,6]    | [2,7]    | [2,8]
+  (Termin) | T_D1      | T_D2     | M_D1     | M_D2     | J_D1     | J_D2     | J_D3     | J_D4
+           | 1         | 1        | 0        | 6        | 2        | 0        | 2        | 6
+
+  Kalender (Beispiel):
+  Tag aus [T_D1|T_D2] = [2|3] -> 23
+  Monat aus [M_D1|M_D2] = [0|5] -> 05
+  Jahr aus [J_D1|J_D2|J_D3|J_D4] = [2|0|2|6] -> 2026
+  Gesamt: 23.05.2026
+        
+\end{verbatim}
+
+        
+Diese tabellarische Organisation ist nur eine von vielen Möglichkeiten.\\
+          Wichtig ist: Jede Zelle hat eine eindeutige Adresse \texttt{[Zeile, Spalte]}, sodass Programme die Informationen gezielt lesen und schreiben können.\\
+          Der Notizblock funktioniert damit wie der Speicher einer Maschine – \textbf{flexibel, übersichtlich und maschinenverständlich}.
+
+
+      
+    
+
+    
+      
+        \section{Tätigkeitenblatt – Abläufe als Bausteine}
+          \(
+          \blacktriangledown
+          \)
+      
+
+      
+        
+Neben \textbf{Notizblock} (Daten) und \textbf{Hilfsblock} (Hilfsvariablen) ist ein \textbf{Tätigkeitenblatt} sinnvoll.\\
+          Dort stehen keine konkreten Werte, sondern \textbf{rezeptartige Abläufe}, die der Prozessor bei Bedarf ausführen kann.
+
+
+        
+\textbf{Wozu dient das Tätigkeitenblatt?}
+
+        \begin{itemize}
+          \item \textbf{Wiederverwendung:} Ein Ablauf wird einmal beschrieben und mehrfach genutzt.
+
+          \item \textbf{Übersicht:} Lange Lösungen werden in kleine, verständliche Bausteine zerlegt.
+
+          \item \textbf{Fehlersuche:} Man prüft gezielt einen Baustein statt das ganze Gesamtprogramm.
+
+        \end{itemize}
+
+        
+\textbf{Möglicher Aufbau eines Eintrags:}
+
+        \begin{itemize}
+          \item \textbf{Name der Tätigkeit} (z. B. \emph{nummer\_lesen})
+
+          \item \textbf{Startwerte/Parameter} (z. B. Zeile = 1)
+
+          \item \textbf{Schritte} (rezeptartig, eindeutig)
+
+          \item \textbf{Ergebnis} (z. B. zusammengesetzte Nummer im Notizblock)
+
+        \end{itemize}
+
+        
+\textbf{Beispiel auf Basis der Bibliotheksliste:}
+
+        \begin{verbatim}
+
+  Tätigkeit: nummer_lesen(zeile)
+
+  1) Setze [10,1] = "".
+  2) Lies in der angegebenen Zeile die Spalten 2 bis 6.
+  3) Hänge jede gelesene Ziffer an [10,1] an.
+  4) Ergebnis: [10,1] enthält die vollständige Nummer.
+
+  Tätigkeit: preis_lesen(zeile)
+
+  1) Setze [10,2] = "".
+  2) Lies in der angegebenen Zeile die Spalten 7 bis 9.
+  3) Hänge jede gelesene Ziffer an [10,2] an.
+  4) Ergebnis: [10,2] enthält den Preis ohne Komma (z. B. "199").
+        
+\end{verbatim}
+
+        
+Didaktisch ist das der nächste logische Schritt: Lernende sehen, dass ein Programm nicht nur aus Daten besteht,\\
+          sondern auch aus \textbf{wiederverwendbaren Tätigkeiten}. In einer späteren JavaScript-Umsetzung entsprechen diese Tätigkeiten dann typischerweise \textbf{Funktionen}.
+
+      
+    
+
+    
+      
+        \section{Prozessor – der Ausführer}
+          \(
+          \blacktriangledown
+          \)
+      
+
+      
+        
+Der \textbf{Prozessor} (bspw. unser Gehirn) liest den Notizblock, führt Befehle aus und schreibt Ergebnisse zurück.\\
+          Er kennt vier grundlegende Fähigkeiten: \textbf{Schreiben}, \textbf{Lesen}, \textbf{Falls-Abfrage} und \textbf{Schleife}.
+
+
+        \subsection{1. Einfache Schreibvorgänge}
+        
+Am einfachsten beginnt man mit reinen Schreibvorgängen.\\
+          Der Prozessor trägt also Werte an bestimmten Stellen in den Notizblock ein.
+
+
+        
+\textbf{Beispiel auf Basis des Einkaufszettels:}
+
+        \begin{itemize}
+          \item Trage für Mehl in Zeile 1, Spalte 1 die erste Ziffer der Menge ein: 1.
+
+          \item Trage für Mehl in Zeile 1, Spalte 2 die zweite Ziffer der Menge ein: 2.
+
+          \item Trage für Zucker in Zeile 2, Spalte 1 die erste Ziffer der Menge ein: 0.
+
+          \item Trage für Zucker in Zeile 2, Spalte 2 die zweite Ziffer der Menge ein: 5.
+
+        \end{itemize}
+
+        
+Hier geht es nur darum zu verstehen: \textbf{Der Prozessor kann gezielt in einzelne Zellen schreiben.}
+
+
+        \subsection{2. Einfache Lesevorgänge}
+        
+Danach folgt das Lesen. Der Prozessor schaut an einer bestimmten Stelle nach, welcher Wert dort steht.
+
+
+        
+\textbf{Beispiel auf Basis des Einkaufszettels:}
+
+        \begin{itemize}
+          \item Lies bei Zucker die erste Mengenziffer aus Zeile 2, Spalte 1.
+
+          \item Lies bei Zucker die zweite Mengenziffer aus Zeile 2, Spalte 2.
+
+          \item Lies bei Eiern die Einheit aus Zeile 3, Spalte 3.
+
+          \item Lies bei Mehl den Laden aus Zeile 1, Spalte 4.
+
+        \end{itemize}
+
+        
+Auch hier ist die Idee noch einfach: \textbf{Der Prozessor kann gezielt aus einzelnen Zellen lesen.}
+
+
+        \subsection{3. Ein einfacher Durchlauf}
+        
+Nun kann der Prozessor mehrere Einträge der Reihe nach abarbeiten.\\
+          Das ist bereits eine \textbf{Schleife}: Derselbe Ablauf wird für mehrere Zeilen und Zellen wiederholt.
+
+
+        
+\textbf{Beispiel auf Basis der Bibliotheksliste:}
+
+        
+Wir gehen jede einzelne Zeile und pro Zeile jede einzelne Zelle durch:
+
+        \begin{verbatim}
+
+  Beispiel eines einfachen Durchlaufs in natürlicher Sprache:
+
+  Für jede Zeile (= jedes Buch):
+    Für jede Zelle der Zeile (= Titel, dann jede Ziffer der Nummer, dann jede Ziffer des Preises):
+      Lies den Wert der aktuellen Zelle.
+      Wenn wir uns in Sp. 2 bis 6 befinden, sammeln wir die Ziffern der Nummer.
+      Wenn wir uns in Sp. 7 bis 9 befinden, sammeln wir die Ziffern des Preises.
+        
+\end{verbatim}
+
+        
+So wird klar: \textbf{Der Prozessor kann mehrere Zeilen nacheinander bearbeiten – und innerhalb jeder Zeile Zelle für Zelle vorgehen.}
+
+
+        \subsection{4. Eine Schleife mit Abfrage}
+        
+Nun erweitern wir die Schleife um eine \textbf{Abfrage}.\\
+          Dabei wird beim wiederholten Durchlaufen zusätzlich geprüft, ob ein bestimmter Fall eingetreten ist.
+
+
+        
+\textbf{Beispiel auf Basis der Bibliotheksliste:}
+
+        
+Wir gehen wieder jede einzelne Zeile und pro Zeile jede einzelne Zelle durch:
+
+        \begin{verbatim}
+
+  Beispiel einer Schleife mit Abfrage in natürlicher Sprache:
+
+  Für jede Zeile (= jedes Buch):
+    Für jede Zelle der Zeile (= Titel, dann jede Ziffer der Nummer, dann jede Ziffer des Preises):
+      Lies den Wert der aktuellen Zelle.
+      Wenn wir uns in Sp. 2 bis 6 befinden, sammeln wir die Ziffern der Nummer.
+      Wenn wir uns in Sp. 7 bis 9 befinden, sammeln wir die Ziffern des Preises.
+    Prüfe nach dem Einlesen der Zeile, ob die gelesene Nummer der gesuchten Nummer 97831 entspricht.
+    Falls ja, schreibe die Nummer und den Preis in die dafür vorgesehene Zeile 10.
+    (Auch dort müssen die Ziffern wieder spaltenweise in die einzelnen Zellen eingetragen werden.)
+    Falls nein, gehe zur nächsten Zeile weiter.
+        
+\end{verbatim}
+
+        
+Hier kommen mehrere Fähigkeiten zusammen: \textbf{lesen}, \textbf{prüfen}, \textbf{gegebenenfalls schreiben} und \textbf{wiederholen} – und zwar auf zwei Ebenen: einmal über die Zeilen, einmal über die Zellen pro Zeile.
+
+
+        
+So wird zunächst in natürlicher Sprache deutlich, \textbf{was} der Prozessor tun soll.\\
+          Erst im nächsten Schritt wird daraus eine formale Programmiersprache.\\
+          Dadurch bleibt der Einstieg anschaulich und verständlich.
+
+
+          
+\textbf{Die Didaktik soll darauf beruhen, dass die Schulmathematik mithilfe eines einfachen JavaScript-Modells mit Matrix als Notizblock beschrieben werden kann.}
+
+
+      
+    
+
+    
+      
+        \section{Hilfsblock – Hilfsvariablen}
+          \(
+          \blacktriangledown
+          \)
+      
+
+      
+        
+Beim Programmieren braucht man oft \textbf{zusätzliche Variablen}, die nicht direkt zum Problem gehören, aber für die Berechnung notwendig sind.\\
+          Beispiele: \emph{Zähler} in Schleifen, \emph{Zwischenergebnisse} bei Berechnungen oder \emph{Flags}, um sich zu merken, ob etwas gefunden wurde.
+
+
+        
+Um diese \textbf{Hilfsvariablen} klar von den eigentlichen \textbf{Daten} zu trennen, nutzen wir ein zweites kariertes Papier – das \textbf{Hilfsblatt}.\\
+          Zugriff erfolgt mit \texttt{h[Zeile, Spalte]} (h = Hilfsspeicher).
+
+
+        
+\textbf{Typische Nutzfelder im Hilfsblatt:}
+
+        \begin{itemize}
+          \item \textbf{Zähler und Zeiger} (z. B. Zeilen 1-5): \emph{„Wo bin ich gerade?"}\\
+              Beispiel: Schleifenzähler, Index in einer Liste
+          
+
+          \item \textbf{Sammelstellen für Werte} (z. B. Zeilen 6-10): \emph{„Was setze ich gerade zusammen?"}\\
+            Beispiel: Mehrere Ziffern zu einer Nummer oder einem Preis zusammensetzen
+          
+
+          \item \textbf{Zwischenwerte und Berechnungen} (z. B. Zeilen 6-10): \emph{„Was berechne ich gerade?"}\\
+              Beispiel: Temporäre Summe, Zwischenergebnis bei Division
+          
+
+          \item \textbf{Zustände und Merker} (z. B. Zeilen 11-15): \emph{„Was habe ich gefunden/erreicht?"}\\
+              Beispiel: Flag für "gefunden", aktuelles Minimum/Maximum
+          
+
+          \item \textbf{Werkzeuge und Konstanten} (z. B. Zeilen 16-25): \emph{„Was brauche ich immer wieder?"}\\
+              Beispiel: Ziffern 0-9 für Grundrechenarten, mathematische Konstanten
+          
+
+        \end{itemize}
+
+        
+\textbf{Beispiel 1: Schleifenzähler beim Durchgehen einer Liste}
+
+
+        \begin{verbatim}
+
+           | Spalte 1
+  ---------+---------
+  Zeile 1  | [1,1] = Tobias
+  Zeile 2  | [2,1] = Erik
+  Zeile 3  | [3,1] = Leon
+
+          Wir wollen jede Zeile dieser Liste durchgehen.
+          Dazu müssen wir aber wissen, was die letzte Zeilennummer war, um mit der nächsten Zeile fortzufahren.
+          Daher speichern wir uns die aktuelle Zeilennummer im Hilfsspeicher und können nachher ab dieser fortsetzen.
+
+        Hilfsspeicher:
+
+           | Spalte 1
+  ---------+---------
+  Zeile 1  | 1 -> d.h. wir sind bei Tobias
+
+           | Spalte 1
+  ---------+---------
+  Zeile 1  | 2 -> d.h. wir sind bei Erik
+
+           | Spalte 1
+  ---------+---------
+  Zeile 1  | 3 -> d.h. wir sind bei Leon
+        
+\end{verbatim}
+
+        
+\textbf{Beispiel 2: Eine Nummer aus einzelnen Ziffern zusammensetzen}
+
+
+        
+In der Bibliotheksliste steht die Nummer nicht in einer einzigen Zelle, sondern verteilt auf mehrere Zellen.\\
+          Während wir die Ziffern lesen, brauchen wir eine Hilfsvariable, in der wir die Nummer Schritt für Schritt zusammensetzen.
+
+
+        \begin{verbatim}
+
+  Bibliotheksliste, Zeile 1:
+
+         | Spalte 2 | Spalte 3 | Spalte 4 | Spalte 5 | Spalte 6
+  -------+----------+----------+----------+----------+----------
+  Werte  | 9        | 7        | 8        | 3        | 1
+
+  Hilfsspeicher:
+
+         | Spalte 1
+  -------+---------
+  Zeile 6| nummer = ""
+
+  Lies Spalte 2 -> 9  -> nummer = "9"
+  Lies Spalte 3 -> 7  -> nummer = "97"
+  Lies Spalte 4 -> 8  -> nummer = "978"
+  Lies Spalte 5 -> 3  -> nummer = "9783"
+  Lies Spalte 6 -> 1  -> nummer = "97831"
+        
+\end{verbatim}
+
+        
+Der Hilfsspeicher hält hier also fest, \textbf{welche Nummer bisher schon zusammengesetzt wurde}.\\
+          Ohne diese Zwischenablage könnten wir die einzelnen gelesenen Ziffern nicht zu einer vollständigen Nummer verbinden.
+
+
+        
+\textbf{Beispiel 3: Merken, ob etwas gefunden wurde}
+
+
+        
+Wenn wir in der Bibliotheksliste die Nummer \texttt{97831} suchen, ist ein Merker hilfreich:
+
+
+        \begin{verbatim}
+
+  Hilfsspeicher:
+
+         | Spalte 1
+  -------+-----------------
+  Zeile 11| gefunden = nein
+
+  Solange keine passende Nummer gefunden wurde:
+    gefunden = nein
+
+  Sobald die zusammengesetzte Nummer 97831 ist:
+    gefunden = ja
+        
+\end{verbatim}
+
+        
+So kann sich der Prozessor merken, \textbf{ob die Suche erfolgreich war}, auch wenn er danach noch weitere Schritte ausführen muss.
+
+
+        
+Diese Trennung macht Programme \textbf{übersichtlicher} und hilft Anfängern zu verstehen, welche Daten zum Problem gehören und welche nur Hilfsmittel (Meta-Daten als Mittel zum Zweck) sind.
+
+
+        
+\textbf{Frage:} Fallen Dir weitere Beispiele ein, bei denen Hilfsvariablen nützlich sein könnten?
+
+
+      
+    
+
+    
+
+      
+        \section{Laufzeitkomplexität: Schritte zählen}
+          \(
+          \blacktriangledown
+          \)
+      
+
+      
+
+        \subsection{Warum Schritte zählen?}
+
+        
+In der Informatik geht es oft darum, ein Problem zu lösen – zum Beispiel: \textbf{Finde eine bestimmte Person in einem Notizblock}.\\
+          Doch nicht jeder Lösungsweg ist gleich gut. Manche brauchen viele Schritte, andere kommen schneller ans Ziel.
+
+
+        
+\textbf{Schritte zählen} hilft uns dabei, verschiedene Lösungswege zu vergleichen:
+
+        \begin{itemize}
+          \item Wie viele Operationen braucht mein Programm mindestens? (Best Case)
+
+          \item Wie viele im schlimmsten Fall? (Worst Case)
+
+          \item Wie viele im Durchschnitt? (Average Case)
+
+        \end{itemize}
+
+        \subsection{Beispiel 1: Lineare Suche im Notizblock}
+
+        \subsubsection{Startsituation:}
+        \begin{itemize}
+          \item Notizblock mit n Einträgen: \texttt{[Anna, Ben, Clara, David, Emma, Felix, Greta]} (hier: n = 7)
+
+          \item \textbf{Zu suchende Person:} Felix
+
+        \end{itemize}
+
+        \subsubsection{Tätigkeit (rezeptartig):}
+        \begin{enumerate}
+          \item Beginne beim ersten Eintrag.
+
+          \item Vergleiche den aktuellen Eintrag mit der \textbf{zu suchenden Person}.
+
+          \item Falls gefunden → fertig.
+
+          \item Falls nicht gefunden → gehe zum nächsten Eintrag.
+
+          \item Wiederhole, bis gefunden oder Notizblock zu Ende.
+
+        \end{enumerate}
+
+        \subsubsection{Schritte zählen:}
+        \begin{itemize}
+          \item \textbf{Best Case:} Die \textbf{zu suchende Person} steht am Anfang → \textbf{1 Vergleich}
+
+          \item \textbf{Worst Case:} Die Person steht am Ende oder fehlt → \textbf{n Vergleiche} (hier: 7)
+
+          \item \textbf{Average Case:} Im Durchschnitt müssen wir die Hälfte durchsuchen → \textbf{n/2 Vergleiche}
+
+        \end{itemize}
+
+        
+\textbf{Asymptotische Laufzeitordnung:} \textbf{O(n)} – „linear"\\
+          Je größer n wird, desto mehr Schritte brauchen wir proportional dazu.
+
+
+        \subsection{Beispiel 2: Binärsuche (im alphabetisch sortierten Notizblock)}
+
+        \subsubsection{Startsituation:}
+        \begin{itemize}
+          \item \textbf{Alphabetisch sortierter} Notizblock: \texttt{[Anna, Ben, Clara, David, Emma, Felix, Greta]} (n = 7)
+
+          \item \textbf{Zu suchende Person:} Felix
+
+        \end{itemize}
+
+        \subsubsection{Tätigkeit:}
+        
+Wir brauchen zwei Merker im Hilfsspeicher: \textbf{linke Grenze} und \textbf{rechte Grenze}, die den aktuell noch zu durchsuchenden Bereich einschließen.
+
+        \begin{enumerate}
+          \item Setze linke Grenze = 1, rechte Grenze = 7 (= Anzahl der Einträge). (Beide Merker kommen in den Hilfsspeicher.)
+
+          \item Berechne die Mitte: (linke Grenze + rechte Grenze) / 2, abgerundet → das ist die aktuelle Prüfposition.
+
+          \item Lies den Eintrag an der aktuellen Prüfposition.
+
+          \item Ist dieser Eintrag die \textbf{zu suchende Person}? → fertig.
+
+          \item Kommt die \textbf{zu suchende Person} alphabetisch früher? → Setze rechte Grenze = aktuelle Prüfposition - 1.
+
+          \item Kommt sie alphabetisch später? → Setze linke Grenze = aktuelle Prüfposition + 1.
+
+          \item Wiederhole ab Schritt 2, solange linke Grenze \(\leq\) rechte Grenze. (Falls nicht mehr: Person nicht vorhanden.)
+
+        \end{enumerate}
+        
+\textbf{Konkreter Ablauf für Felix:}
+
+        \begin{itemize}
+          \item Durchlauf 1: linke Grenze = 1, rechte Grenze = 7 → Mitte = 4 → \textbf{David}. Felix > David → linke Grenze = 5.
+
+          \item Durchlauf 2: linke Grenze = 5, rechte Grenze = 7 → Mitte = 6 → \textbf{Felix} → gefunden nach \textbf{2 Vergleichen}.
+
+        \end{itemize}
+
+        \subsubsection{Schritte zählen:}
+        \begin{itemize}
+          \item Bei jedem Schritt halbiert sich die Suchgröße.
+
+          \item n → n/2 → n/4 → n/8 → ... → 1
+
+          \item Anzahl der Schritte: \textbf{$\log_2(n)$}
+
+        \end{itemize}
+
+        
+Beispiel: n = 1024 Personen
+
+        \begin{itemize}
+          \item Lineare Suche: bis zu 1024 Vergleiche
+
+          \item Binärsuche: \textbf{10 Vergleiche} (weil $2^{10} = 1024$)
+
+        \end{itemize}
+
+        
+\textbf{Asymptotische Laufzeitordnung:} \textbf{O(log n)} – „logarithmisch"\\
+          Extrem effizient! Selbst bei sehr großen Notizblöcken braucht man nur wenige Schritte.
+
+
+        \subsection{Vergleich der beiden Verfahren}
+
+        
+          
+            Verfahren
+            Worst Case
+            Beispiel (n=1000 Personen)
+          
+          
+            Lineare Suche
+            O(n)
+            1000 Schritte
+          
+          
+            Binärsuche
+            O(log n)
+            10 Schritte
+          
+        
+
+        
+\textbf{Erkenntnis:}\\
+          Je größer n wird, desto dramatischer ist der Unterschied zwischen den Verfahren.\\
+          Die asymptotische Laufzeitordnung (O-Notation) hilft uns, die Effizienz von Algorithmen zu verstehen – unabhängig von Hardware oder Programmiersprache.
+
+
+        \subsection{Verbindung zur späteren Umsetzung}
+
+        
+Auch in einer späteren JavaScript-Umsetzung mit Matrix als Notizblock können wir Schritte zählen, wenn wir auf unserem karierten Papier suchen:
+
+        \begin{itemize}
+          \item Jeder Funktionsaufruf ist ein Schritt
+
+          \item Jeder Schreibzugriff ist ein Schritt
+
+          \item Jede Abfrage mit Vergleich ist ein Schritt
+
+        \end{itemize}
+
+        
+Ein Programm zur linearen Suche hätte im Worst Case n Vergleiche.\\
+          Ein Programm zur Binärsuche hätte nur $\log_2(n)$ Vergleiche.
+
+
+        
+\textbf{Fazit:} Problemlösung ist Routine – aber manche Routinen sind effizienter als andere. Schritte zählen und asymptotische Laufzeitordnung helfen uns, die besten Werkzeuge auszuwählen.
+
+
+          
+\textbf{TODOs:} Weitere Beispiele für Laufzeitkomplexität, Übungen zum Schritte zählen, Einführung in O-Notation, Vergleich von Algorithmen, praktische Anwendungen, Verbindung zu späteren JavaScript-Implementierungen.
+
+
+      
+    
+
+    
+
+      
+        \section{Zusammenhang Informatik - Mathematik}
+          \(
+          \blacktriangledown
+          \)
+      
+
+      
+        
+In Bearbeitung ...
+
+
+        
+Die Schulmathematik – Arithmetik, Algebra, Analysis, Stochastik, Statistik – scheint nur bedingt was mit Informatik zu tun zu haben. Dennoch lassen sich alle diese Probleme prinzipiell auf einer Registermaschine lösen.
+
+
+        
+Die Idee dahinter:
+
+        \begin{itemize}
+          \item Eine Registermaschine hat nur einen Speicher (die „Register“) und elementare Befehle wie Lesen, Schreiben, Vergleichen und Springen.
+
+          \item Komplexe Rechenoperationen wie Addition, Subtraktion, Multiplikation oder Division lassen sich Schritt für Schritt aus diesen einfachen Befehlen aufbauen.
+
+          \item Variablen der Mathematik entsprechen dabei Speicheradressen (Register), Bedingungen und Schleifen werden über Vergleichs- und Sprungbefehle umgesetzt.
+
+        \end{itemize}
+
+        
+\textbf{Mächtigkeit:} Eine Registermaschine ist Turing-vollständig – das bedeutet, dass alles, was algorithmisch lösbar ist, auf ihr dargestellt werden kann. Damit kann die gesamte Schulmathematik ausgeführt werden.
+
+
+        \subsubsection{Gleichungen über Zahlen}
+        
+Ein typisches Beispiel aus der Schulmathematik ist das Lösen von Gleichungen:
+
+        \begin{itemize}
+          \item Funktional (algebraisch): x + 3 = 7 → x = 7 - 3
+
+          \item Imperativ / programmatisch: Schrittweise Werte testen oder hochzählen, bis die Gleichung erfüllt ist.
+
+        \end{itemize}
+        
+Beide Paradigmen können auf Registermaschinen abgebildet werden – entweder durch Umkehrfunktionen oder durch schrittweise Verarbeitung mit Funktionsaufrufen und Vergleichen.
+
+
+        \subsubsection{Gleichungen über nicht-numerische Objekte: Farben}
+        
+Gleichungen müssen nicht nur mit Zahlen gelöst werden. Wir können auch andere Objekte betrachten, z.\,B. Farben.
+
+        \begin{itemize}
+          \item Funktion \textbf{f}: vertauscht Rot und Cyan, Gelb und Blau, Grün und Magenta etc.
+
+          \item Umkehrfunktion \textbf{f-1}: kehrt die Vertauschung wieder um.
+
+        \end{itemize}
+        
+Beispiel:
+
+        \begin{verbatim}
+
+  f(f(x)) = gelb | f-1 auf beide Seiten
+  f(x)     = f-1(gelb) = blau | f-1 erneut
+  x        = f-1(blau) = gelb
+        
+\end{verbatim}
+
+        
+Ergebnis: \texttt{x = gelb}
+
+
+        
+Dieses Beispiel zeigt, dass Gleichungen auch über nicht-numerische Objekte gelöst werden können, solange die Funktion bijektiv ist.
+
+
+        \subsubsection{Gleichungssysteme über bewegende Objekte}
+        
+Betrachten wir zwei Autos auf einer Straße, die unterschiedliche Startpositionen und Geschwindigkeiten haben. Wir möchten bestimmen, wann sie sich treffen.
+
+
+        \paragraph{1. Mathematisch-algebraisch}
+        \begin{itemize}
+          \item Auto A: WegA(t) = vA * t + sA,0
+
+          \item Auto B: WegB(t) = vB * t + sB,0
+
+          \item Gleichungssystem: WegA(t) = WegB(t)
+
+          \item Lösung über Umkehrfunktionen: t = (sB,0 - sA,0) / (vA - vB)
+
+        \end{itemize}
+
+        \paragraph{2. Imperativ / programmatisch}
+        \begin{itemize}
+          \item Wir starten bei t = 0 und erhöhen die Zeit schrittweise (hochzählen).
+
+          \item In jedem Schritt wird WegA(t) und WegB(t) berechnet.
+
+          \item Wenn WegA(t) = WegB(t), haben wir die Lösung gefunden.
+
+          \item Dies entspricht dem klassischen Programmierparadigma, wie wir es z.\,B. in einer einfachen JavaScript-Umsetzung mit Schleifen formulieren könnten.
+
+        \end{itemize}
+
+        
+Dieses Beispiel illustriert:
+
+        \begin{itemize}
+          \item Gleichungssysteme können sowohl algebraisch über Umkehrfunktionen gelöst werden als auch imperativ durch Schritt-für-Schritt-Berechnung.
+
+          \item Die imperativen Schritte lassen sich auf eine Registermaschine übertragen, da jeder Schritt nur elementare Befehle benötigt (Werte lesen, schreiben, vergleichen, springen).
+
+          \item So wird deutlich, dass Registermaschinen oder eine einfache JavaScript-Umsetzung auch dynamische, zeitabhängige Probleme modellieren können.
+
+          \item Damit können sowohl funktionale Lösungen über Umkehrfunktionen als auch imperative Lösungen über schrittweises Abarbeiten beschrieben werden.
+
+        \end{itemize}
+
+        
+Für Lernende bedeutet dies: Registermaschinen und eine einfache JavaScript-Umsetzung mit Matrix sind universelle Werkzeuge, die weit über einfache Zahlenoperationen hinausgehen. Sie können auch Aufgaben lösen, die abstrakte Strukturen oder zeitabhängige Systeme betreffen, solange diese als Speicherinhalte modelliert werden.
+
+      
+
+    
+
+    
+
+  
+    \section{Schlussfolgerungen}
+      \(
+      \blacktriangledown
+      \)
+  
+
+  
+    \subsection{Was ist eine Schlussfolgerung?}
+    
+
+      Eine \textbf{Schlussfolgerung} ist ein logischer Ableitungsschritt, der neue Aussagen direkt aus bestehenden Prämissen ableitet.  
+      In komplexen Beweisen kann eine Schlussfolgerung aus mehreren aufeinander aufbauenden Einzelschritten bestehen. Jede Teilableitung ist dabei eine eigene Schlussfolgerung.
+    
+
+
+    
+
+      In vielen Beispielen werden Mengenlogik und Vergleiche angewandt, um Schlussfolgerungen zu ziehen.  
+      Eigentlich kann man aber mit jedem deterministischen System oder Modell Schlussfolgerungen betreiben.
+    
+
+
+    \subsection{Beispiele aus der natürlichen Sprache}
+    
+Beispiel 1 – Tiere:
+
+    \begin{itemize}
+      \item Prämisse 1: Kein Tier ist müde.
+
+      \item Prämisse 2: Einige Tiere sind nicht hungrig.
+
+      \item Schlussfolgerung: Mindestens einige Tiere sind nicht müde.
+
+    \end{itemize}
+
+    
+Beispiel 2 – Sokrates:
+
+    \begin{itemize}
+      \item Prämisse 1: Alle Menschen sind sterblich.
+
+      \item Prämisse 2: Sokrates ist ein Mensch.
+
+      \item Schlussfolgerung: Sokrates ist sterblich.
+
+    \end{itemize}
+
+    
+Erkenntnis:
+
+    \begin{itemize}
+      \item Schlussfolgerungen sind die Bausteine logischen Denkens.
+
+      \item Sie können auf Mengen, Eigenschaften oder konkrete Objekte angewendet werden.
+
+      \item Auch ohne Zahlen lassen sich daraus neue Aussagen ableiten.
+
+    \end{itemize}
+  
+
+
+  
+  
+    
+      \section{Beweisführung}
+        \(
+        \blacktriangledown
+        \)
+    
+
+    
+      \subsection{Was ist eine Beweisführung?}
+      
+
+        Eine \textbf{Beweisführung} ist ein geordneter Prozess (ein Spezialfall der Problemlösung), um eine Behauptung oder These systematisch aus bekannten Fakten oder Prämissen zu zeigen.  
+        Sie besteht aus drei Kernbestandteilen:
+      
+
+      \begin{itemize}
+        \item \textbf{Behauptung / These:} Das Ziel, das bewiesen werden soll.
+
+        \item \textbf{Prämissen:} Bekannte Fakten, Annahmen oder Axiome, die als Ausgangspunkt dienen.
+
+        \item \textbf{Werkzeuge:} Anwendung von Schlussfolgerungen oder andere logische/arithmetic Methoden, z.\,B. direkter Beweis, Beweis durch Widerspruch oder Induktion.
+
+      \end{itemize}
+
+      \subsection{Beispiel 1 – Sokrates}
+      
+
+        Behauptung: Sokrates ist sterblich. \emph{(Die Aufstellung der Behauptung startet die Beweisführung.)}
+      
+
+      \begin{itemize}
+        \item Prämisse 1: Alle Menschen sind sterblich.
+
+        \item Prämisse 2: Sokrates ist ein Mensch.
+
+        \item Schlussfolgerung ist hier ein Werkzeug: Sokrates ist sterblich.
+
+      \end{itemize}
+      
+
+        Erkenntnis: Der Großteil der Beweisführung besteht in der Anwendung von Schlussfolgerungen. Die Behauptung gibt den Rahmen vor.
+      
+
+
+      \subsection{Beispiel 2 – Arithmetik: Quadratische Faktorisierung}
+      
+
+        Behauptung: Für jede Zahl \(a\) gilt \textbf{a² - 1 = (a-1)(a+1)}.
+      
+
+
+      \subsubsection{einige arithmetische Werkzeuge}
+      \begin{itemize}
+        \item Ausklammern / Distributivgesetz: a(b+c) = ab + ac
+
+        \item Faktorisierung von Summen/Differenzen: a² - b² = (a-b)(a+b)
+
+        \item Potenzgesetze: $a^m \cdot a^n = a^{m+n}$
+
+        \item Umformung von Termen: z.\,B. a2 - 12 → a2 - 1
+
+        \item Substitution: Setze bekannte Werte ein (z.\,B. b=1)
+
+        \item Induktionswerkzeuge: Für wiederkehrende Strukturen (z.\,B. Summenformeln)
+
+        \item Übersetzen in arithmetische Sprache
+
+        \item Polynom-Kongruenz
+
+        \item aus einer unendlich zu testenden Menge eine endliche herbeiführen (Resteklassen, Transitivität)
+
+      \end{itemize}
+
+      \subsubsection{Ausgewähltes Werkzeug}
+      
+Für diese Beweisführung wählen wir das Werkzeug \textbf{Faktorisierung von Differenzen: a² - b² = (a-b)(a+b)} - ein Spezialfall des Werkzeugs \textbf{Schablonenerkennung}.
+
+
+      \subsubsection{Schlussfolgerung / Ableitung}
+      \begin{enumerate}
+        \item Faktorisierung von Differenzen: a² - b² = (a-b)(a+b)
+
+        \item Setze b = 1 ein: a² - 1² = (a-1)(a+1)
+
+        \item Da 1² = 1, folgt: \textbf{a² - 1 = (a-1)(a+1)}.
+
+      \end{enumerate}
+
+      \subsection{Erkenntnis}
+      \begin{itemize}
+        \item Beweisführung ist ein geordneter Rahmen, in dem Schlussfolgerungen als Werkzeuge eingesetzt werden.
+
+        \item Schlussfolgerungen können einzeln oder in Ketten auftreten.
+
+        \item Arithmetische Beweise nutzen Werkzeuge wie Faktorisierung, Potenzgesetze oder Summenregeln.
+
+        \item Selbst scheinbar „magische“ Formeln werden nachvollziehbar, wenn Behauptung, ausgewähltes Werkzeug und Ableitung klar definiert sind.
+
+      \end{itemize}
+
+      
+Fazit: Wer Behauptung, Werkzeuge und Ableitung kennt, kann jede Beweisführung Schritt für Schritt aufbauen und verstehen.
+
+
+      \subsection{Beispiel 3 - Teilbarkeit prüfen mit Polynom-Kongruenz}
+      
+
+        Behauptung (natürliche Sprache): \textbf{2n² - 3n + 6 ist durch 4 teilbar}.\\
+        Stimmt diese Behauptung für alle natürlichen Zahlen n?
+      
+
+
+      \subsubsection{Werkzeuganwendung: Übersetzen in arithmetische Sprache}
+      
+
+        "Durch 4 teilbar" übersetzen wir in arithmetische Sprache:
+      
+
+      
+          $2n^2 - 3n + 6 \equiv 0 \pmod{4}$
+      
+
+
+      \subsubsection{Werkzeuganwendung: Polynom-Kongruenz / Restklassen (Strukturerhalt des Terms)}
+
+      \paragraph{Vorweg: Was bedeutet Kongruenz für mod 4?}
+      
+      $n \equiv r \pmod{4}$ genau dann, wenn $n = r + 4\cdot m$ für ein ganzzahliges $m$.
+      
+
+
+      \paragraph{
+        Strukturgleichheit bei Modulo-Rechnungen
+      }
+
+      \begin{itemize}
+        \item \texttt{5} $\equiv$ \texttt{9 (mod 4)} → beide Zahlen Rest 1 → gleiche Restklasse.
+
+        \item \texttt{t(n) = n}, \texttt{t'(n) = n}
+
+        \item 
+          \begin{itemize}
+            \item \texttt{t(5) = 5, t'(9) = 9}
+
+            \item \texttt{5} $\equiv$ \texttt{9 (mod 4)} → beide Restklasse 1, Struktur bleibt parallel.
+
+          \end{itemize}
+        
+
+        \item \texttt{t(n) = 2n}, \texttt{t'(n) = 2n}
+
+        \item 
+          \begin{itemize}
+            \item \texttt{t(5) = 10, t'(9) = 18}
+
+            \item \texttt{5} $\equiv$ \texttt{9 (mod 4)}
+
+            \item \texttt{10} $\equiv$ \texttt{18 (mod 4)} → beide Restklasse 2, Struktur bleibt parallel.
+
+          \end{itemize}
+        
+
+      \end{itemize}
+
+      
+Wie bei diesen Modulo-Rechnungen erkennbar, kann man nur anhand von n (ohne die Terme zu kennen) die Restklasse für mod 4 bestimmen.
+
+
+      
+Anders verhält es sich bei diesem Beispiel:
+
+
+      \begin{itemize}
+        \item \texttt{t(n) = 2n}, \texttt{t'(n) = 3n}
+
+        \item 
+          \begin{itemize}
+            \item \texttt{t(5) = 10, t'(9) = 27}
+
+            \item \texttt{obwohl 5} $\equiv$ \texttt{9 (mod 4), ist 10 nicht} $\equiv$ \texttt{27 (mod 4)}
+
+          \end{itemize}
+        
+
+      \end{itemize}
+
+      
+Hier unterscheidet sich die Restklasse zwischen den bloßen n-Werten und der Ausführung der Terme.
+
+      
+Die Struktur bleibt hier also nicht erhalten.
+
+
+      \textbf{
+        Merksatz: Wenn die Struktur gleich bleibt, genügt es, die Variable durch ihren Vertreter der Restklasse zu ersetzen anstelle des gesamten Terms.
+      }
+
+      
+In unserem Fall geht es darum zu wissen, wann der Term durch 4 teilbar ist.
+      
+
+
+      
+Folgendes funktioniert für $2n^2 - 3n + 6 \equiv 0 \pmod{4}$ leider nicht, weil dadurch der Term nicht mehr bekannt ist:
+
+
+      \begin{itemize}
+        \item $0 \bmod 4 = 0$
+
+        \item $1 \bmod 4 = 1$
+
+        \item $2 \bmod 4 = 2$
+
+        \item ...
+
+      \end{itemize}
+
+      
+\textbf{ABER:} Wir wissen ja, dass wir n zum Testen verwenden können ohne dass die Struktur verloren geht.
+
+
+      \subsubsection{Beweisführung: Prüfung aller Restklassen}
+      
+Wir prüfen jede Restklasse $n \equiv r \pmod{4}$:
+
+
+        \begin{itemize}
+
+
+      
+        \item $n \equiv 0 \pmod{4}$ → $2\cdot0^2 - 3\cdot0 + 6 = 6$ → $6 \% 4 = 2$ → nicht teilbar
+
+        \item $n \equiv 1 \pmod{4}$ → $2\cdot1^2 - 3\cdot1 + 6 = 5$ → $5 \% 4 = 1$ → nicht teilbar
+
+        \item $n \equiv 2 \pmod{4}$ → $2\cdot2^2 - 3\cdot2 + 6 = 8$ → $8 \% 4 = 0$ → teilbar
+
+        \item $n \equiv 3 \pmod{4}$ → $2\cdot3^2 - 3\cdot3 + 6 = 15$ → $15 \% 4 = 3$ → nicht teilbar
+
+      \end{itemize}
+
+      \textbf{Frage: Warum brauchen wir nur die Restklassen testen und nicht alle Zahlen?}
+      
+Zur Erinnerung: Modulo gibt den Rest einer Division aus. (in unserem Beispiel zwischen einschließlich 0 und 3)
+
+      
+Auch wenn wir ein n > 3 testen, bekommen wir auch nur ein Modulo-Ergebnis (einen Rest) zwischen einschließlich 0 und 3.
+
+      
+Nur im Falle der Resteklasse 0 wissen wir, dass es sich um eine Zahl handelt, die durch 4 teilbar ist.
+
+
+      
+
+      	\textbf{Fazit:} Nur für $n \equiv 2 \pmod{4}$ (also bspw. für $n = 2, 6, 10, \dots$) ist der Term durch 4 teilbar.
+      
+
+
+      
+
+        Mit den Werkzeugen \textbf{Übersetzen in arithmetische Sprache} und \textbf{Polynom-Kongruenz} konnten wir die Teilbarkeit vollständig nachvollziehen und ohne aufwendige algebraische Tricks prüfen.
+      
+
+
+      \subsection{Beispiel 4 - Prüfung der Geradzahligkeit}
+
+      
+
+        Ausgangsbehauptung: \textbf{Wenn 2n² - 3n + 6 durch 4 teilbar ist (siehe Beispiel 3), dann ist n gerade}.\\
+        Übung von: Lehrerfortbildung Baden-Württemberg – Übungen zum Beweisen
+      
+
+
+      
+
+        Aus der Restklassen-Analyse in Beispiel 3 wissen wir: Nur \texttt{n} $\equiv$ \texttt{2 (mod 4)} liefert Teilbarkeit durch 4.
+      
+
+
+      \subsubsection{Geradzahligkeit prüfen mit Modulo 2}
+      
+
+        Eine Zahl ist gerade, genau dann, wenn $n \bmod 2 = 0$.
+      
+
+
+      
+
+        Wir setzen die Restklasse für die Teilbarkeit ein. Wichtig: Wir müssen \textbf{nicht alle Zahlen} prüfen, sondern nur die Vertreter der Restklassen. (siehe Polynom-Kongruenz), nämlich \texttt{n = 2} für \texttt{n} $\equiv$ \texttt{2 (mod 4)}.
+      
+
+
+      
+      $(2 \cdot 2^2 - 3 \cdot 2 + 6) \bmod 2 = (8 - 6 + 6) \bmod 2 = 8 \bmod 2 = 0$
+      
+
+
+      
+
+        \textbf{Fazit:} Das Ergebnis ist 0 → die Zahl ist gerade. Damit gilt die Behauptung.
+      
+
+
+      
+
+        Mit \textbf{Modulo 4} haben wir die Teilbarkeit ermittelt, mit \textbf{Modulo 2} die Geradzahligkeit überprüft. Dank der Restklassenanalyse ist das Verfahren übersichtlich und vollständig.
+      
+
+    
+  
+
+    
+      
+        \section{Tipps zur Didaktik}
+        \(
+        \blacktriangledown
+        \)
+      
+
+      
+        \begin{itemize}
+          \item Bei Übungen ist es wichtig, dass der Lernende seinen eigenen Weg nutzt, um zum Ziel zu kommen.
+              Der Lehrende muss erkennen, dass trotzdem der Weg unkonventionell und ggf. auch umständlich ist, dieser auch zum Ziel führen könnte.
+              Beispiel: Wenn der Schüler für den Anfang folgendes definiert:
+              \texttt{var produktUndPreis = 'Brot für 1,99€'}
+              und er das Produkt und den Preis ermitteln möchte, dann kann er das trotzdem herausfinden, auch wenn Produkt und Preis nicht in getrennte Variablen ausgewiesen ist.
+          
+
+
+          \item Die Erklärungen müssen häppchenweise (modular) stattfinden, sodass jeder das Thema nachvollziehen kann.
+
+
+          \item Da Problemlösung auch nur eine Routine und keine Magie ist, kann jeder die zu lernenden Themen nicht nur logisch verstehen, sondern auch kreativ und problemlösend in diesem Bereich agieren.
+
+        
+          \item Wenn man ein Konzept erlernt, müssen erst die dazugehörigen Fundamente verstanden werden. (viele WARUM-Fragen müssen gestellt werden)
+
+          \begin{itemize}
+            \item Das bedeutet, es muss vom Konzept aus ein roter Faden bis hin zum Fundament verfolgt werden.
+
+            \item Beim Lösen von Aufgaben aus dem Konzept sollte man im Laufe der Zeit trotzdem ein gedankliches Framework entwickeln.
+
+            \item Das bedeutet, dass man beim Bearbeiten der Aufgabe nicht vom Fundament aus bis zum Konzept über die Zusammenhänge nachdenkt, sondern das gedankliche Framework beinhaltet die Struktur und die wichtigsten Tipps des Fundaments.
+
+            \item Damit kann man effizienter und zielgerichteter arbeiten, da das Framework als Leitfaden dient.
+
+          \end{itemize}
+
+          \item Gut wäre es, ein Thema (bspw. Stochastik) über ein Fundament (bspw. Kombinatorik in Baumstruktur) zu vermitteln.
+            Auch u.a. das mehrfache Falten von Papier kann auf Kombinatorik reduziert werden.
+          
+
+        \end{itemize}
+      
+    
+
+    
+      
+        \section{Wie kann man das Kochen lernen?}
+        \(
+        \blacktriangledown
+        \)
+      
+
+      
+        \begin{itemize}
+          \item Dieses Thema passt hier gut rein, weil dies ein gutes Beispiel ist, um meine Philosophie des Lernens über einen roten Faden zu verinnerlichen.
+
+          \item Wirklich kochen kann man, wenn man keine Rezepte braucht, weil man sich ein gutes Rezept selber durch die physikalischen, biochemischen Grundlagen und durch Kenntnisse über die geschmackliche Komposition von Gewürzen und anderen Lebensmittel ableiten kann.
+
+          \item Hat man diese Grundlagen einmal verstanden und häufig angewendet, entwickelt sich daraus ein mentales Framework. Dieses Framework enthält die wichtigsten Zusammenhänge und Erfahrungswerte in verdichteter Form. Dadurch muss man beim Kochen nicht jedes Mal alle physikalischen und biochemischen Prozesse bewusst herleiten, sondern kann schnell und zielgerichtet entscheiden.
+
+        \end{itemize}
+      
+    
+\end{document}
