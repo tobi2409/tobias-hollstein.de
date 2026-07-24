@@ -34,6 +34,28 @@ body > header > a {
     margin-right: auto;
 }
 
+body > header > a > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+@media (max-height: 400px) {
+    body > header {
+        padding: 4px;
+    }
+
+    body > header > a {
+        width: 48px;
+        height: 48px;
+    }
+
+    body > main > footer,
+    body > footer {
+        font-size: 10px;
+    }
+}
+
 body > main {
     --align: client;
     background-color: var(--content-background-color);
@@ -43,13 +65,13 @@ body > main {
     background-size: 20px 20px;
 }
 
-@media (width <= 1000px) {
+@media (max-width: 1000px) {
     body > main > section {
         width: 90%;
     }
 }
 
-@media (width > 1000px) {
+@media (min-width: 1001px) {
     body > main > section {
         width: 950px;
     }
@@ -73,7 +95,7 @@ body > main > .develop-and-explain > aside > .large-display {
     max-width: 550px;
 }
 
-@media (width <= 1000px) {
+@media (max-width: 1000px) {
     body > main > .develop-and-explain > aside {
         --align: client;
     }
@@ -87,13 +109,13 @@ body > main > .develop-and-explain > aside > .large-display {
         text-align: center;
     }
 
-    @media (width <= 750px) {
+    @media (max-width: 750px) {
         body > main > .develop-and-explain > aside > .small-display {
             text-align: center;
         }
     }
 
-    @media (width > 750px) {
+    @media (min-width: 751px) {
         body > main > .develop-and-explain > aside > .small-display {
             text-align: left;
         }
@@ -108,32 +130,32 @@ body > main > .develop-and-explain > aside > .large-display {
         margin-right: auto;
     }
 
-    @media (width <= 750px) {
+    @media (max-width: 750px) {
         body > main > .develop-and-explain > .imgs {
             --align: bottom;
         }
     }
 
-    @media (width > 750px) {
+    @media (min-width: 751px) {
         body > main > .develop-and-explain > .imgs {
             --align: right;
         }
     }
 
-    @media (width <= 450px) {
+    @media (max-width: 450px) {
         body > main > .develop-and-explain > aside > .small-display > span {
             font-size: 16px;
         }
     }
 
-    @media (width > 450px) {
+    @media (min-width: 451px) {
         body > main > .develop-and-explain > aside > .small-display > span {
             font-size: 20px;
         }
     }
 }
 
-@media (width > 1000px) {
+@media (min-width: 1001px) {
     body > main > .develop-and-explain > aside {
         --align: client;
     }
@@ -238,7 +260,7 @@ body > main > .develop-and-explain > .imgs > *:nth-child(3) > img:nth-child(2) {
     }
 }
 
-@media (width <= 580px) {
+@media (max-width: 580px) {
     body > main > .personal-overview > figure {
         --align: top;
         display: block;
@@ -247,7 +269,7 @@ body > main > .develop-and-explain > .imgs > *:nth-child(3) > img:nth-child(2) {
     }
 }
 
-@media (width > 580px) {
+@media (min-width: 581px) {
     body > main > .personal-overview > figure {
         --align: left;
     }
@@ -299,14 +321,14 @@ body > main > .tech-skills > .track > .group > figure > figcaption {
     text-align: center;
 }
 
-@media (width <= 800px) {
+@media (max-width: 800px) {
     body > main > .project-fullsty > .logo {
         --align: top;
         margin-bottom: 20px;
     }
 }
 
-@media (width > 800px) {
+@media (min-width: 801px) {
     body > main > .project-fullsty > .logo {
         --align: left;
         margin-right: 20px;
@@ -336,7 +358,7 @@ body > main > .contact > form > div:nth-child(1) {
     --align: top;
 }
 
-@media (width <= 600px) {
+@media (max-width: 600px) {
     body > main > .contact > form > div:nth-child(1) > input:nth-child(1) {
         --align: top;
     }
@@ -346,7 +368,7 @@ body > main > .contact > form > div:nth-child(1) {
     }
 }
 
-@media (width > 600px) {
+@media (min-width: 601px) {
     body > main > .contact > form > div:nth-child(1) > input:nth-child(1) {
         --align: left;
     }

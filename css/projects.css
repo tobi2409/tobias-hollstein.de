@@ -31,6 +31,28 @@ body > header > a {
     margin-right: auto;
 }
 
+body > header > a > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+@media (max-height: 400px) {
+    body > header {
+        padding: 4px;
+    }
+
+    body > header > a {
+        width: 48px;
+        height: 48px;
+    }
+
+    body > main > footer,
+    body > footer {
+        font-size: 10px;
+    }
+}
+
 body > main {
     --align: client;
     background-color: var(--content-background-color);
@@ -40,13 +62,13 @@ body > main {
     background-size: 20px 20px;
 }
 
-@media (width <= 1000px) {
+@media (max-width: 1000px) {
     body > main > section {
         width: 90%;
     }
 }
 
-@media (width > 1000px) {
+@media (min-width: 1001px) {
     body > main > section {
         width: 950px;
     }
@@ -67,7 +89,7 @@ body > main > section > h2 {
 }
 
 
-@media (width <= 600px) {
+@media (max-width: 600px) {
     body > main > .projects-page > .pages > .overview > .row > .col:nth-child(1) {
         --align: top;
     }
@@ -78,7 +100,7 @@ body > main > section > h2 {
     }
 }
 
-@media (width > 600px) {
+@media (min-width: 601px) {
     body > main > .projects-page > .pages > .overview > .row {
         margin-bottom: 25px;
     }
