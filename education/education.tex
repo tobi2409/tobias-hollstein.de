@@ -21,14 +21,6 @@ Momentan werden hier nur vereinzelte Gedankengänge festgehalten, die v.a. aufgr
 
       
         \section{Natürliche Sprache präzisieren für Informatik}
-          \(
-          \blacktriangledown
-          \)
-      
-
-      
-          
-        
 
           Wir Menschen nutzen unsere \textbf{natürliche Sprache} – zum Beispiel Deutsch oder Englisch –, um Sachverhalte zu beschreiben.\\
           Doch viele Sätze (und sogar einzelne Begriffe) können unterschiedlich verstanden werden.\\
@@ -44,12 +36,6 @@ Momentan werden hier nur vereinzelte Gedankengänge festgehalten, die v.a. aufgr
     
       
         \section{Notizblock – der Speicher}
-          \(
-          \blacktriangledown
-          \)
-      
-
-      
         
 Der Notizblock ist unser \textbf{Speicher}: Er enthält alle Informationen, die wir geordnet ablegen und wieder auslesen können.
 
@@ -144,12 +130,6 @@ Diese tabellarische Organisation ist nur eine von vielen Möglichkeiten. Entsche
     
       
         \section{Datentypen und Hilfsfunktionen – Was steht in einer Zelle?}
-          \(
-          \blacktriangledown
-          \)
-      
-
-      
         
 Bisher haben wir Inhalte einfach in Zellen geschrieben, ohne genauer zu sagen, \textbf{was für eine Art von Inhalt} dort steht.\\
           In der Informatik ist das aber wichtig: Jede Zelle enthält einen Wert eines bestimmten \textbf{Datentyps}.\\
@@ -250,12 +230,6 @@ Einzelne chars und digits reichen oft nicht aus – wir wollen Wörter, Zahlen o
     
       
         \section{Tätigkeitenblatt – Abläufe als Bausteine}
-          \(
-          \blacktriangledown
-          \)
-      
-
-      
         
 Neben \textbf{Notizblock} (Daten) und \textbf{Hilfsblock} (Hilfsvariablen) ist ein \textbf{Tätigkeitenblatt} sinnvoll.\\
           Dort stehen keine konkreten Werte, sondern \textbf{rezeptartige Abläufe}, die der Prozessor bei Bedarf ausführen kann.
@@ -318,12 +292,6 @@ Didaktisch ist das der nächste logische Schritt: Lernende sehen, dass ein Progr
     
       
         \section{Prozessor – der Ausführer}
-          \(
-          \blacktriangledown
-          \)
-      
-
-      
         
 Der \textbf{Prozessor} (bspw. unser Gehirn) liest den Notizblock, führt Befehle aus und schreibt Ergebnisse zurück.\\
           Er kennt vier grundlegende Fähigkeiten: \textbf{Schreiben}, \textbf{Lesen}, \textbf{Falls-Abfrage} und \textbf{Schleife}.
@@ -448,11 +416,6 @@ So wird zunächst in natürlicher Sprache deutlich, \textbf{was} der Prozessor t
 
       
 \section{Rechnen mit integers – ein erster Algorithmus}
-            \(
-            \blacktriangledown
-            \)
-
-      
         
   In diesem Kapitel geht es nicht um einen Beweis, sondern um einen \textbf{Algorithmus}.\\
             Wir wollen zeigen, wie man mit \textbf{integers} im Notizblock-Modell rechnen kann.\\
@@ -540,12 +503,6 @@ So wird zunächst in natürlicher Sprache deutlich, \textbf{was} der Prozessor t
     
       
         \section{Hilfsblock – Hilfsvariablen}
-          \(
-          \blacktriangledown
-          \)
-      
-
-      
         
 Beim Programmieren braucht man oft \textbf{zusätzliche Variablen}, die nicht direkt zum Problem gehören, aber für die Berechnung notwendig sind.\\
           Beispiele: \emph{Zähler} in Schleifen, \emph{Zwischenergebnisse} bei Berechnungen oder \emph{Flags}, um sich zu merken, ob etwas gefunden wurde.
@@ -696,13 +653,68 @@ Diese Trennung macht Programme \textbf{übersichtlicher} und hilft Anfängern zu
     
 
       
-        \section{Laufzeitkomplexität: Schritte zählen}
-          \(
-          \blacktriangledown
-          \)
-      
+      \section{Programmatische Problemlösung mithilfe von Werkzeugen}
+
+    Die folgenden vier Werkzeuge bilden den Kern unserer Notizblock-Denkweise.\\
+    Sie helfen beim systematischen Lösen von Aufgaben – von einfachen Einträgen bis zu vollständigen Algorithmen.
+
+    \begin{center}
+    \begin{tabular}{|p{3.2cm}|p{5.8cm}|p{9.8cm}|}
+    \hline
+    	\textbf{Werkzeug} & \textbf{Wirkung} & \textbf{Geeignete Situationen} \\
+    \hline
+    	\textbf{Schreiben} &
+    Werte werden gezielt in Zellen abgelegt oder überschrieben. Dadurch entstehen neue Zustände im Notizblock. &
+    Wenn Daten neu eingetragen werden müssen (z.\,B. Startwerte), wenn Zwischenergebnisse festgehalten werden sollen oder wenn am Ende ein Ergebnis dokumentiert wird. \\
+    \hline
+    	\textbf{Lesen} &
+    Werte werden aus konkreten Zellen entnommen, ohne den Speicherinhalt zu verändern. &
+    Wenn Entscheidungen vorbereitet werden, wenn mit vorhandenen Daten weitergerechnet wird oder wenn Eingaben geprüft und verarbeitet werden sollen. \\
+    \hline
+      	\textbf{Schleife} &
+    Ein Ablauf wird mehrfach wiederholt, bis alle relevanten Einträge bearbeitet sind oder eine Abbruchbedingung erreicht ist. &
+    Bei Listen, Tabellen und Matrizen mit vielen ähnlichen Einträgen; bei wiederholtem Zählen; beim schrittweisen Suchen; generell dann, wenn derselbe Arbeitsschritt mehrfach nötig ist. \\
+    \hline
+    	\textbf{Bedingung} &
+    Der Ablauf verzweigt abhängig von einem Vergleich (z.\,B. gleich, kleiner, größer). So kann auf unterschiedliche Fälle passend reagiert werden. &
+    Wenn zwischen Fällen unterschieden werden muss (Treffer/kein Treffer, gültig/ungültig, positiv/negativ), wenn Regeln nur unter bestimmten Voraussetzungen gelten oder wenn eine Schleife gezielt beendet werden soll. \\
+    \hline
+    \end{tabular}
+    \end{center}
+
+	    	\textbf{Didaktischer Hinweis:} In der Praxis werden diese Werkzeuge fast immer kombiniert, z.\,B. \emph{lesen $\rightarrow$ bedingung prüfen $\rightarrow$ schreiben} innerhalb einer \emph{Schleife}. Genau diese Kombination macht aus Einzelschritten einen vollständigen Algorithmus.
+
+
+    \subsection{Demonstrationsbeispiel}
+
+    \subsubsection{Startsituation}
+    Im Notizblock stehen in den ersten 9 Zeilen Zahlen, die addiert werden sollen, z.\,B.:\\
+  		\texttt{[1,1]=12, [2,1]=7, [3,1]=3, [4,1]=5, [5,1]=9, [6,1]=4, [7,1]=8, [8,1]=6, [9,1]=2}.\\
+    Das Ziel ist, die Summe in \texttt{[10,1]} einzutragen.
+
+    \subsubsection{Verwendung welcher Werkzeuge und warum}
+    \begin{itemize}
+      \item \textbf{Schleife:} Wir gehen mit einer Schleife über die Zeilen 1 bis 9.\\
+      \emph{Warum?} Weil wir genau diese 9 Zahlen systematisch addieren wollen.
+
+      \item \textbf{Lesen:} In jedem Schleifendurchlauf lesen wir den aktuellen Wert aus \texttt{[Zeile,1]}.\\
+      \emph{Warum?} Nur so liegt der Wert für die laufende Summe vor.
+
+      \item \textbf{Bedingung:} Direkt nach dem Lesen prüfen wir, ob der gelesene Inhalt eine Zahl ist.\\
+      \emph{Warum?} So verhindern wir, dass ein ungültiger Eintrag die Summe verfälscht.
+
+      \item \textbf{Schreiben:} Nach dem letzten Durchlauf schreiben wir das Gesamtergebnis in \texttt{[10,1]}.\\
+      \emph{Warum?} Das Resultat wird dauerhaft im Notizblock gespeichert und ist für weitere Schritte verfügbar.
+    \end{itemize}
+
+    \subsubsection{Endsituation}
+    Nach der Verarbeitung steht im Notizblock:\\
+  		\texttt{[10,1] = 56}.\\
+    Das Ziel wurde erreicht: Aus Startwerten wurde durch geeignetes Kombinieren der Werkzeuge ein korrektes Ergebnis erzeugt und abgelegt.
+
 
       
+        \section{Laufzeitkomplexität: Schritte zählen}
 
         \subsection{Warum Schritte zählen?}
 
@@ -881,18 +893,19 @@ Ein Programm zur linearen Suche hätte im Worst Case n Vergleiche.\\
 
 
  \section{Sanfter Umstieg in eine Hochsprache (JavaScript)}
-          \(
-          \blacktriangledown
-          \)
-
-      
         
 Bis hierhin haben wir mit Notizblock-Adressen wie \texttt{[Zeile, Spalte]} gearbeitet.\\
           Das ist didaktisch sehr hilfreich, weil man Speicher direkt "sehen" kann.\\
-          In JavaScript können wir ein Array-of-Arrays – eine \textbf{Matrix} – verwenden, um unser Notizblock-Modell direkt umzusetzen. So verlieren wir nicht die Sichtbarkeit und Nachvollziehbarkeit, sondern gewinnen die Kraft einer echten Programmiersprache hinzu.
+          In JavaScript können wir ein Array-of-Arrays – eine \textbf{Matrix} – verwenden, um unser Notizblock-Modell direkt umzusetzen. So verlieren wir nicht die Sichtbarkeit und Nachvollziehbarkeit, sondern gewinnen die Kraft einer echten Programmiersprache hinzu.\\
+          
+          Da wir uns sukzessive an die praktische Verwendung von JavaScript herantasten, werden wir mit einer etwas größeren Veränderung ggü. dem Notizblock beginnen:
+          Das bedeutet, wir tragen nicht mehr alle Zeichen/Ziffern einzeln ab, sondern legen direkt \textbf{bereits zusammengefasste Werte (Strings, Numbers)} in den Zellen ab.\\
 
 
-        \subsection{Erster Übergang: Notizblock wird zur Matrix}
+        \subsection{Erste Annäherung an JavaScript durch zusammengefasste Werte}
+
+
+        \subsubsection{Erster Übergang: Notizblock wird zur Matrix}
 
         
 Grundidee:
@@ -914,7 +927,7 @@ Beides meint dasselbe Prinzip: \textbf{ein Speicherplatz erhält einen Wert}.\\
         \end{itemize}
 
 
-        \subsection{Mini-Beispiel (gleicher Inhalt, zwei Schreibweisen)}
+        \subsubsection{Mini-Beispiel (gleicher Inhalt, zwei Schreibweisen)}
 
         \begin{verbatim}
   Notizblock-Idee:
@@ -924,8 +937,9 @@ Beides meint dasselbe Prinzip: \textbf{ein Speicherplatz erhält einen Wert}.\\
 
   JavaScript-Idee (mit Matrix):
 
-    // 10x10 Matrix mit unabhängigen Zeilen (für den Anfang ist der konkrete Aufbau dieser Zeile erstmal nicht relevant)
+    // 10x10 Matrix mit unabhängigen Zeilen (für den Anfang ist der konkrete Aufbau dieser beiden Zeilen erstmal nicht relevant)
     let notizblock = Array.from({ length: 10 }, () => Array(10).fill(null));
+    let hilfsblock = Array.from({ length: 10 }, () => Array(10).fill(null));
     
     notizblock[0][0] = 4;
     notizblock[0][1] = 7;
@@ -936,18 +950,16 @@ Beides meint dasselbe Prinzip: \textbf{ein Speicherplatz erhält einen Wert}.\\
     Wichtig zu erkennen ist, dass wir im Gegensatz zu unserem Notizblock nicht mit 1 zu zählen beginnen, sondern mit 0.
 
 
-        \subsection{Unsere Bücherei aus der alten Welt übertragen}
+        \subsubsection{Unsere Bücherei aus der alten Welt übertragen}
 
         \begin{verbatim}
   // Altes Modell: zeichenweise gespeichert (wie auf dem karierten Notizblock)
-  let alt = [
-    ['M','a','t','h','e',' ','7', '9','7','8','3','1', '1','9','9'],
+    ['M','a','t','h','e',' ','7', '9','7','8','3','1', '1','9','9']
     ['P','h','y','s','i','k',' ', '9','3','4','1','0', '2','2','4']
-  ];
 
   // Neues JS-Notizblock-Modell: Matrix + bereits zusammengefasste Werte
   let notizblock = Array.from({ length: 10 }, () => Array(10).fill(null));
-
+  let hilfsblock = Array.from({ length: 10 }, () => Array(10).fill(null));
   // Zeile 0 = erstes Buch, Zeile 1 = zweites Buch
   // Spalte 0 = Titel, Spalte 1 = Nummer, Spalte 2 = Preis
   notizblock[0][0] = 'Mathe 7';
@@ -962,19 +974,25 @@ Beides meint dasselbe Prinzip: \textbf{ein Speicherplatz erhält einen Wert}.\\
         
 
 
-        \subsection{Schleifendenken vom Notizblock zu JavaScript}
+        \subsubsection{Schleifendenken vom Notizblock zu JavaScript}
 
         \begin{verbatim}
   // Wir haben die Werte bereits zusammengefasst.
   // Deshalb sammeln wir nicht mehr Zeichen für Zeichen.
   // Eine innere Schleife ist hier dadurch nicht mehr nötig.
+  // Der Zeilenzähler liegt im Hilfsblock.
+  // Ausgabeziel im Notizblock beginnt bei Zeile 5.
+  // Spalten: 0=Zeile, 1=Titel, 2=Nummer, 3=Preis
 
-  for (let zeile = 0; zeile <= 1; zeile++) {      // jedes Buch
-    let titel  = notizblock[zeile][0];
-    let nummer = notizblock[zeile][1];
-    let preis  = notizblock[zeile][2];
+  hilfsblock[0][0] = 0; // aktuelle Zeile
+  while (hilfsblock[0][0] <= 1) {
+    // ab Zeile 5 + aktuelle Zeile die Ergebnisse schreiben (im Grunde übertragen wir nur die Werte in die Ergebniszeilen)
+    notizblock[5 + hilfsblock[0][0]][0] = hilfsblock[0][0];
+    notizblock[5 + hilfsblock[0][0]][1] = notizblock[hilfsblock[0][0]][0];
+    notizblock[5 + hilfsblock[0][0]][2] = notizblock[hilfsblock[0][0]][1];
+    notizblock[5 + hilfsblock[0][0]][3] = notizblock[hilfsblock[0][0]][2];
 
-    console.log('Zeile', zeile, 'Titel:', titel, 'Nummer:', nummer, 'Preis:', preis); // Ausgabe der Werte
+    hilfsblock[0][0] = hilfsblock[0][0] + 1;
   }
         \end{verbatim}
 
@@ -982,49 +1000,67 @@ Beides meint dasselbe Prinzip: \textbf{ein Speicherplatz erhält einen Wert}.\\
 Analog zum Notizblock bleibt die Denkweise gleich: Wir gehen alle Bücher der Reihe nach durch.\\
 Da die Zellen bereits zusammengefasste Werte enthalten (String/Number), entfällt hier die innere Schleife über Einzelzeichen.
 
+
+        \subsubsection{Schleife mit Bedingung vom Notizblock zu JavaScript}
+
+        \begin{verbatim}
+  // Gesuchte Nummer (d.h. nach dieser Nummer wird gefragt) und Merker im Hilfsblock
+  hilfsblock[1][0] = 97831; // gesuchteNummer
+  hilfsblock[1][1] = false; // gefunden
+  hilfsblock[1][2] = 0;     // aktuelle Zeile
+
+  // Ergebniszeile (analog zu "schreibe in Zeile 10"):
+  // Wir nutzen hier Zeile 9 (0-basierte Indizierung)
+  while (hilfsblock[1][2] <= 1) {
+    if (notizblock[hilfsblock[1][2]][1] === hilfsblock[1][0]) {
+      notizblock[9][0] = notizblock[hilfsblock[1][2]][0];
+      notizblock[9][1] = notizblock[hilfsblock[1][2]][1];
+      notizblock[9][2] = notizblock[hilfsblock[1][2]][2];
+      hilfsblock[1][1] = true;
+      // optimiert wäre hier noch ein Abbruch der Schleife, aber wir konzentrieren uns erstmal auf das Wesentliche
+    }
+
+    hilfsblock[1][2] = hilfsblock[1][2] + 1;
+  }
+
+  if (hilfsblock[1][1] === true) {
+    notizblock[9][3] = 'Treffer';
+  } else {
+    notizblock[9][3] = 'Kein Treffer';
+  }
+        \end{verbatim}
+
+        
+Damit entspricht die Logik direkt dem Notizblock-Ablauf: Zeilen durchlaufen, Bedingung prüfen, bei Treffer Daten in eine Ergebniszeile schreiben, sonst weitersuchen.
+
         
 Didaktischer Nutzen: Lernende erkennen, dass JavaScript nichts "Neues" zaubert.\\
-          Die Programmiersprache gibt nur die technische Umsetzung unseres Notizblock-Konzepts. Das Modell – adressierter Speicher – bleibt erhalten.\\
-        
-  			\textbf{Hinweis:} Bei unserem Notizblock-Modell haben wir noch zwischen \textbf{Notiz-} und \textbf{Hilfsblock} unterschieden (Daten vs. Hilfsvariablen).\\
-              In JavaScript nutzen wir für beide Kontexte einfach Variablen.\\
-              Der konzeptionelle Unterschied bleibt in unserem Denken – aber die technische Umsetzung ist jetzt vereinheitlicht.\\
-      
+          Die Programmiersprache gibt nur die technische Umsetzung unseres Notizblock-Konzepts. Das Modell – adressierter Speicher – bleibt erhalten.\\      
 
 
               
         \section{Zusammenhang Informatik - Mathematik}
-          \(
-          \blacktriangledown
-          \)
-      
-
-      
-        
-In Bearbeitung ...
-
-
-        
-Die Schulmathematik – Arithmetik, Algebra, Analysis, Stochastik, Statistik – scheint nur bedingt was mit Informatik zu tun zu haben. Dennoch lassen sich alle diese Probleme prinzipiell auf einer Registermaschine lösen.
+          
+Die Schulmathematik – Arithmetik, Algebra, Analysis, Stochastik, Statistik – scheint nur bedingt was mit Informatik zu tun zu haben. Dennoch lassen sich alle diese Probleme prinzipiell im Notizblock-Modell lösen.
 
 
         
 Die Idee dahinter:
 
         \begin{itemize}
-          \item Eine Registermaschine hat nur einen Speicher (die „Register“) und elementare Befehle wie Lesen, Schreiben, Vergleichen und Springen.
+          \item Das Notizblock-Modell hat einen Speicher (den Notizblock) und elementare Befehle wie Lesen, Schreiben, Vergleichen und Springen.
 
           \item Komplexe Rechenoperationen wie Addition, Subtraktion, Multiplikation oder Division lassen sich Schritt für Schritt aus diesen einfachen Befehlen aufbauen.
 
-          \item Variablen der Mathematik entsprechen dabei Speicheradressen (Register), Bedingungen und Schleifen werden über Vergleichs- und Sprungbefehle umgesetzt.
+          \item Variablen der Mathematik entsprechen dabei Speicheradressen im Notizblock, Bedingungen und Schleifen werden über Vergleichs- und Sprungbefehle umgesetzt.
 
         \end{itemize}
 
         
-\textbf{Mächtigkeit:} Eine Registermaschine ist Turing-vollständig – das bedeutet, dass alles, was algorithmisch lösbar ist, auf ihr dargestellt werden kann. Damit kann die gesamte Schulmathematik ausgeführt werden.
+  	\textbf{Mächtigkeit:} Das Notizblock-Modell ist als vereinfachtes Rechenmodell Turing-vollständig interpretierbar – das bedeutet, dass alles, was algorithmisch lösbar ist, damit dargestellt werden kann. Damit kann die gesamte Schulmathematik schrittweise ausgeführt werden.
 
 
-        \subsubsection{Gleichungen über Zahlen}
+        \subsection{Gleichungen über Zahlen}
         
 Ein typisches Beispiel aus der Schulmathematik ist das Lösen von Gleichungen:
 
@@ -1035,10 +1071,10 @@ Ein typisches Beispiel aus der Schulmathematik ist das Lösen von Gleichungen:
 
         \end{itemize}
         
-Beide Paradigmen können auf Registermaschinen abgebildet werden – entweder durch Umkehrfunktionen oder durch schrittweise Verarbeitung mit Funktionsaufrufen und Vergleichen.
+Beide Paradigmen können auf unser Notizblock-Modell abgebildet werden – entweder durch Umkehrfunktionen oder durch schrittweise Verarbeitung mit Funktionsaufrufen und Vergleichen.
 
 
-        \subsubsection{Gleichungen über nicht-numerische Objekte: Farben}
+        \subsection{Gleichungen über nicht-numerische Objekte: Farben}
         
 Gleichungen müssen nicht nur mit Zahlen gelöst werden. Wir können auch andere Objekte betrachten, z.\,B. Farben.
 
@@ -1067,7 +1103,7 @@ Ergebnis: \texttt{x = gelb}
 Dieses Beispiel zeigt, dass Gleichungen auch über nicht-numerische Objekte gelöst werden können, solange die Funktion bijektiv ist.
 
 
-        \subsubsection{Gleichungssysteme über bewegende Objekte}
+        \subsection{Gleichungssysteme über bewegende Objekte}
         
 Betrachten wir zwei Autos auf einer Straße, die unterschiedliche Startpositionen und Geschwindigkeiten haben. Wir möchten bestimmen, wann sie sich treffen.
 
@@ -1102,32 +1138,21 @@ Dieses Beispiel illustriert:
         \begin{itemize}
           \item Gleichungssysteme können sowohl algebraisch über Umkehrfunktionen gelöst werden als auch imperativ durch Schritt-für-Schritt-Berechnung.
 
-          \item Die imperativen Schritte lassen sich auf eine Registermaschine übertragen, da jeder Schritt nur elementare Befehle benötigt (Werte lesen, schreiben, vergleichen, springen).
+          \item Die imperativen Schritte lassen sich direkt im Notizblock-Modell ausdrücken, da jeder Schritt nur elementare Befehle benötigt (Werte lesen, schreiben, vergleichen, springen).
 
-          \item So wird deutlich, dass Registermaschinen oder eine einfache JavaScript-Umsetzung auch dynamische, zeitabhängige Probleme modellieren können.
+          \item So wird deutlich, dass das Notizblock-Modell oder eine einfache JavaScript-Umsetzung auch dynamische, zeitabhängige Probleme modellieren können.
 
           \item Damit können sowohl funktionale Lösungen über Umkehrfunktionen als auch imperative Lösungen über schrittweises Abarbeiten beschrieben werden.
 
         \end{itemize}
 
         
-Für Lernende bedeutet dies: Registermaschinen und eine einfache JavaScript-Umsetzung mit Matrix sind universelle Werkzeuge, die weit über einfache Zahlenoperationen hinausgehen. Sie können auch Aufgaben lösen, die abstrakte Strukturen oder zeitabhängige Systeme betreffen, solange diese als Speicherinhalte modelliert werden.
-
-      
-
-    
-
-    
+Für Lernende bedeutet dies: Das Notizblock-Modell und eine einfache JavaScript-Umsetzung mit Matrix sind universelle Werkzeuge, die weit über einfache Zahlenoperationen hinausgehen. Sie können auch Aufgaben lösen, die abstrakte Strukturen oder zeitabhängige Systeme betreffen, solange diese als Speicherinhalte modelliert werden.    
 
   
-    \section{Schlussfolgerungen}
-      \(
-      \blacktriangledown
-      \)
+    \subsection{Schlussfolgerungen}
   
-
-  
-    \subsection{Was ist eine Schlussfolgerung?}
+    \subsubsection{Was ist eine Schlussfolgerung?}
     
 
       Eine \textbf{Schlussfolgerung} ist ein logischer Ableitungsschritt, der neue Aussagen direkt aus bestehenden Prämissen ableitet.  
@@ -1142,7 +1167,7 @@ Für Lernende bedeutet dies: Registermaschinen und eine einfache JavaScript-Umse
     
 
 
-    \subsection{Beispiele aus der natürlichen Sprache}
+    \subsubsection{Beispiele aus der natürlichen Sprache}
     
 Beispiel 1 – Tiere:
 
@@ -1184,14 +1209,9 @@ Erkenntnis:
   
   
     
-      \section{Beweisführung}
-        \(
-        \blacktriangledown
-        \)
+      \subsection{Beweisführung}
     
-
-    
-      \subsection{Was ist eine Beweisführung?}
+      \subsubsection{Was ist eine Beweisführung?}
       
 
         Eine \textbf{Beweisführung} ist ein geordneter Prozess (ein Spezialfall der Problemlösung), um eine Behauptung oder These systematisch aus bekannten Fakten oder Prämissen zu zeigen.  
@@ -1207,7 +1227,7 @@ Erkenntnis:
 
       \end{itemize}
 
-      \subsection{Beispiel 1 – Sokrates}
+      \subsubsection{Beispiel 1 – Sokrates}
       
 
         Behauptung: Sokrates ist sterblich. \emph{(Die Aufstellung der Behauptung startet die Beweisführung.)}
@@ -1227,14 +1247,14 @@ Erkenntnis:
       
 
 
-      \subsection{Beispiel 2 – Arithmetik: Quadratische Faktorisierung}
+      \subsubsection{Beispiel 2 – Arithmetik: Quadratische Faktorisierung}
       
 
         Behauptung: Für jede Zahl \(a\) gilt \textbf{a² - 1 = (a-1)(a+1)}.
       
 
 
-      \subsubsection{einige arithmetische Werkzeuge}
+      \paragraph{einige arithmetische Werkzeuge}
       \begin{itemize}
         \item Ausklammern / Distributivgesetz: a(b+c) = ab + ac
 
@@ -1256,12 +1276,12 @@ Erkenntnis:
 
       \end{itemize}
 
-      \subsubsection{Ausgewähltes Werkzeug}
+      \paragraph{Ausgewähltes Werkzeug}
       
 Für diese Beweisführung wählen wir das Werkzeug \textbf{Faktorisierung von Differenzen: a² - b² = (a-b)(a+b)} - ein Spezialfall des Werkzeugs \textbf{Schablonenerkennung}.
 
 
-      \subsubsection{Schlussfolgerung / Ableitung}
+      \paragraph{Schlussfolgerung / Ableitung}
       \begin{enumerate}
         \item Faktorisierung von Differenzen: a² - b² = (a-b)(a+b)
 
@@ -1271,7 +1291,7 @@ Für diese Beweisführung wählen wir das Werkzeug \textbf{Faktorisierung von Di
 
       \end{enumerate}
 
-      \subsection{Erkenntnis}
+      \subsubsection{Erkenntnis}
       \begin{itemize}
         \item Beweisführung ist ein geordneter Rahmen, in dem Schlussfolgerungen als Werkzeuge eingesetzt werden.
 
@@ -1287,7 +1307,7 @@ Für diese Beweisführung wählen wir das Werkzeug \textbf{Faktorisierung von Di
 Fazit: Wer Behauptung, Werkzeuge und Ableitung kennt, kann jede Beweisführung Schritt für Schritt aufbauen und verstehen.
 
 
-      \subsection{Beispiel 3 - Teilbarkeit prüfen mit Polynom-Kongruenz}
+      \subsubsection{Beispiel 3 - Teilbarkeit prüfen mit Polynom-Kongruenz}
       
 
         Behauptung (natürliche Sprache): \textbf{2n² - 3n + 6 ist durch 4 teilbar}.\\
@@ -1295,7 +1315,7 @@ Fazit: Wer Behauptung, Werkzeuge und Ableitung kennt, kann jede Beweisführung S
       
 
 
-      \subsubsection{Werkzeuganwendung: Übersetzen in arithmetische Sprache}
+      \paragraph{Werkzeuganwendung: Übersetzen in arithmetische Sprache}
       
 
         "Durch 4 teilbar" übersetzen wir in arithmetische Sprache:
@@ -1306,7 +1326,7 @@ Fazit: Wer Behauptung, Werkzeuge und Ableitung kennt, kann jede Beweisführung S
       
 
 
-      \subsubsection{Werkzeuganwendung: Polynom-Kongruenz / Restklassen (Strukturerhalt des Terms)}
+      \paragraph{Werkzeuganwendung: Polynom-Kongruenz / Restklassen (Strukturerhalt des Terms)}
 
       \paragraph{Vorweg: Was bedeutet Kongruenz für mod 4?}
       
@@ -1404,7 +1424,7 @@ Folgendes funktioniert für $2n^2 - 3n + 6 \equiv 0 \pmod{4}$ leider nicht, weil
 \textbf{ABER:} Wir wissen ja, dass wir n zum Testen verwenden können ohne dass die Struktur verloren geht.
 
 
-      \subsubsection{Beweisführung: Prüfung aller Restklassen}
+      \paragraph{Beweisführung: Prüfung aller Restklassen}
       
 Wir prüfen jede Restklasse $n \equiv r \pmod{4}$:
 
@@ -1446,7 +1466,7 @@ Nur im Falle der Resteklasse 0 wissen wir, dass es sich um eine Zahl handelt, di
       
 
 
-      \subsection{Beispiel 4 - Prüfung der Geradzahligkeit}
+      \subsubsection{Beispiel 4 - Prüfung der Geradzahligkeit}
 
       
 
@@ -1461,7 +1481,7 @@ Nur im Falle der Resteklasse 0 wissen wir, dass es sich um eine Zahl handelt, di
       
 
 
-      \subsubsection{Geradzahligkeit prüfen mit Modulo 2}
+      \paragraph{Geradzahligkeit prüfen mit Modulo 2}
       
 
         Eine Zahl ist gerade, genau dann, wenn $n \bmod 2 = 0$.
@@ -1488,19 +1508,22 @@ Nur im Falle der Resteklasse 0 wissen wir, dass es sich um eine Zahl handelt, di
       
 
         Mit \textbf{Modulo 4} haben wir die Teilbarkeit ermittelt, mit \textbf{Modulo 2} die Geradzahligkeit überprüft. Dank der Restklassenanalyse ist das Verfahren übersichtlich und vollständig.
+
+
+        \section{Wie kann man das Kochen lernen?}
       
+        \begin{itemize}
+          \item Dieses Thema passt hier gut rein, weil dies ein gutes Beispiel ist, um meine Philosophie des Lernens über einen roten Faden zu verinnerlichen.
 
-    
-  
+          \item Wirklich kochen kann man, wenn man keine Rezepte braucht, weil man sich ein gutes Rezept selber durch die physikalischen, biochemischen Grundlagen und durch Kenntnisse über die geschmackliche Komposition von Gewürzen und anderen Lebensmittel ableiten kann.
 
+          \item Hat man diese Grundlagen einmal verstanden und häufig angewendet, entwickelt sich daraus ein mentales Framework. Dieses Framework enthält die wichtigsten Zusammenhänge und Erfahrungswerte in verdichteter Form. Dadurch muss man beim Kochen nicht jedes Mal alle physikalischen und biochemischen Prozesse bewusst herleiten, sondern kann schnell und zielgerichtet entscheiden.
+
+        \end{itemize}
+      
     
       
         \section{Tipps zur Didaktik}
-        \(
-        \blacktriangledown
-        \)
-      
-
       
         \begin{itemize}
           \item Bei Übungen ist es wichtig, dass der Lernende seinen eigenen Weg nutzt, um zum Ziel zu kommen.
@@ -1535,26 +1558,5 @@ Nur im Falle der Resteklasse 0 wissen wir, dass es sich um eine Zahl handelt, di
           
 
         \end{itemize}
-      
-    
-
-    
-      
-        \section{Wie kann man das Kochen lernen?}
-        \(
-        \blacktriangledown
-        \)
-      
-
-      
-        \begin{itemize}
-          \item Dieses Thema passt hier gut rein, weil dies ein gutes Beispiel ist, um meine Philosophie des Lernens über einen roten Faden zu verinnerlichen.
-
-          \item Wirklich kochen kann man, wenn man keine Rezepte braucht, weil man sich ein gutes Rezept selber durch die physikalischen, biochemischen Grundlagen und durch Kenntnisse über die geschmackliche Komposition von Gewürzen und anderen Lebensmittel ableiten kann.
-
-          \item Hat man diese Grundlagen einmal verstanden und häufig angewendet, entwickelt sich daraus ein mentales Framework. Dieses Framework enthält die wichtigsten Zusammenhänge und Erfahrungswerte in verdichteter Form. Dadurch muss man beim Kochen nicht jedes Mal alle physikalischen und biochemischen Prozesse bewusst herleiten, sondern kann schnell und zielgerichtet entscheiden.
-
-        \end{itemize}
-      
     
 \end{document}
