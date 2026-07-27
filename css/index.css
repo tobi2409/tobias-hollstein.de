@@ -285,6 +285,37 @@ body > main > .personal-overview > aside {
     margin-bottom: auto;
 }
 
+body > main > .personal-overview .github-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #253237 0%, #3a5057 100%);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 2px 2px #c0c3c6;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+body > main > .personal-overview .github-button > img {
+    display: block;
+    flex: 0 0 auto;
+    filter: brightness(0) invert(1);
+}
+
+body > main > .personal-overview .github-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 4px 4px #c0c3c6;
+    filter: brightness(1.05);
+}
+
+body > main > .personal-overview .github-button:focus-visible {
+    outline: 3px solid #3a5057;
+    outline-offset: 3px;
+}
+
 body > main > .tech-skills > .track {
     white-space: nowrap;
     overflow: hidden;
