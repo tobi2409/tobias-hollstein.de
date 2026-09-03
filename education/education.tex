@@ -5,15 +5,82 @@
 \usepackage[ngerman]{babel}
 \usepackage{amssymb}
 \usepackage{xcolor}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{listings}
+\usepackage[most]{tcolorbox}
+\usepackage{titlesec}
 \usepackage[hidelinks]{hyperref}
+
+\definecolor{hauptfarbe}{HTML}{1F4E5F}
+\definecolor{akzentfarbe}{HTML}{B5532D}
+\definecolor{hellblau}{HTML}{EEF5F6}
+\definecolor{hellorange}{HTML}{FBF1EB}
+\definecolor{codehintergrund}{HTML}{F4F6F7}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\setlist{itemsep=0.25em,topsep=0.35em}
+\titleformat{\section}{\Large\bfseries\color{hauptfarbe}}{\thesection}{0.7em}{}
+\titleformat{\subsection}{\large\bfseries\color{hauptfarbe}}{\thesubsection}{0.7em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{akzentfarbe}}{\thesubsubsection}{0.7em}{}
+\titlespacing*{\section}{0pt}{1.8em}{0.7em}
+\titlespacing*{\subsection}{0pt}{1.3em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{1em}{0.35em}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{codehintergrund},
+  frame=single,
+  rulecolor=\color{hauptfarbe!35},
+  breaklines=true,
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em
+}
+
+\lstdefinelanguage{JavaScript}{
+  keywords={break,const,else,false,for,function,if,let,null,return,true,var,while},
+  keywordstyle=\color{hauptfarbe}\bfseries,
+  comment=[l]{//},
+  commentstyle=\color{black!55}\itshape,
+  string=[b]',
+  morestring=[b]",
+  stringstyle=\color{akzentfarbe}
+}
+
+\newtcolorbox{uebung}[1]{
+  breakable,
+  colback=hellorange,
+  colframe=akzentfarbe,
+  boxrule=0.7pt,
+  arc=1mm,
+  title={Übung: #1},
+  fonttitle=\bfseries
+}
+
+\newtcolorbox{merksatz}[1][Merksatz]{
+  breakable,
+  colback=hellblau,
+  colframe=hauptfarbe,
+  boxrule=0.7pt,
+  arc=1mm,
+  title={#1},
+  fonttitle=\bfseries
+}
 \begin{document}
 
 \begin{center}
-	\textbf{\textcolor{red}{Diese Seite befindet sich im Aufbau.}}\\
-Momentan werden hier nur vereinzelte Gedankengänge festgehalten, die v.a. aufgrund fehlender Visualisierungen, Übungen und Unvollständigkeit eher für Lehrkräfte als für Studierende geeignet sind.\\
-\vspace{0.5em}
-	\textbf{TODOs:} Übungen in jedem Kapitel
+  {\huge\bfseries\color{hauptfarbe} Informatik und Mathematik vom Fundament aus verstehen}\\[0.6em]
+  {\large Vom sichtbaren Notizblock zum Algorithmus und zum Programm}
 \end{center}
+
+\begin{merksatz}[Arbeitsstand]
+Dieses Dokument entwickelt einen didaktischen roten Faden und befindet sich noch im Aufbau. Beispiele und Übungen machen Denkwege sichtbar; weitere Visualisierungen werden schrittweise ergänzt.
+\end{merksatz}
 
 	\tableofcontents
 \newpage
@@ -83,22 +150,23 @@ Wir nutzen \textbf{kariertes Papier}, auf dem wir Informationen an beliebigen Po
   Laden aus Buchstabenspalten:    [L1|...|L5] = [E|d|e|k|a] -> "Edeka"
   Hinweis: Leere Zellen (wie EH3 bei Mehl/Zucker, L5 bei Rewe/Aldi) bleiben einfach frei.
 
-  # Beispiel: Bibliotheksliste (Nummern und Preis-Ziffern in einzelnen Zellen)
+  # Beispiel: Bibliotheksliste (alle Zeichen in einzelnen Zellen)
 
-           | Spalte 1       | Spalte 2 | Spalte 3 | Spalte 4 | Spalte 5 | Spalte 6 | Spalte 7 | Spalte 8 | Spalte 9
-  ---------+----------------+----------+----------+----------+----------+----------+----------+----------+----------
-  Zeile 1  | [1,1]| [1,2]| [1,3]| [1,4]| [1,5]| [1,6]| [1,7]| [1,8]| [1,9]| [1,10]| [1,11]| [1,12]| [1,13]| [1,14]
-  (Buch)   | T1   | T2   | T3   | T4   | T5   | T6   | T7   | Nr1  | Nr2  | Nr3   | Nr4   | Nr5   | P1    | P2    | P3
-           | M    | a    | t    | h    | e    |      | 7    | 9    | 7    | 8     | 3     | 1     | 1     | 9     | 9
+  Zeile 1  | [1,1]| [1,2]| [1,3]| [1,4]| [1,5]| [1,6]| [1,7]| [1,8] | [1,9]|[1,10]|[1,11]|[1,12]|[1,13]|[1,14] |[1,15]|[1,16]|[1,17]|[1,18]|[1,19]
+  (Buch)   | T1   | T2   | T3   | T4   | T5   | T6   | T7   |       | Nr1  | Nr2  | Nr3  | Nr4  | Nr5  |       | PV1  | PV2  | PK   | PN1  | PN2
+           | M    | a    | t    | h    | e    |      | 7    |       | 9    | 7    | 8    | 3    | 1    |       |      | 1    | ,    | 9    | 9
   
-  Zeile 2  | [2,1]| [2,2]| [2,3]| [2,4]| [2,5]| [2,6]| [2,7]| [2,8]| [2,9]| [2,10]| [2,11]| [2,12]| [2,13]| [2,14]
-  (Buch)   | T1   | T2   | T3   | T4   | T5   | T6   | T7   | Nr1  | Nr2  | Nr3   | Nr4   | Nr5   | P1    | P2    | P3
-           | P    | h    | y    | s    | i    | k    |      | 9    | 3    | 4     | 1     | 0     | 2     | 2     | 4     | 9
+  Zeile 2  | [2,1]| [2,2]| [2,3]| [2,4]| [2,5]| [2,6]| [2,7]| [2,8] | [2,9]|[2,10]|[2,11]|[2,12]|[2,13]|[2,14] |[2,15]|[2,16]|[2,17]|[2,18]|[2,19]
+  (Buch)   | T1   | T2   | T3   | T4   | T5   | T6   | T7   |       | Nr1  | Nr2  | Nr3  | Nr4  | Nr5  |       | PV1  | PV2  | PK   | PN1  | PN2
+           | P    | h    | y    | s    | i    | k    |      |       | 9    | 3    | 4    | 1    | 0    |       | 2    | 2    | ,    | 4    | 9
 
   Bibliotheksliste (Beispiel):
   Titel aus Buchstabenspalten: [T1|...|T7] = [M|a|t|h|e| |7] -> "Mathe 7" (Leerzeichen ist auch ein Zeichen!)
+  Zwischen Titel, Nummer und Preis bleibt jeweils eine Zelle als optischer Abstand leer.
   Nummer aus Ziffernspalten:   [Nr1|...|Nr5] = [9|7|8|3|1] -> 97831
-  Preis aus Ziffernspalten:    [P1|P2|P3] = [1|9|9] -> 1,99
+  Preisfeld mit fünf Zellen:    [PV1|PV2|PK|PN1|PN2]
+  1,99  = [ |1|,|9|9] (erste Vorkommastelle bleibt leer)
+  22,49 = [2|2|,|4|9]
 
   # Beispiel: Kalender (Datum als einzelne Ziffern pro Zelle)
 
@@ -124,6 +192,10 @@ Wir nutzen \textbf{kariertes Papier}, auf dem wir Informationen an beliebigen Po
 Diese tabellarische Organisation ist nur eine von vielen Möglichkeiten. Entscheidend dabei: \textbf{jedes Zeichen} – ob Buchstabe, Ziffer oder Leerzeichen – belegt genau eine Zelle. Das gilt nicht nur für Ziffern, sondern für alle Inhalte.\\[0.3em]
           Wichtig ist: Jede Zelle hat eine eindeutige Adresse \texttt{[Zeile, Spalte]}, sodass Programme die Informationen gezielt lesen und schreiben können.\\
           Der Notizblock funktioniert damit wie der Speicher einer Maschine – \textbf{flexibel, übersichtlich und maschinenverständlich}.
+
+\begin{uebung}{Einen Familienstammbaum gliedern}
+Überlege dir, wie sich ein Familienstammbaum auf dem karierten Notizblock speichern lässt, \textbf{ohne Verbindungslinien zu verwenden}. Lege fest, welche Informationen zu einer Person gehören und wie Eltern, Kinder oder Generationen allein durch Zellen und deren Inhalte zugeordnet werden können. Zeichne eine mögliche Belegung für mindestens drei Generationen und erkläre, wie man zu einer Person ihre Eltern findet. Es gibt mehrere sinnvolle Lösungen.
+\end{uebung}
 
 
       
@@ -162,9 +234,11 @@ Die drei grundlegenden Typen für eine einzelne Zelle sind:
         \subsection{Zusammengesetzte Typen (mehrere Zellen)}
 
         
-Einzelne chars und digits reichen oft nicht aus – wir wollen Wörter, Zahlen oder Kommazahlen speichern.\\
-          Dafür gibt es \textbf{Hilfsfunktionen}, die mehrere Zellen lesen oder befüllen und den Inhalt als Ganzes übergeben.\\
+Einzelne chars und digits sind oft unhandlich – wir wollen Wörter, Zahlen oder Kommazahlen speichern.\\
+          Dafür führen wir \textbf{Hilfsfunktionen} ein, die mehrere Zellen lesen oder befüllen und den Inhalt als Ganzes übergeben.\\
           Sie sind sozusagen \textbf{Abkürzungen für wiederkehrende Abläufe} auf dem Notizblock.
+
+Auch bei Anwendung dieser Hilfsfunktionen wird ein String oder Integer \textbf{nicht in einer einzigen Zelle zusammengefasst}. Beim Schreiben verteilt die Hilfsfunktion den Wert automatisch Zeichen für Zeichen beziehungsweise Ziffer für Ziffer auf mehrere aufeinanderfolgende Zellen. Beim Lesen setzt sie die Inhalte mehrerer Zellen lediglich für die Übergabe wieder zu einem String oder Integer zusammen. Die Speicherung im Notizblock bleibt also zellenweise; man muss sich nur nicht mehr selbst um jeden einzelnen Lese- oder Schreibschritt kümmern.
 
 
         \begin{itemize}
@@ -190,11 +264,11 @@ Einzelne chars und digits reichen oft nicht aus – wir wollen Wörter, Zahlen o
 
           \begin{verbatim}
 
-  integer schreiben – integer(1, 8, 97831):
-  -> [1,8]=9, [1,9]=7, [1,10]=8, [1,11]=3, [1,12]=1
+  integer schreiben – integer(1, 9, 97831):
+  -> [1,9]=9, [1,10]=7, [1,11]=8, [1,12]=3, [1,13]=1
 
-  integer lesen – integer(1, 8, 12):
-  -> liest [1,8] bis [1,12] -> 97831
+  integer lesen – integer(1, 9, 13):
+  -> liest [1,9] bis [1,13] -> 97831
           \end{verbatim}
 
           \item \textbf{float(zeile, spalte, zahl)} – Fließkommazahl schreiben:\\
@@ -205,14 +279,14 @@ Einzelne chars und digits reichen oft nicht aus – wir wollen Wörter, Zahlen o
 
           \begin{verbatim}
 
-  float schreiben – float(1, 13, 1,99):
-  -> [1,13]=1, [1,14]=',', [1,15]=9, [1,16]=9
+  float schreiben – float(1, 16, 1,99):
+  -> [1,16]=1, [1,17]=',', [1,18]=9, [1,19]=9
 
-  float lesen – float(1, 13, 16, 1):
-  -> liest [1,13] bis [1,16], Komma nach Stelle 1 -> 1,99
+  float lesen – float(1, 16, 19, 1):
+  -> liest [1,16] bis [1,19], Komma nach Stelle 1 -> 1,99
 
   float-Darstellung ohne Komma (vereinfachte Skizze):
-  -> [1,13]=1, [1,14]=9, [1,15]=9
+  -> [1,16]=1, [1,17]=9, [1,18]=9
           \end{verbatim}
 
         \end{itemize}
@@ -226,6 +300,10 @@ Einzelne chars und digits reichen oft nicht aus – wir wollen Wörter, Zahlen o
           Der Notizblock kennt selbst keine zusammengesetzten Werte – er enthält nur einzelne chars, digits oder booleans pro Zelle.\\
           Wörter, Zahlen und Kommazahlen entstehen erst durch das \textbf{gezielte Lesen und Zusammensetzen mehrerer Zellen} mithilfe dieser Hilfsfunktionen.\\
           Genau das werden wir später auch in JavaScript so umsetzen: Daten zeichenweise im Array ablegen und per Funktion auslesen.
+
+\begin{uebung}{Dieselbe Information verschieden darstellen}
+Speichere den Text „Bus 42" und den Preis „3,20" zunächst Zeichen für Zeichen. Lege danach fest, welche Hilfsfunktionen beide Werte wieder zusammensetzen. Begründe für jede Zelle den gewählten Datentyp.
+\end{uebung}
 
 
       
@@ -272,23 +350,41 @@ Neben \textbf{Notizblock} (Daten) und \textbf{Hilfsblock} (Hilfsvariablen) ist e
 
   Tätigkeit: nummer_lesen(zeile)
 
-  1) Setze [10,1] = "".
-  2) Lies in der angegebenen Zeile die Spalten 2 bis 6.
-  3) Hänge jede gelesene Ziffer an [10,1] an.
-  4) Ergebnis: [10,1] enthält die vollständige Nummer.
+  1) Setze [10,1] bis [10,5] jeweils auf "".
+  2) Lies in der angegebenen Zeile die Spalten 9 bis 13.
+  3) Schreibe die gelesenen Ziffern der Reihe nach in [10,1] bis [10,5].
+  4) Ergebnis: Ab [10,1] steht die vollständige Nummer zellenweise.
 
   Tätigkeit: preis_lesen(zeile)
 
-  1) Setze [10,2] = "".
-  2) Lies in der angegebenen Zeile die Spalten 7 bis 9.
-  3) Hänge jede gelesene Ziffer an [10,2] an.
-  4) Ergebnis: [10,2] enthält den Preis ohne Komma (z. B. "199").
+  1) Setze [11,1] bis [11,5] jeweils auf "".
+  2) Lies in der angegebenen Zeile die Spalten 15 bis 19.
+  3) Schreibe jedes gelesene Zeichen in die entsprechende Zelle [11,1] bis [11,5].
+  4) Ergebnis: Ab [11,1] steht der Preis einschließlich Komma zellenweise.
+
+  Tätigkeit: artikel_leeren(zeile)
+
+  1) Gehe in der angegebenen Zeile jede Zelle von Spalte 1 bis 19 durch.
+  2) Setze jede dieser Zellen auf "".
+  3) Ergebnis: Die gesamte Artikelzeile ist leer und kann neu belegt werden.
+
+  Tätigkeit: artikel_hinzufügen(zeile, titel, nummer, preis)
+
+  1) Führe artikel_leeren(zeile) aus.
+  2) Schreibe den Titel zeichenweise ab Spalte 1.
+  3) Schreibe die Nummer ziffernweise in die Spalten 9 bis 13.
+  4) Schreibe den Preis einschließlich Komma in die Spalten 15 bis 19.
+  5) Ergebnis: Die angegebene Zeile enthält den neuen Artikel.
         
 \end{verbatim}
 
         
 Didaktisch ist das der nächste logische Schritt: Lernende sehen, dass ein Programm nicht nur aus Daten besteht,\\
           sondern auch aus \textbf{wiederverwendbaren Tätigkeiten}. In einer späteren JavaScript-Umsetzung entsprechen diese Tätigkeiten dann typischerweise \textbf{Funktionen}.
+
+\begin{uebung}{Eine Nummer rückwärts lesen}
+Entwirf die Tätigkeit \emph{reverse\_nummer\_lesen(zeile)}. Sie soll die Nummer aus den Spalten 9 bis 13 lesen und in umgekehrter Reihenfolge ab \texttt{[10,1]} ablegen. Gib an, welche Zielzellen zuerst geleert werden, welche Quellzelle in welche Zielzelle geschrieben wird und welches Ergebnis für die Nummer 97831 entsteht.
+\end{uebung}
 
       
     
@@ -338,9 +434,9 @@ Danach folgt das Lesen. Der Prozessor schaut an einer bestimmten Stelle nach, we
 
           \item Lies bei Zucker die zweite Mengenziffer aus Zeile 2, Spalte 2.
 
-          \item Lies bei Eiern die Einheit aus Zeile 3, Spalte 3.
+          \item Lies bei Eiern die Einheit aus Zeile 3, Spalte 3 bis 5: \texttt{string(3, 3, 5)}.
 
-          \item Lies bei Mehl den Laden aus Zeile 1, Spalte 4.
+          \item Lies bei Mehl den Laden aus Zeile 1, Spalte 7 bis 11: \texttt{string(1, 7, 11)}.
 
         \end{itemize}
 
@@ -367,8 +463,8 @@ Wir gehen jede einzelne Zeile und pro Zeile jede einzelne Zelle durch:
   Für jede Zeile (= jedes Buch):
     Für jede Zelle der Zeile (= Titel, dann jede Ziffer der Nummer, dann jede Ziffer des Preises):
       Lies den Wert der aktuellen Zelle.
-      Wenn wir uns in Sp. 2 bis 6 befinden, sammeln wir die Ziffern der Nummer.
-      Wenn wir uns in Sp. 7 bis 9 befinden, sammeln wir die Ziffern des Preises.
+      Wenn wir uns in Sp. 9 bis 13 befinden, sammeln wir die Ziffern der Nummer.
+      Wenn wir uns in Sp. 15 bis 19 befinden, sammeln wir die Zeichen des Preises.
         
 \end{verbatim}
 
@@ -395,8 +491,8 @@ Wir gehen wieder jede einzelne Zeile und pro Zeile jede einzelne Zelle durch:
   Für jede Zeile (= jedes Buch):
     Für jede Zelle der Zeile (= Titel, dann jede Ziffer der Nummer, dann jede Ziffer des Preises):
       Lies den Wert der aktuellen Zelle.
-      Wenn wir uns in Sp. 2 bis 6 befinden, sammeln wir die Ziffern der Nummer.
-      Wenn wir uns in Sp. 7 bis 9 befinden, sammeln wir die Ziffern des Preises.
+      Wenn wir uns in Sp. 9 bis 13 befinden, sammeln wir die Ziffern der Nummer.
+      Wenn wir uns in Sp. 15 bis 19 befinden, sammeln wir die Zeichen des Preises.
     Prüfe nach dem Einlesen der Zeile, ob die gelesene Nummer der gesuchten Nummer 97831 entspricht.
     Falls ja, schreibe die Nummer und den Preis in die dafür vorgesehene Zeile 10.
     (Auch dort müssen die Ziffern wieder spaltenweise in die einzelnen Zellen eingetragen werden.)
@@ -407,18 +503,146 @@ Wir gehen wieder jede einzelne Zeile und pro Zeile jede einzelne Zelle durch:
         
 Hier kommen mehrere Fähigkeiten zusammen: \textbf{lesen}, \textbf{prüfen}, \textbf{gegebenenfalls schreiben} und \textbf{wiederholen} – und zwar auf zwei Ebenen: einmal über die Zeilen, einmal über die Zellen pro Zeile.
 
+\textbf{Verschachtelung} bedeutet, dass ein Ablauf innerhalb eines anderen Ablaufs liegt. Hier wird für jede Zeile eine innere Schleife über deren Zellen ausgeführt. Der Prozessor beginnt mit der ersten Zeile, arbeitet die innere Zellschleife vollständig ab und setzt erst danach die äußere Schleife mit der nächsten Zeile fort. Trifft er innerhalb der inneren Schleife auf eine Bedingung, wertet er diese an der aktuellen Zelle aus und kehrt anschließend an die passende Stelle der inneren Schleife zurück.
+
 
         
 So wird zunächst in natürlicher Sprache deutlich, \textbf{was} der Prozessor tun soll.\\
           Erst im nächsten Schritt wird daraus eine formale Programmiersprache.\\
           Dadurch bleibt der Einstieg anschaulich und verständlich.
 
+\begin{uebung}{Den nächsten Schritt begründen}
+Beginne eine Suche nach einem frei gewählten Buchtitel. Halte nach jeder Werkzeuganwendung den aktuellen Zustand fest und entscheide zwischen Lesen, Schreiben, Bedingung und Schleife. Begründe jeweils, warum das gewählte Werkzeug jetzt sinnvoll ist.
+\end{uebung}
+
+\begin{uebung}{Zusammengesetzte Typen verwenden}
+Formuliere das Beispiel aus diesem Abschnitt neu, indem du die Hilfsfunktionen für zusammengesetzte Typen verwendest. Kennzeichne, welche Schleife dadurch entfällt.
+\end{uebung}
+
 
           
 \textbf{Die Didaktik soll darauf beruhen, dass die Schulmathematik mithilfe eines einfachen JavaScript-Modells mit Matrix als Notizblock beschrieben werden kann.}
 
 
-      
+\section{Problemlösen: vom Ausgangszustand zum Zielzustand}
+
+Eine \textbf{Aufgabe} gibt vor, was getan werden soll. Sie kann auch dann bearbeitet werden, wenn der Lösungsweg bereits bekannt ist.\\
+Ein \textbf{Problem} liegt dagegen vor, wenn ein gewünschtes Ziel bekannt ist, aber noch kein unmittelbar anwendbarer Lösungsweg zur Verfügung steht.\\
+Problemlösen bedeutet deshalb, einen geeigneten Weg vom vorhandenen Zustand zum gewünschten Zustand zu finden.
+
+\subsection{Problem und Probleminstanz}
+
+Ein Problem beschreibt eine ganze Klasse gleichartiger Fragestellungen.\\
+Eine \textbf{Probleminstanz} ist ein einzelner, konkreter Fall dieses Problems.
+
+\begin{itemize}
+  \item \textbf{Problem:} Finde eine bestimmte Nummer in einer Bibliotheksliste.
+  \item \textbf{Probleminstanz:} Finde die Nummer \texttt{97831} in der aktuell vorliegenden Liste.
+\end{itemize}
+
+Die Unterscheidung ist wichtig: Ein Lösungsweg soll nach Möglichkeit nicht nur eine einzige Probleminstanz lösen, sondern für alle zulässigen Instanzen des Problems geeignet sein.
+
+\subsection{Ausgangszustand (Startsituation) und gewünschter Zielzustand}
+
+Der \textbf{Ausgangszustand}, in Beispielen auch \textbf{Startsituation} genannt, beschreibt alle zu Beginn bekannten und relevanten Informationen. Dazu gehören die Eingaben, ihre Anordnung im Notizblock und mögliche Voraussetzungen.\\
+Der \textbf{gewünschte Zielzustand} beschreibt, woran eine erfolgreiche Lösung erkannt wird. Er legt fest, welches Ergebnis am Ende vorliegen und wo es abgelegt werden soll. Ist dieser Zustand erreicht, nennen wir ihn in Beispielen auch \textbf{Endsituation}.
+
+\begin{itemize}
+  \item \textbf{Ausgangszustand:} Im Notizblock steht eine Bibliotheksliste; die gesuchte Nummer lautet \texttt{97831}.
+  \item \textbf{Zielzustand bei einem Treffer:} Der passende Eintrag wurde gefunden und seine Position oder sein Preis steht an einer festgelegten Stelle.
+  \item \textbf{Zielzustand ohne Treffer:} Der gesamte relevante Bereich wurde geprüft und der Merker \emph{gefunden} steht auf \emph{nein}.
+\end{itemize}
+
+Ein präziser Zielzustand verhindert, dass ein Ablauf zu früh beendet wird oder unklar bleibt, ob das Problem tatsächlich gelöst wurde.
+
+\subsection{Sinnvolle Werkzeuganwendungen im aktuellen Zustand}
+
+Zum Lösen verwenden wir die bereits bekannten Werkzeuge \textbf{Lesen}, \textbf{Schreiben}, \textbf{Bedingung} und \textbf{Schleife}.\\
+Die konkrete Verwendung eines Werkzeugs nennen wir eine \textbf{Werkzeuganwendung}. Eine Werkzeuganwendung verändert entweder den aktuellen Zustand oder liefert Informationen, die die nächste Werkzeuganwendung bestimmen.
+
+Nicht jede grundsätzlich erlaubte Werkzeuganwendung ist in jedem Zustand sinnvoll. Vor jeder Anwendung können wir daher fragen:
+
+\begin{itemize}
+  \item \textbf{Ist die Anwendung ausführbar?} Die benötigte Zelle oder Information muss vorhanden sein.
+  \item \textbf{Bringt die Anwendung uns dem Ziel näher?} Sie sollte neue relevante Informationen liefern oder den Zustand gezielt verändern.
+  \item \textbf{Bewahrt die Anwendung wichtige Bedingungen?} Bereits korrekt gespeicherte Daten dürfen nicht unbeabsichtigt zerstört werden.
+  \item \textbf{Passt die Anwendung zum aktuellen Zustand?} Nach einem Treffer ist beispielsweise ein weiterer Suchschritt meist unnötig.
+\end{itemize}
+
+Bei der Suche wäre es etwa nicht sinnvoll, sofort \emph{gefunden = ja} zu schreiben. Zuerst muss ein Eintrag gelesen und mit der gesuchten Nummer verglichen werden. Erst wenn die Bedingung erfüllt ist, ist diese Werkzeuganwendung sinnvoll.
+
+\subsection{Ein Lösungsweg mithilfe der Werkzeuge}
+
+Ein Lösungsweg ist eine geordnete Folge sinnvoller Werkzeuganwendungen, die den Ausgangszustand in den Zielzustand überführt. Für die Suche könnte er zunächst in natürlicher Sprache so aussehen:
+
+\begin{enumerate}
+  \item Schreibe \emph{gefunden = nein} in den Hilfsblock und beginne beim ersten Eintrag.
+  \item Lies die Nummer des aktuellen Eintrags.
+  \item Vergleiche sie mit der gesuchten Nummer.
+  \item Falls beide Nummern gleich sind, schreibe \emph{gefunden = ja} und merke die Position.
+  \item Falls sie nicht gleich sind und noch ein Eintrag folgt, gehe zum nächsten Eintrag und wiederhole die Schritte 2 bis 4.
+  \item Falls kein Eintrag mehr folgt, beende die Suche mit \emph{gefunden = nein}.
+\end{enumerate}
+
+Problemlösen besteht damit nicht nur darin, Werkzeuge zu kennen. Entscheidend ist, in jedem Zustand eine passende nächste Werkzeuganwendung auszuwählen und die Anwendungen so anzuordnen, dass der Zielzustand tatsächlich erreicht wird.
+
+\begin{uebung}{Einen Streit mit der Freundin auflösen}
+Betrachte einen Streit mit deiner Freundin als konkrete Probleminstanz. Beschreibe den \textbf{Ausgangszustand}, ohne bereits eine Lösung vorwegzunehmen. Welche Werkzeuge stehen zur Verfügung, beispielsweise Zuhören, Nachfragen, die eigene Sicht erklären, eine Pause vereinbaren oder sich entschuldigen? Formuliere den \textbf{gewünschten Zielzustand}. Begründe anschließend einen möglichen Lösungsweg und prüfe bei jedem Werkzeugeinsatz, ob er im aktuellen Zustand sinnvoll ist. Es kann mehrere geeignete Lösungswege geben.
+\end{uebung}
+
+\begin{uebung}{Eine Aufgabe als Problem strukturieren}
+Wähle eine Alltagssituation, etwa das Finden des günstigsten Produkts. Formuliere Problem, eine konkrete Probleminstanz, Ausgangszustand und Zielzustand. Nenne verfügbare Werkzeuge und skizziere einen eigenen Lösungsweg. Mehrere korrekte Wege sind ausdrücklich möglich.
+\end{uebung}
+
+
+\section{Algorithmus und Programm}
+
+Ist ein Lösungsweg so genau beschrieben, dass seine Schritte eindeutig ausgeführt werden können, sprechen wir von einem \textbf{Algorithmus}.\\
+Ein Algorithmus ist eine allgemeine, eindeutige und endliche Handlungsvorschrift zur Lösung eines Problems.
+
+\subsection{Eigenschaften eines Algorithmus}
+
+Ein Algorithmus besitzt mindestens folgende Eigenschaften:
+
+\begin{itemize}
+  \item \textbf{Allgemeinheit:} Er löst nicht nur ein einzelnes Beispiel, sondern alle vorgesehenen Probleminstanzen.
+  \item \textbf{Eindeutigkeit:} In jedem Schritt ist festgelegt, was als Nächstes zu tun ist.
+  \item \textbf{Ausführbarkeit:} Jeder Einzelschritt kann mit den verfügbaren Werkzeugen ausgeführt werden.
+  \item \textbf{Endlichkeit:} Die Beschreibung besteht aus endlich vielen Anweisungen.
+  \item \textbf{Terminierung:} Für jede zulässige Eingabe endet die Ausführung nach endlich vielen Schritten.
+  \item \textbf{Korrektheit:} Wenn der Algorithmus endet, entspricht sein Ergebnis dem festgelegten Zielzustand.
+\end{itemize}
+
+Der Algorithmus beschreibt dabei die Idee und die Regeln des Lösungswegs. Er ist noch nicht an eine bestimmte Programmiersprache oder einen bestimmten Computer gebunden. Er kann beispielsweise in präziser natürlicher Sprache, als Ablaufdiagramm oder als Pseudocode dargestellt werden.
+
+\subsection{Unterschied zwischen Algorithmus und Programm}
+
+Ein \textbf{Programm} ist die konkrete Formulierung eines Algorithmus in einer Programmiersprache. Es berücksichtigt die Syntax dieser Sprache sowie die dort vorhandenen Datentypen, Speicherstrukturen und Befehle.\\
+Mehrere unterschiedliche Programme können daher denselben Algorithmus umsetzen, etwa eines in JavaScript und ein anderes in Pascal.
+
+\begin{center}
+\begin{tabular}{|p{4cm}|p{8cm}|p{8cm}|}
+\hline
+\textbf{Begriff} & \textbf{Algorithmus} & \textbf{Programm} \\
+\hline
+Zweck & Allgemeiner Lösungsweg für ein Problem & Konkrete, vom Computer ausführbare Umsetzung \\
+\hline
+Darstellung & Natürliche Sprache, Pseudocode oder Ablaufdiagramm & Programmiersprache, zum Beispiel JavaScript \\
+\hline
+Abhängigkeit & Grundsätzlich unabhängig von einer Programmiersprache & An Sprache und Ausführungsumgebung gebunden \\
+\hline
+Beispiel & Prüfe Listeneinträge nacheinander auf Übereinstimmung & Eine JavaScript-Schleife mit Array-Zugriffen und Vergleichen \\
+\hline
+\end{tabular}
+\end{center}
+
+Zusammengefasst beschreibt das \textbf{Problem}, \textbf{was} erreicht werden soll. Der \textbf{Algorithmus} beschreibt allgemein, \textbf{wie} dies erreicht werden kann. Das \textbf{Programm} übersetzt diesen Lösungsweg schließlich in eine konkrete, ausführbare Sprache.
+
+\begin{uebung}{Algorithmus oder Programm?}
+Formuliere einen sprachunabhängigen Algorithmus zum Finden des größten Listeneintrags. Prüfe ihn auf Allgemeinheit, Eindeutigkeit, Ausführbarkeit, Endlichkeit, Terminierung und Korrektheit. Markiere danach, welche zusätzlichen Entscheidungen erst bei einer Umsetzung als Programm nötig werden.
+\end{uebung}
+
+
 \section{Rechnen mit integers – ein erster Algorithmus}
         
   In diesem Kapitel geht es nicht um einen Beweis, sondern um einen \textbf{Algorithmus}.\\
@@ -433,6 +657,19 @@ So wird zunächst in natürlicher Sprache deutlich, \textbf{was} der Prozessor t
             Dadurch kann der Prozessor innerhalb dieses Bereichs zählen, indem er von einer Zelle zur nächsten weitergeht.\\
             Bei einer Aufgabe wie \texttt{2 + 5} könnte man den Speicherbereich für die Ziffern als Zählbereich verwenden: Die \textbf{3. Spalte} (= die Ziffer 2) wird ausgelesen, und anschließend werden über eine Schleife \textbf{5 weitere Spalten} nacheinander gelesen – also ein wiederholtes Zählen von einer Zelle zur nächsten.\\
             Für den Anfang betrachten wir nur \textbf{ganze Zahlen} ohne Komma.
+
+\begin{verbatim}
+  Zeile 1 (Ziffernbereich):
+  Spalte   [1,1] [1,2] [1,3] [1,4] [1,5] [1,6] [1,7] [1,8] [1,9] [1,10]
+  Ziffer      0     1    (2)    3     4     5     6    [7]    8      9
+                         Start   .     .     .     .     Ziel
+                                 1     2     3     4      5   Schleifenschritte
+
+  Zeile 2 (Addition):
+  [2,1] = 2   [2,2] = '+'   [2,3] = 5   [2,4] = '='   [2,5] = 7
+\end{verbatim}
+
+Die Schleife startet im Ziffernbereich bei der 2. Nach jedem der fünf Durchläufe geht der Prozessor genau eine Zelle weiter. Nach dem fünften Schritt liest er die 7 und schreibt sie als Ergebnis der Addition in Zeile 2.
 
 
           \subsection{Beispiel: Addition mit Übertrag}
@@ -580,43 +817,7 @@ Um diese \textbf{Hilfsvariablen} klar von den eigentlichen \textbf{Daten} zu tre
 \end{verbatim}
 
         
-\textbf{Beispiel 2: Eine Nummer aus einzelnen Ziffern zusammensetzen}
-
-
-        
-In der Bibliotheksliste steht die Nummer nicht in einer einzigen Zelle, sondern verteilt auf mehrere Zellen.\\
-          Während wir die Ziffern lesen, brauchen wir eine Hilfsvariable, in der wir die Nummer Schritt für Schritt zusammensetzen.
-
-
-        \begin{verbatim}
-
-  Bibliotheksliste, Zeile 1:
-
-         | Spalte 2 | Spalte 3 | Spalte 4 | Spalte 5 | Spalte 6
-  -------+----------+----------+----------+----------+----------
-  Werte  | 9        | 7        | 8        | 3        | 1
-
-  Hilfsspeicher:
-
-         | Spalte 1
-  -------+---------
-  Zeile 6| nummer = ""
-
-  Lies Spalte 2 -> 9  -> nummer = "9"
-  Lies Spalte 3 -> 7  -> nummer = "97"
-  Lies Spalte 4 -> 8  -> nummer = "978"
-  Lies Spalte 5 -> 3  -> nummer = "9783"
-  Lies Spalte 6 -> 1  -> nummer = "97831"
-        
-\end{verbatim}
-
-        
-Der Hilfsspeicher hält hier also fest, \textbf{welche Nummer bisher schon zusammengesetzt wurde}.\\
-          Ohne diese Zwischenablage könnten wir die einzelnen gelesenen Ziffern nicht zu einer vollständigen Nummer verbinden.
-
-
-        
-\textbf{Beispiel 3: Merken, ob etwas gefunden wurde}
+\textbf{Beispiel 2: Merken, ob etwas gefunden wurde}
 
 
         
@@ -648,7 +849,13 @@ Diese Trennung macht Programme \textbf{übersichtlicher} und hilft Anfängern zu
 
 
         
-\textbf{Frage:} Fallen Dir weitere Beispiele ein, bei denen Hilfsvariablen nützlich sein könnten?
+\begin{uebung}{Hilfsvariablen aus dem Ablauf ableiten}
+Entwirf einen eigenen Lösungsweg zum Finden des kleinsten Preises. Beschreibe insbesondere den kreativen Ansatz, mit dem du einen bisher gelesenen Preis mit dem bisherigen Minimum vergleichst und das Minimum aktualisierst. Formuliere diese Idee anschließend als wiederverwendbares Werkzeug für dein persönliches Werkzeug-Portfolio.
+\end{uebung}
+
+\begin{uebung}{Weitere Informationen im Hilfsblock}
+Trage zusammen, welche Informationen außer Zählern und dem Merker \emph{gefunden} noch im Hilfsblock abgelegt werden können. Ordne deine Vorschläge den Fragen „Wo bin ich?“, „Was weiß ich bereits?“, „Was berechne ich gerade?“ und „Bin ich fertig?“ zu und gib jeweils ein konkretes Beispiel für eine zellenweise Speicherung an.
+\end{uebung}
 
 
       
@@ -657,10 +864,11 @@ Diese Trennung macht Programme \textbf{übersichtlicher} und hilft Anfängern zu
     
 
       
+      \newpage
       \section{Programmatische Problemlösung mithilfe von Werkzeugen}
 
     Die folgenden vier Werkzeuge bilden den Kern unserer Notizblock-Denkweise.\\
-    Sie helfen beim systematischen Lösen von Aufgaben – von einfachen Einträgen bis zu vollständigen Algorithmen.
+    Sie helfen beim systematischen Lösen von Problemen – von einfachen Einträgen bis zu vollständigen Algorithmen. Dabei verwenden wir immer dieselben Begriffe und Schritte: Problem und Probleminstanz, Ausgangszustand, gewünschter Zielzustand, Werkzeuge, Lösungsweg und erreichter Zielzustand.
 
     \begin{center}
     \begin{tabular}{|p{3.2cm}|p{5.8cm}|p{9.8cm}|}
@@ -691,357 +899,300 @@ Diese Trennung macht Programme \textbf{übersichtlicher} und hilft Anfängern zu
 
     \subsection{Demonstrationsbeispiel}
 
-    \subsubsection{Startsituation}
-    Im Notizblock stehen in den ersten 9 Zeilen Zahlen, die addiert werden sollen, z.\,B.:\\
-  		\texttt{[1,1]=12, [2,1]=7, [3,1]=3, [4,1]=5, [5,1]=9, [6,1]=4, [7,1]=8, [8,1]=6, [9,1]=2}.\\
-    Das Ziel ist, die Summe in \texttt{[10,1]} einzutragen.
+    \subsubsection{Problem und Probleminstanz}
+    Das allgemeine \textbf{Problem} lautet: Addiere eine Reihe von Zahlen und speichere ihre Summe.\\
+    Die konkrete \textbf{Probleminstanz} besteht aus den neun Zahlen 12, 7, 3, 5, 9, 4, 8, 6 und 2.
 
-    \subsubsection{Verwendung welcher Werkzeuge und warum}
+    \subsubsection{Ausgangszustand (Startsituation)}
+    Im Notizblock stehen in den ersten 9 Zeilen zweistellige Zahlen, die addiert werden sollen. Jede Ziffer belegt eine eigene Zelle; einstellige Zahlen erhalten eine führende Null:\\
+    		\texttt{[1,1]=1, [1,2]=2; [2,1]=0, [2,2]=7; ...; [9,1]=0, [9,2]=2}.\\
+    Dies entspricht den Zahlen 12, 7, 3, 5, 9, 4, 8, 6 und 2.
+
+    \subsubsection{Gewünschter Zielzustand}
+    Die Summe aller neun Zahlen steht \textbf{ab} \texttt{[10,1]}, wobei jede Ergebnisziffer eine eigene Zelle belegt. Für die Summe 56 gilt also: \texttt{[10,1]=5} und \texttt{[10,2]=6}. Daran erkennen wir, dass das Problem gelöst ist.
+
+    \subsubsection{Werkzeuge und begründete Werkzeuganwendungen}
     \begin{itemize}
       \item \textbf{Schleife:} Wir gehen mit einer Schleife über die Zeilen 1 bis 9.\\
       \emph{Warum?} Weil wir genau diese 9 Zahlen systematisch addieren wollen.
 
-      \item \textbf{Lesen:} In jedem Schleifendurchlauf lesen wir den aktuellen Wert aus \texttt{[Zeile,1]}.\\
-      \emph{Warum?} Nur so liegt der Wert für die laufende Summe vor.
+      \item \textbf{Lesen:} In jedem Schleifendurchlauf lesen wir mit \texttt{integer(Zeile, 1, 2)} die beiden Ziffern der aktuellen Zahl.\\
+      \emph{Warum?} Nur so liegt die vollständige Zahl für die laufende Summe vor.
 
-      \item \textbf{Bedingung:} Direkt nach dem Lesen prüfen wir, ob der gelesene Inhalt eine Zahl ist.\\
-      \emph{Warum?} So verhindern wir, dass ein ungültiger Eintrag die Summe verfälscht.
+      \item \textbf{Addition:} Wir addieren die gelesene Zahl zur bisherigen Summe. Die Addition wurde zuvor aus den grundlegenden Werkzeugen Lesen, Schreiben, Vergleichen, Schleife und Hilfswerten aufgebaut und als wiederverwendbares Werkzeug in unser \textbf{Werkzeug-Portfolio} aufgenommen. Deshalb dürfen wir sie hier als bereits definiertes Werkzeug verwenden, ohne ihre inneren Schritte jedes Mal erneut auszuführen. Die laufende Summe bleibt dabei weiterhin ziffernweise im Hilfsblock gespeichert.\\
+      \emph{Warum?} Erst durch diese Werkzeuganwendung entsteht aus den gelesenen Einzelzahlen schrittweise die Gesamtsumme.
 
-      \item \textbf{Schreiben:} Nach dem letzten Durchlauf schreiben wir das Gesamtergebnis in \texttt{[10,1]}.\\
-      \emph{Warum?} Das Resultat wird dauerhaft im Notizblock gespeichert und ist für weitere Schritte verfügbar.
+      \item \textbf{Schreiben:} Nach dem letzten Durchlauf schreiben wir das Gesamtergebnis ziffernweise ab \texttt{[10,1]}.\\
+      \emph{Warum?} Das Resultat wird dauerhaft im Notizblock gespeichert und ist für weitere Schritte verfügbar. Jede Ziffer belegt dabei genau eine Zelle.
     \end{itemize}
 
-    \subsubsection{Endsituation}
+    Diese geordnete Folge der Werkzeuganwendungen bildet den \textbf{Lösungsweg}. Bei jeder Anwendung wird geprüft, ob sie im aktuellen Zustand ausführbar und für das Erreichen des Zielzustands sinnvoll ist.
+
+    \subsubsection{Erreichter Zielzustand (Endsituation)}
     Nach der Verarbeitung steht im Notizblock:\\
-  		\texttt{[10,1] = 56}.\\
+  		\texttt{[10,1] = 5, [10,2] = 6}.\\
     Das Ziel wurde erreicht: Aus Startwerten wurde durch geeignetes Kombinieren der Werkzeuge ein korrektes Ergebnis erzeugt und abgelegt.
 
 
       
-        \section{Laufzeitkomplexität: Schritte zählen}
+\newpage
+\section{Laufzeitanalyse: vom Schrittmodell zur Größenordnung}
 
-        \subsection{Warum Schritte zählen?}
+Zwei Lösungswege können denselben Zielzustand erreichen und trotzdem unterschiedlich aufwendig sein. Um sie fair zu vergleichen, müssen wir zuerst festlegen, \textbf{welche Kosten wir zählen}. Erst danach können wir die gezählten Schritte verallgemeinern.
 
-        
-In der Informatik geht es oft darum, ein Problem zu lösen – zum Beispiel: \textbf{Finde eine bestimmte Person in einem Notizblock}.\\
-          Doch nicht jeder Lösungsweg ist gleich gut. Manche brauchen viele Schritte, andere kommen schneller ans Ziel.
+\subsection{Das Schrittmodell: Was kostet wie viel?}
 
+Ein \textbf{Kostenmodell} legt fest, welche Operationen als Schritte gelten und welches Gewicht sie erhalten. Ohne ein solches Modell ist die Aussage „dieser Algorithmus ist schneller" ungenau.
 
-        
-\textbf{Schritte zählen} hilft uns dabei, verschiedene Lösungswege zu vergleichen:
+\begin{itemize}
+  \item \textbf{Vergleichsmodell:} Wir zählen nur Vergleiche. Dieses Modell eignet sich besonders für Suchverfahren.
+  \item \textbf{Einfaches Schrittmodell:} Lesen, Schreiben, Vergleichen und Springen kosten jeweils einen Schritt.
+  \item \textbf{Gewichtetes Schrittmodell:} Verschiedene Operationen dürfen unterschiedlich viel kosten, etwa Lesen = 2 und Vergleichen = 1.
+\end{itemize}
 
-        \begin{itemize}
-          \item Wie viele Operationen braucht mein Programm mindestens? (Best Case)
+Keines dieser Modelle ist grundsätzlich „das richtige". Ein Modell ist geeignet, wenn es für die untersuchte Frage die entscheidenden Kosten sichtbar macht. In den folgenden Suchbeispielen verwenden wir zunächst das \textbf{Vergleichsmodell}.
 
-          \item Wie viele im schlimmsten Fall? (Worst Case)
+\begin{merksatz}[Wichtig]
+Erst das Kostenmodell festlegen, dann Schritte zählen. Ergebnisse aus unterschiedlichen Kostenmodellen dürfen nicht ungeprüft miteinander verglichen werden.
+\end{merksatz}
 
-          \item Wie viele im Durchschnitt? (Average Case)
+\subsection{Konkrete Schrittzahl der linearen Suche}
 
-        \end{itemize}
+\textbf{Probleminstanz:} Suche Felix in
+\texttt{[Anna, Ben, Clara, David, Emma, Felix, Greta]} mit \(n=7\).
 
-        \subsection{Beispiel 1: Lineare Suche im Notizblock}
+Die Einträge werden von links nach rechts mit Felix verglichen. Im Vergleichsmodell kostet jeder Vergleich genau einen Schritt. Für diese Instanz sind sechs Schritte nötig.
 
-        \subsubsection{Startsituation:}
-        \begin{itemize}
-          \item Notizblock mit n Einträgen: \texttt{[Anna, Ben, Clara, David, Emma, Felix, Greta]} (hier: n = 7)
+\begin{itemize}
+  \item \textbf{Best Case:} Felix steht am Anfang: \(T_{best}(n)=1\).
+  \item \textbf{Worst Case:} Felix steht am Ende oder fehlt: \(T_{worst}(n)=n\).
+  \item \textbf{Average Case:} Bei gleich wahrscheinlichen Positionen sind ungefähr \(T_{avg}(n)=(n+1)/2\) Vergleiche nötig.
+\end{itemize}
 
-          \item \textbf{Zu suchende Person:} Felix
+Best, Worst und Average Case sind keine verschiedenen Kostenmodelle. Sie beschreiben verschiedene Lagen der Eingabe \textbf{innerhalb desselben Modells}.
 
-        \end{itemize}
+\subsection{Konkrete Schrittzahl der Binärsuche}
 
-        \subsubsection{Tätigkeit (rezeptartig):}
-        \begin{enumerate}
-          \item Beginne beim ersten Eintrag.
+Die Binärsuche benötigt einen sortierten Notizblock. Sie prüft jeweils den mittleren Eintrag und verwirft danach eine Hälfte des noch möglichen Bereichs.
 
-          \item Vergleiche den aktuellen Eintrag mit der \textbf{zu suchenden Person}.
+\begin{verbatim}
+  Start:       [Anna | Ben | Clara | David | Emma | Felix | Greta]
+                L=1                  M=4                    R=7
+                                     David < Felix
 
-          \item Falls gefunden → fertig.
+  Danach:                              [Emma | Felix | Greta]
+                                        L=5    M=6     R=7
+                                               Treffer
+\end{verbatim}
 
-          \item Falls nicht gefunden → gehe zum nächsten Eintrag.
+Die Grenzen \texttt{L} und \texttt{R} markieren den noch möglichen Bereich, \texttt{M} dessen Mitte. Nach dem Vergleich mit David kann die linke Hälfte einschließlich David ausgeschlossen werden. Der nächste betrachtete Bereich enthält nur noch Emma, Felix und Greta.
 
-          \item Wiederhole, bis gefunden oder Notizblock zu Ende.
+\begin{enumerate}
+  \item Setze die linke und rechte Grenze auf den gesamten Suchbereich.
+  \item Bestimme die Mitte und vergleiche den dortigen Eintrag mit der gesuchten Person.
+  \item Suche abhängig vom Ergebnis nur in der linken oder rechten Hälfte weiter.
+  \item Beende die Suche bei einem Treffer oder bei einem leeren Suchbereich.
+\end{enumerate}
 
-        \end{enumerate}
+Für Felix gilt: Zuerst wird David, danach Felix geprüft. Im Vergleichsmodell kostet diese Probleminstanz also zwei Schritte. Im Worst Case halbiert sich der Suchbereich so lange, bis nur noch ein Eintrag übrig ist:
 
-        \subsubsection{Schritte zählen:}
-        \begin{itemize}
-          \item \textbf{Best Case:} Die \textbf{zu suchende Person} steht am Anfang → \textbf{1 Vergleich}
+\[
+n \rightarrow \frac{n}{2} \rightarrow \frac{n}{4} \rightarrow \frac{n}{8} \rightarrow \dots \rightarrow 1
+\]
 
-          \item \textbf{Worst Case:} Die Person steht am Ende oder fehlt → \textbf{n Vergleiche} (hier: 7)
+Bei \(n=1024\) sind höchstens ungefähr \(\log_2(1024)=10\) Vergleiche nötig.
 
-          \item \textbf{Average Case:} Im Durchschnitt müssen wir die Hälfte durchsuchen → \textbf{n/2 Vergleiche}
+\subsection{Von der Schrittzahl zur asymptotischen Laufzeitordnung}
 
-        \end{itemize}
+Konkrete Schrittzahlen hängen vom gewählten Kostenmodell, von der Eingabe und teilweise von der Maschine ab. Für große Eingaben interessiert uns deshalb vor allem die Frage: \textbf{Wie wächst der Aufwand, wenn \(n\) wächst?}
 
-        
-\textbf{Asymptotische Laufzeitordnung:} \textbf{O(n)} – „linear"\\
-          Je größer n wird, desto mehr Schritte brauchen wir proportional dazu.
+Die asymptotische Laufzeitordnung beschreibt dieses langfristige Wachstumsverhalten. Dabei betrachten wir nicht mehr jeden einzelnen Schritt, sondern den dominierenden Anteil einer Kostenfunktion.
 
+\subsubsection{Die Idee der Asymptote: Kleingeld spielt keine Rolle}
 
-        \subsection{Beispiel 2: Binärsuche (im alphabetisch sortierten Notizblock)}
+Angenommen, ein detailliertes Kostenmodell (konkrete Schrittzahl) liefert für eine lineare Suche
 
-        \subsubsection{Startsituation:}
-        \begin{itemize}
-          \item \textbf{Alphabetisch sortierter} Notizblock: \texttt{[Anna, Ben, Clara, David, Emma, Felix, Greta]} (n = 7)
+\[
+T(n)=5n+20.
+\]
 
-          \item \textbf{Zu suchende Person:} Felix
+Die zusätzlichen 20 Schritte und der Faktor 5 sind für eine konkrete Ausführung durchaus echte Kosten. Wenn \(n\) jedoch sehr groß wird, entscheidet vor allem der linear wachsende Anteil \(n\) über das Verhalten. Bildlich gesprochen: Beim langfristigen Wachstum ist \textbf{Kleingeld nicht ausschlaggebend}.
 
-        \end{itemize}
+Deshalb fassen wir \(5n+20\), \(n\) und \(100n+3\) in derselben asymptotischen Ordnung \(\mathcal{O}(n)\) zusammen. Entsprechend gehört eine binäre Suche zu \(\mathcal{O}(\log n)\).
 
-        \subsubsection{Tätigkeit:}
-        
-Wir brauchen zwei Merker im Hilfsspeicher: \textbf{linke Grenze} und \textbf{rechte Grenze}, die den aktuell noch zu durchsuchenden Bereich einschließen.
+\begin{merksatz}[Kleingeld spielt keine Rolle]
+Die O-Notation behauptet nicht, dass Konstanten bei einer konkreten Messung wertlos sind. Sie blendet sie bewusst aus, wenn nur das Wachstum für sehr große Eingaben verglichen werden soll.
+\end{merksatz}
 
-        \begin{enumerate}
-          \item Setze linke Grenze = 1, rechte Grenze = 7 (= Anzahl der Einträge). (Beide Merker kommen in den Hilfsspeicher.)
+\subsection{Wachstumsordnungen vergleichen}
 
-          \item Berechne die Mitte: (linke Grenze + rechte Grenze) / 2, abgerundet → das ist die aktuelle Prüfposition.
+\begin{center}
+\begin{tabularx}{0.8\textwidth}{|>{\bfseries}l|X|X|}
+\hline
+Anzahl \(n\) & Lineare Suche: \(n\) & Binärsuche: ungefähr \(\log_2 n\) \\
+\hline
+10 & 10 Vergleiche & 4 Vergleiche \\
+100 & 100 Vergleiche & 7 Vergleiche \\
+1.000 & 1.000 Vergleiche & 10 Vergleiche \\
+1.000.000 & 1.000.000 Vergleiche & 20 Vergleiche \\
+\hline
+\end{tabularx}
+\end{center}
 
-          \item Lies den Eintrag an der aktuellen Prüfposition.
+Die lineare Suche hat im Worst Case die Ordnung \(\mathcal{O}(n)\), die Binärsuche \(\mathcal{O}(\log n)\). Dieser Vergleich setzt allerdings voraus, dass die Daten für die Binärsuche bereits sortiert sind. Auch Voraussetzungen eines Algorithmus gehören daher zur Bewertung eines Lösungswegs.
 
-          \item Ist dieser Eintrag die \textbf{zu suchende Person}? → fertig.
+\begin{uebung}{Vom Zählen zum Wachstum}
+Gegeben sind die Kostenfunktionen \(T_1(n)=3n+8\), \(T_2(n)=n^2+2n\) und \(T_3(n)=4\log_2(n)+20\). Berechne zunächst die konkreten Kosten für \(n=10\) und \(n=1000\). Streiche danach gedanklich das „Kleingeld" und ordne die Funktionen \(\mathcal{O}(n)\), \(\mathcal{O}(n^2)\) oder \(\mathcal{O}(\log n)\) zu.
+\end{uebung}
 
-          \item Kommt die \textbf{zu suchende Person} alphabetisch früher? → Setze rechte Grenze = aktuelle Prüfposition - 1.
+\subsection{Verbindung zur JavaScript-Umsetzung}
 
-          \item Kommt sie alphabetisch später? → Setze linke Grenze = aktuelle Prüfposition + 1.
+Auch ein JavaScript-Programm kann nach verschiedenen Kostenmodellen untersucht werden. Wir können beispielsweise nur die Auswertung einer Suchbedingung zählen oder zusätzlich Array-Zugriffe, Zuweisungen und Schleifensprünge. Wichtig ist nicht, möglichst viele Dinge zu zählen, sondern das Modell vor der Analyse eindeutig anzugeben.
 
-          \item Wiederhole ab Schritt 2, solange linke Grenze \(\leq\) rechte Grenze. (Falls nicht mehr: Person nicht vorhanden.)
 
-        \end{enumerate}
-        
-\textbf{Konkreter Ablauf für Felix:}
+\newpage
+\section{Sanfter Umstieg in eine Hochsprache (JavaScript)}
 
-        \begin{itemize}
-          \item Durchlauf 1: linke Grenze = 1, rechte Grenze = 7 → Mitte = 4 → \textbf{David}. Felix > David → linke Grenze = 5.
+Der Übergang erfolgt in kleinen Stufen. In jeder Stufe kommt möglichst nur \textbf{eine neue Idee} hinzu. Alles andere bleibt zunächst so, wie es aus dem Notizblock-Modell bekannt ist. Dadurch kann jede neue Schreibweise auf ihre bereits verstandene Bedeutung zurückgeführt werden.
 
-          \item Durchlauf 2: linke Grenze = 5, rechte Grenze = 7 → Mitte = 6 → \textbf{Felix} → gefunden nach \textbf{2 Vergleichen}.
+\subsection{Stufe 1: Gleicher Speicher, andere Schreibweise}
 
-        \end{itemize}
+Zum sanften Übergang bilden wir den karierten Notizblock zunächst \textbf{mithilfe von JavaScript} als Matrix ab. Zunächst bleiben sogar die einzelnen Zeichen erhalten. Nur die Schreibweise der Adresse ändert sich.\\
+Wie diese Matrix in JavaScript initialisiert wird, ist an dieser Stelle nebensächlich und wird als vorbereitetes Werkzeug vorgegeben. Darüber muss zunächst nicht weiter nachgedacht werden; entscheidend sind die bekannten Zellen und ihre Adressen.
 
-        \subsubsection{Schritte zählen:}
-        \begin{itemize}
-          \item Bei jedem Schritt halbiert sich die Suchgröße.
+\begin{center}
+\begin{tabularx}{0.8\textwidth}{|>{\bfseries}l|X|}
+\hline
+Notizblock & JavaScript \\
+\hline
+\texttt{[1,1] = 'M'} & \texttt{notizblock[0][0] = 'M';} \\
+\texttt{[1,2] = 'a'} & \texttt{notizblock[0][1] = 'a';} \\
+\hline
+\end{tabularx}
+\end{center}
 
-          \item n → n/2 → n/4 → n/8 → ... → 1
+JavaScript beginnt beim Zählen mit 0. Daher entspricht Notizblock-Adresse \texttt{[Zeile, Spalte]} in JavaScript der Adresse \texttt{[Zeile - 1][Spalte - 1]}.
 
-          \item Anzahl der Schritte: \textbf{$\log_2(n)$}
+\begin{lstlisting}[language=JavaScript]
+let notizblock = Array.from(
+  { length: 10 },
+  () => Array(10).fill(null)
+);
 
-        \end{itemize}
+notizblock[0][0] = 'M';
+notizblock[0][1] = 'a';
+notizblock[0][2] = 't';
+\end{lstlisting}
 
-        
-Beispiel: n = 1024 Personen
+Entscheidend ist zunächst allein die Übersetzung der Adressen.
 
-        \begin{itemize}
-          \item Lineare Suche: bis zu 1024 Vergleiche
+\begin{uebung}{Adressen übersetzen}
+Übertrage \texttt{[2,3] = 'k'}, \texttt{[4,1] = 7} und \texttt{[10,5] = ja} in JavaScript. Formuliere anschließend selbst zwei JavaScript-Zugriffe und übersetze sie zurück in die Notizblock-Schreibweise.
+\end{uebung}
 
-          \item Binärsuche: \textbf{10 Vergleiche} (weil $2^{10} = 1024$)
+\subsection{Stufe 2: Lesen und Schreiben}
 
-        \end{itemize}
+Auch die Grundwerkzeuge bleiben gleich. Eine Zuweisung schreibt einen Wert, die Verwendung einer Adresse auf der rechten Seite liest ihn.
 
-        
-\textbf{Asymptotische Laufzeitordnung:} \textbf{O(log n)} – „logarithmisch"\\
-          Extrem effizient! Selbst bei sehr großen Notizblöcken braucht man nur wenige Schritte.
+\begin{lstlisting}[language=JavaScript]
+notizblock[0][0] = 4;                         // schreiben
+notizblock[0][1] = 7;                         // schreiben
+notizblock[0][2] = notizblock[0][0]
+                    + notizblock[0][1];       // lesen und schreiben
+\end{lstlisting}
 
+Der Zielzustand lautet anschließend: In \texttt{notizblock[0][2]} steht der Wert 11. Neu ist nur die formale Schreibweise; Ausgangszustand, Werkzeuge und Zielzustand sind bereits bekannt.
 
-        \subsection{Vergleich der beiden Verfahren}
+\begin{uebung}{Zustände sichtbar halten}
+Zeichne den Notizblock vor und nach jeder der drei Anweisungen. Markiere bei jedem Schritt, welche Zellen gelesen und welche geschrieben werden.
+\end{uebung}
 
-        
-          
-            Verfahren
-            Worst Case
-            Beispiel (n=1000 Personen)
-          
-          
-            Lineare Suche
-            O(n)
-            1000 Schritte
-          
-          
-            Binärsuche
-            O(log n)
-            10 Schritte
-          
-        
+\subsection{Stufe 3: Mehrere Zeichen zu einem Wert zusammenfassen}
 
-        
-\textbf{Erkenntnis:}\\
-          Je größer n wird, desto dramatischer ist der Unterschied zwischen den Verfahren.\\
-          Die asymptotische Laufzeitordnung (O-Notation) hilft uns, die Effizienz von Algorithmen zu verstehen – unabhängig von Hardware oder Programmiersprache.
+Erst jetzt vereinfachen wir die Darstellung. Ein JavaScript-String darf ein ganzes Wort und eine Number eine ganze Zahl enthalten. Die Einzelzeichen verschwinden nicht; JavaScript verwaltet ihre interne Darstellung für uns.
 
+\begin{lstlisting}[language=JavaScript]
+// Zeichenweise, wie auf dem bisherigen Notizblock
+notizblock[0][0] = 'M';
+notizblock[0][1] = 'a';
+notizblock[0][2] = 't';
+notizblock[0][3] = 'h';
+notizblock[0][4] = 'e';
 
-        \subsection{Verbindung zur späteren Umsetzung}
+// Neue Abstraktion: ein zusammengefasster Wert pro Zelle
+notizblock[1][0] = 'Mathe 7';
+notizblock[1][1] = 97831;
+notizblock[1][2] = 1.99;
+\end{lstlisting}
 
-        
-Auch in einer späteren JavaScript-Umsetzung mit Matrix als Notizblock können wir Schritte zählen, wenn wir auf unserem karierten Papier suchen:
+Diese Stufe verändert die \textbf{Datenrepräsentation}, aber noch nicht den Lösungsweg. Durch die Zusammenfassung benötigt die Bibliotheksliste nur noch die Spalten Titel, Nummer und Preis.
 
-        \begin{itemize}
-          \item Jeder Funktionsaufruf ist ein Schritt
+\begin{uebung}{Abstraktion begründen}
+Speichere den Eintrag „Physik, Nummer 93410, Preis 22,49" zuerst zeichenweise und danach mit drei zusammengefassten Werten. Vergleiche den benötigten Platz und erkläre, welche Details die zweite Darstellung absichtlich verbirgt.
+\end{uebung}
 
-          \item Jeder Schreibzugriff ist ein Schritt
+\subsection{Stufe 4: Wiederholen und Entscheiden}
 
-          \item Jede Abfrage mit Vergleich ist ein Schritt
+Die bekannte Schleife und Bedingung erhalten nun ihre JavaScript-Schreibweise. Der Zeilenzähler bleibt zunächst sichtbar im Hilfsblock.
 
-        \end{itemize}
+\begin{lstlisting}[language=JavaScript]
+let hilfsblock = Array.from(
+  { length: 10 },
+  () => Array(10).fill(null)
+);
 
-        
-Ein Programm zur linearen Suche hätte im Worst Case n Vergleiche.\\
-          Ein Programm zur Binärsuche hätte nur $\log_2(n)$ Vergleiche.
+hilfsblock[0][0] = 97831; // gesuchte Nummer
+hilfsblock[0][1] = false; // gefunden
+hilfsblock[0][2] = 0;     // aktuelle Zeile
 
-
-        
-\textbf{Fazit:} Problemlösung ist Routine – aber manche Routinen sind effizienter als andere. Schritte zählen und asymptotische Laufzeitordnung helfen uns, die besten Werkzeuge auszuwählen.
-
-
-          
-\textbf{TODOs:} Weitere Beispiele für Laufzeitkomplexität, Übungen zum Schritte zählen, Einführung in O-Notation, Vergleich von Algorithmen, praktische Anwendungen, Verbindung zu späteren JavaScript-Implementierungen.
-
-
- \section{Sanfter Umstieg in eine Hochsprache (JavaScript)}
-        
-Bis hierhin haben wir mit Notizblock-Adressen wie \texttt{[Zeile, Spalte]} gearbeitet.\\
-          Das ist didaktisch sehr hilfreich, weil man Speicher direkt "sehen" kann.\\
-          In JavaScript können wir ein Array-of-Arrays – eine \textbf{Matrix} – verwenden, um unser Notizblock-Modell direkt umzusetzen. So verlieren wir nicht die Sichtbarkeit und Nachvollziehbarkeit, sondern gewinnen die Kraft einer echten Programmiersprache hinzu.\\
-          
-          Da wir uns sukzessive an die praktische Verwendung von JavaScript herantasten, werden wir mit einer etwas größeren Veränderung ggü. dem Notizblock beginnen:
-          Das bedeutet, wir tragen nicht mehr alle Zeichen/Ziffern einzeln ab, sondern legen direkt \textbf{bereits zusammengefasste Werte (Strings, Numbers)} in den Zellen ab.\\
-
-          \textbf{Hinweis:} TODO: Der Übergang in eine übliche Programmiersprache soll in \textbf{kleinen, bewusst gesetzten Schritten} erfolgen. Jede Erweiterung – von zusammengefassten Werten über Schleifen bis zu Bedingungen – baut dabei auf dem bereits bekannten Notizblock-Modell auf. So bleibt der rote Faden stets sichtbar, und es entsteht kein Bruch zwischen dem gedanklichen Modell und der realen Programmiersprache.\\
-
-
-        \subsection{Erste Annäherung an JavaScript durch zusammengefasste Werte}
-
-
-        \subsubsection{Erster Übergang: Notizblock wird zur Matrix}
-
-        
-Grundidee:
-
-        \begin{itemize}
-          \item Notizblock: \texttt{[1,1] = 4}
-          \item JavaScript-Matrix: \texttt{notizblock[0][0] = 4;}
-
-        \end{itemize}
-
-        
-Beides meint dasselbe Prinzip: \textbf{ein Speicherplatz erhält einen Wert}.\\
-          Der Unterschied ist minimal – wir nutzen einfach die native Array-Struktur von JavaScript, um unser Notizblock-Konzept direkt abzubilden:
-
-        \begin{itemize}
-          \item Im Notizblock ist die Position sichtbar als \texttt{[Zeile, Spalte]}.
-          \item In JavaScript bleibt das Konzept erhalten: \texttt{notizblock[zeile][spalte]}. Technisch beginnt die Indizierung bei 0.
-
-        \end{itemize}
-
-
-        \subsubsection{Mini-Beispiel (gleicher Inhalt, zwei Schreibweisen)}
-
-        \begin{verbatim}
-  Notizblock-Idee:
-    [1,1] = 4
-    [1,2] = 7
-    [1,3] = [1,1] + [1,2]
-
-  JavaScript-Idee (mit Matrix):
-
-    // 10x10 Matrix mit unabhängigen Zeilen (für den Anfang ist der konkrete Aufbau dieser beiden Zeilen erstmal nicht relevant)
-    let notizblock = Array.from({ length: 10 }, () => Array(10).fill(null));
-    let hilfsblock = Array.from({ length: 10 }, () => Array(10).fill(null));
-    
-    notizblock[0][0] = 4;
-    notizblock[0][1] = 7;
-    notizblock[0][2] = notizblock[0][0] + notizblock[0][1];
-        \end{verbatim}
-
-    
-    Wichtig zu erkennen ist, dass wir im Gegensatz zu unserem Notizblock nicht mit 1 zu zählen beginnen, sondern mit 0.
-
-
-        \subsubsection{Unsere Bücherei aus der alten Welt übertragen}
-
-        \begin{verbatim}
-  // Altes Modell: zeichenweise gespeichert (wie auf dem karierten Notizblock)
-    ['M','a','t','h','e',' ','7', '9','7','8','3','1', '1','9','9']
-    ['P','h','y','s','i','k',' ', '9','3','4','1','0', '2','2','4']
-
-  // Neues JS-Notizblock-Modell: Matrix + bereits zusammengefasste Werte
-  let notizblock = Array.from({ length: 10 }, () => Array(10).fill(null));
-  let hilfsblock = Array.from({ length: 10 }, () => Array(10).fill(null));
-  // Zeile 0 = erstes Buch, Zeile 1 = zweites Buch
-  // Spalte 0 = Titel, Spalte 1 = Nummer, Spalte 2 = Preis
-  notizblock[0][0] = 'Mathe 7';
-  notizblock[0][1] = 97831;
-  notizblock[0][2] = 1.99;
-
-  notizblock[1][0] = 'Physik';
-  notizblock[1][1] = 93410;
-  notizblock[1][2] = 22.49;
-        \end{verbatim}
-
-        
-
-
-        \subsubsection{Schleifendenken vom Notizblock zu JavaScript}
-
-        \begin{verbatim}
-  // Wir haben die Werte bereits zusammengefasst.
-  // Deshalb sammeln wir nicht mehr Zeichen für Zeichen.
-  // Eine innere Schleife ist hier dadurch nicht mehr nötig.
-  // Der Zeilenzähler liegt im Hilfsblock.
-  // Ausgabeziel im Notizblock beginnt bei Zeile 5.
-  // Spalten: 0=Zeile, 1=Titel, 2=Nummer, 3=Preis
-
-  hilfsblock[0][0] = 0; // aktuelle Zeile
-  while (hilfsblock[0][0] <= 1) {
-    // ab Zeile 5 + aktuelle Zeile die Ergebnisse schreiben (im Grunde übertragen wir nur die Werte in die Ergebniszeilen)
-    notizblock[5 + hilfsblock[0][0]][0] = hilfsblock[0][0];
-    notizblock[5 + hilfsblock[0][0]][1] = notizblock[hilfsblock[0][0]][0];
-    notizblock[5 + hilfsblock[0][0]][2] = notizblock[hilfsblock[0][0]][1];
-    notizblock[5 + hilfsblock[0][0]][3] = notizblock[hilfsblock[0][0]][2];
-
-    hilfsblock[0][0] = hilfsblock[0][0] + 1;
+while (hilfsblock[0][2] <= 1) {
+  if (notizblock[hilfsblock[0][2]][1] === hilfsblock[0][0]) {
+    notizblock[9][0] = notizblock[hilfsblock[0][2]][0];
+    notizblock[9][1] = notizblock[hilfsblock[0][2]][1];
+    notizblock[9][2] = notizblock[hilfsblock[0][2]][2];
+    hilfsblock[0][1] = true;
   }
-        \end{verbatim}
 
-        
-Analog zum Notizblock bleibt die Denkweise gleich: Wir gehen alle Bücher der Reihe nach durch.\\
-Da die Zellen bereits zusammengefasste Werte enthalten (String/Number), entfällt hier die innere Schleife über Einzelzeichen.
+  hilfsblock[0][2] = hilfsblock[0][2] + 1;
+}
+\end{lstlisting}
 
+Die Klammern legen eindeutig fest, welche Anweisungen wiederholt und welche nur unter einer Bedingung ausgeführt werden. Inhaltlich bleibt der Ablauf derselbe: Zeile lesen, Nummer vergleichen, gegebenenfalls Ergebnis und Merker schreiben, zur nächsten Zeile gehen.
 
-        \subsubsection{Schleife mit Bedingung vom Notizblock zu JavaScript}
+\begin{uebung}{Ablaufprotokoll statt Raten}
+Führe das Programm für die gesuchte Nummer 93410 von Hand aus. Notiere nach jedem Schleifendurchlauf aktuelle Zeile, gelesene Nummer und den Merker \emph{gefunden}. Wiederhole die Übung mit einer Nummer, die nicht vorhanden ist.
+\end{uebung}
 
-        \begin{verbatim}
-  // Gesuchte Nummer (d.h. nach dieser Nummer wird gefragt) und Merker im Hilfsblock
-  hilfsblock[1][0] = 97831; // gesuchteNummer
-  hilfsblock[1][1] = false; // gefunden
-  hilfsblock[1][2] = 0;     // aktuelle Zeile
+\subsection{Stufe 5: Das Tätigkeitenblatt wird zur Funktion}
 
-  // Ergebniszeile (analog zu "schreibe in Zeile 10"):
-  // Wir nutzen hier Zeile 9 (0-basierte Indizierung)
-  while (hilfsblock[1][2] <= 1) {
-    if (notizblock[hilfsblock[1][2]][1] === hilfsblock[1][0]) {
-      notizblock[9][0] = notizblock[hilfsblock[1][2]][0];
-      notizblock[9][1] = notizblock[hilfsblock[1][2]][1];
-      notizblock[9][2] = notizblock[hilfsblock[1][2]][2];
-      hilfsblock[1][1] = true;
-      // optimiert wäre hier noch ein Abbruch der Schleife, aber wir konzentrieren uns erstmal auf das Wesentliche
+Ein wiederverwendbarer Ablauf des Tätigkeitenblatts entspricht in JavaScript einer Funktion. Erst nachdem der Ablauf verstanden und getestet wurde, erhält er einen Namen und kann als Baustein verwendet werden.
+
+\begin{lstlisting}[language=JavaScript]
+function sucheNummer(notizblock, gesuchteNummer) {
+  let aktuelleZeile = 0;
+
+  while (aktuelleZeile < 2) {
+    if (notizblock[aktuelleZeile][1] === gesuchteNummer) {
+      return aktuelleZeile;
     }
-
-    hilfsblock[1][2] = hilfsblock[1][2] + 1;
+    aktuelleZeile = aktuelleZeile + 1;
   }
 
-  if (hilfsblock[1][1] === true) {
-    notizblock[9][3] = 'Treffer';
-  } else {
-    notizblock[9][3] = 'Kein Treffer';
-  }
-        \end{verbatim}
+  return -1;
+}
 
-        
-Damit entspricht die Logik direkt dem Notizblock-Ablauf: Zeilen durchlaufen, Bedingung prüfen, bei Treffer Daten in eine Ergebniszeile schreiben, sonst weitersuchen.
+let gefundeneZeile = sucheNummer(notizblock, 97831);
+\end{lstlisting}
 
-        
-Didaktischer Nutzen: Lernende erkennen, dass JavaScript nichts "Neues" zaubert.\\
-          Die Programmiersprache gibt nur die technische Umsetzung unseres Notizblock-Konzepts. Das Modell – adressierter Speicher – bleibt erhalten.\\      
+Hier wird der Hilfsblock teilweise durch lokale Variablen ersetzt. Das ist keine neue Art des Denkens, sondern eine kompaktere Darstellung derselben Hilfswerte. Der Rückgabewert \texttt{-1} beschreibt den Zielzustand „kein Eintrag gefunden".
+
+\begin{uebung}{Vom Tätigkeitenblatt zur Funktion}
+Beschreibe zuerst ein Tätigkeitenblatt \emph{preis\_lesen(zeile)} mit Parametern, Werkzeuganwendungen und Ergebnis. Übersetze es anschließend in eine JavaScript-Funktion. Prüfe die Funktion mit einer gültigen und einer ungültigen Zeile.
+\end{uebung}
+
+\begin{merksatz}[Roter Faden]
+JavaScript führt keine neue Form der Problemlösung ein. Notizblock, Hilfsblock, Werkzeuge und Tätigkeitenblatt werden schrittweise zu Matrix, Variablen, Anweisungen und Funktionen.
+\end{merksatz}
 
 
               
@@ -1079,7 +1230,9 @@ Ein typisches Beispiel aus der Schulmathematik ist das Lösen von Gleichungen:
         
 Beide Paradigmen können auf unser Notizblock-Modell abgebildet werden – entweder durch Umkehrfunktionen oder durch schrittweise Verarbeitung mit Funktionsaufrufen und Vergleichen.
 
-        \textbf{Übung:} TODO: Übung um mithilfe einer Programmiersprache eine Gleichungsumstellung zu implementieren
+      \begin{uebung}{Eine Gleichungsumstellung programmatisch ausführen}
+      Wähle eine einfache Gleichung wie \(x+3=7\). Beschreibe zunächst die algebraischen Umformungsschritte und lege für jeden Schritt Ausgangszustand, verwendetes Werkzeug und Zielzustand fest. Setze den Ablauf anschließend in einer Programmiersprache um. Das Programm soll die Gleichung nicht nur für die Zahl 7, sondern für verschiedene Werte auf der rechten Seite bearbeiten können.
+      \end{uebung}
 
 
         \subsection{Gleichungen über nicht-numerische Objekte: Farben}
@@ -1222,16 +1375,19 @@ Erkenntnis:
       \subsubsection{Was ist eine Beweisführung?}
       
 
-        Eine \textbf{Beweisführung} ist ein geordneter Prozess (ein Spezialfall der Problemlösung), um eine Behauptung oder These systematisch aus bekannten Fakten oder Prämissen zu zeigen.  
-        Sie besteht aus drei Kernbestandteilen:
+        Eine \textbf{Beweisführung} ist ein geordneter Prozess und damit ein Spezialfall der Problemlösung. Die allgemeine Struktur bleibt erhalten, erhält beim Beweisen aber fachlich genauere Namen:
       
 
       \begin{itemize}
-        \item \textbf{Behauptung / These:} Das Ziel, das bewiesen werden soll.
+        \item \textbf{Problem und Probleminstanz:} Allgemein soll die Gültigkeit einer Behauptung gezeigt werden; die konkrete Behauptung bildet die jeweilige Probleminstanz.
 
-        \item \textbf{Prämissen:} Bekannte Fakten, Annahmen oder Axiome, die als Ausgangspunkt dienen.
+        \item \textbf{Ausgangszustand:} Bekannte Fakten, Annahmen oder Axiome heißen hier \textbf{Prämissen}.
 
-        \item \textbf{Werkzeuge:} Anwendung von Schlussfolgerungen oder andere logische/arithmetic Methoden, z.\,B. direkter Beweis, Beweis durch Widerspruch oder Induktion - TODO: näher auf diese eingehen.
+        \item \textbf{Gewünschter Zielzustand:} Die \textbf{Behauptung oder These} ist nachvollziehbar aus den Prämissen hergeleitet.
+
+        \item \textbf{Werkzeuge:} Schlussregeln und andere logische oder arithmetische Methoden, z.\,B. direkter Beweis, Beweis durch Widerspruch oder Induktion - TODO: näher auf diese eingehen.
+
+        \item \textbf{Lösungsweg:} Die \textbf{Ableitung} ist eine geordnete Folge sinnvoller Werkzeuganwendungen, die von den Prämissen zur Behauptung führt.
 
       \end{itemize}
 
@@ -1252,6 +1408,10 @@ Erkenntnis:
       
 
         Erkenntnis: Der Großteil der Beweisführung besteht in der Anwendung von Schlussfolgerungen. Die Behauptung gibt den Rahmen vor.
+
+      \begin{uebung}{Beweisführung als Problemlösung lesen}
+      Ordne im Sokrates-Beispiel Problem, Probleminstanz, Ausgangszustand, Zielzustand, Werkzeug und Lösungsweg zu. Ersetze danach eine Prämisse so, dass die vorhandene Schlussfolgerung nicht mehr sinnvoll angewendet werden kann, und erkläre den entstandenen Bruch.
+      \end{uebung}
       
 
 
@@ -1534,6 +1694,20 @@ Nur im Falle der Resteklasse 0 wissen wir, dass es sich um eine Zahl handelt, di
     
       
         \section{Tipps zur Didaktik}
+
+        \subsection{Wo Übungen in diesem Lernweg sinnvoll sind}
+
+        Übungen stehen vor allem an einem \textbf{Übergang zwischen zwei Darstellungen oder Denkstufen}. Dort zeigen sie, ob das Fundament verstanden wurde und auf eine neue Situation übertragen werden kann.
+
+        \begin{itemize}
+          \item \textbf{Nach einer neuen Darstellung:} Lernende stellen dieselbe Information selbst dar, lesen sie zurück und begründen ihre Struktur.
+          \item \textbf{Nach einem neuen Werkzeug:} Lernende führen es aus und erklären, warum seine Anwendung im aktuellen Zustand sinnvoll ist.
+          \item \textbf{Nach einem vollständigen Beispiel:} Lernende lösen eine ähnliche Probleminstanz auf einem eigenen, möglicherweise unkonventionellen Weg.
+          \item \textbf{Vor einer stärkeren Abstraktion:} Lernende führen den bisher sichtbaren Ablauf von Hand aus. Erst danach wird er durch Datentypen, Funktionen oder eine Hochsprache verdichtet.
+          \item \textbf{Nach einer Abstraktion:} Lernende übersetzen in beide Richtungen, etwa vom Notizblock zu JavaScript und wieder zurück.
+        \end{itemize}
+
+        Geeignete Übungen fragen daher nicht nur nach einem Ergebnis. Sie verlangen einen sichtbaren Ausgangszustand, einen Zielzustand, begründete Werkzeuganwendungen und eine Prüfung des erreichten Zustands. So bleibt Raum für eigene Lösungswege, ohne dass die fachliche Nachvollziehbarkeit verloren geht.
       
         \begin{itemize}
           \item Bei Übungen ist es wichtig, dass der Lernende seinen eigenen Weg nutzt, um zum Ziel zu kommen.
@@ -1564,7 +1738,7 @@ Nur im Falle der Resteklasse 0 wissen wir, dass es sich um eine Zahl handelt, di
 
           \end{itemize}
 
-          \item Gut wäre es, ein Thema (bspw. Stochastik) über ein Fundament (bspw. Kombinatorik in Baumstruktur) zu vermitteln.
+          \item Gut wäre es, ein Thema (bspw. Stochastik) über ein gemeinsames Fundament (bspw. Kombinatorik in Baumstruktur) zu vermitteln.
             Auch u.a. das mehrfache Falten von Papier kann auf Kombinatorik reduziert werden.
           
 
