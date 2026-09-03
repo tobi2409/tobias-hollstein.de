@@ -1222,7 +1222,7 @@ Die Idee dahinter:
 Ein typisches Beispiel aus der Schulmathematik ist das Lösen von Gleichungen:
 
         \begin{itemize}
-          \item Funktional (algebraisch): x + 3 = 7 → x = 7 - 3
+          \item Algebraisch: x + 3 = 7 → x = 7 - 3
 
           \item Imperativ / (klassisch) programmatisch: Schrittweise Werte testen oder hochzählen, bis die Gleichung erfüllt ist.
 
@@ -1265,7 +1265,14 @@ Eine bekannte Umkehrfunktion nutzt die Struktur der Gleichung und führt gezielt
 Dieser Vergleich gilt für das hier gewählte Kostenmodell. Bei sehr großen Zahlen haben auch arithmetische Werkzeuge innere Kosten. Außerdem muss eine passende Umkehrfunktion bekannt und unter den gegebenen Bedingungen anwendbar sein. Fehlt sie oder lässt sich die Gleichung nicht direkt umstellen, kann ein iteratives oder näherungsweises Verfahren dennoch sinnvoll sein.
 
       \begin{uebung}{Eine Gleichungsumstellung programmatisch ausführen}
-      Wähle eine einfache Gleichung wie \(x+3=7\). Beschreibe zunächst die algebraischen Umformungsschritte und lege für jeden Schritt Ausgangszustand, verwendetes Werkzeug und Zielzustand fest. Setze den Ablauf anschließend in einer Programmiersprache um. Das Programm soll die Gleichung nicht nur für die Zahl 7, sondern für verschiedene Werte auf der rechten Seite bearbeiten können.
+      Entwickle ein JavaScript-Programm, das einfache Gleichungen mit einer Unbekannten \(x\) auf zwei Arten löst. Verwende zunächst Gleichungen der Formen \(x+a=b\), \(x-a=b\), \(x\cdot a=b\) und \(x/a=b\).
+
+      \begin{enumerate}
+        \item \textbf{Algebraisch mit automatischer Umstellung:} Das Programm erhält die Gleichung beziehungsweise ihre Bestandteile als Eingabe. Es erkennt selbstständig die verwendete Operation, wählt aus einem Werkzeug-Portfolio die passende Umkehrfunktion aus und stellt die Gleichung nach \(x\) um. Aus \(x+3=7\) soll es beispielsweise zuerst \(x=7-3\) und anschließend \(x=4\) erzeugen. Die Umstellung \texttt{x = b - a} darf also nicht bereits fest im allgemeinen Lösungsablauf vorausgesetzt werden. Beschreibe Ausgangszustand, Auswahl des Werkzeugs, Umformungsschritt und Zielzustand.
+        \item \textbf{Imperativ:} Beginne mit einem Startwert für \(x\), teste in einer Schleife \texttt{x + a === b} und verändere \(x\) schrittweise, bis die Gleichung erfüllt ist. Beschreibe auch hier Ausgangszustand, verwendete Werkzeuge und Zielzustand.
+      \end{enumerate}
+
+      Beide JavaScript-Varianten sollen für verschiedene Werte von \(a\) und \(b\) funktionieren. Erweitere auch die imperative Variante so, dass sie die jeweils eingegebene Operation prüfen kann. Zähle anschließend in einem selbst festgelegten Kostenmodell die benötigten Schritte und vergleiche die Laufzeit beider Lösungswege.
       \end{uebung}
 
 
