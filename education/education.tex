@@ -1224,11 +1224,45 @@ Ein typisches Beispiel aus der Schulmathematik ist das Lösen von Gleichungen:
         \begin{itemize}
           \item Funktional (algebraisch): x + 3 = 7 → x = 7 - 3
 
-          \item Imperativ / programmatisch: Schrittweise Werte testen oder hochzählen, bis die Gleichung erfüllt ist.
+          \item Imperativ / (klassisch) programmatisch: Schrittweise Werte testen oder hochzählen, bis die Gleichung erfüllt ist.
 
         \end{itemize}
         
-Beide Paradigmen können auf unser Notizblock-Modell abgebildet werden – entweder durch Umkehrfunktionen oder durch schrittweise Verarbeitung mit Funktionsaufrufen und Vergleichen.
+\textbf{Beide Paradigmen} können auf unser Notizblock-Modell abgebildet werden – entweder durch Beschreibung und Anwendung von Umkehrfunktionen oder durch schrittweise Verarbeitung mit Funktionsaufrufen und Vergleichen.
+
+\subsubsection{Warum Umkehrfunktionen häufig sinnvoller sind}
+
+Bei der algebraischen Variante wird die ursprüngliche Operation gezielt rückgängig gemacht. Aus
+
+\[
+x+3=7
+\]
+
+wird durch Anwendung der Umkehrfunktion der Addition unmittelbar
+
+\[
+x=7-3=4.
+\]
+
+Wenn Addition und Subtraktion bereits als Werkzeuge im Werkzeug-Portfolio liegen und im einfachen Kostenmodell jeweils als eine Werkzeuganwendung gezählt werden, benötigt dieser Lösungsweg unabhängig vom Wert auf der rechten Seite nur eine feste Anzahl von Schritten. Seine Laufzeit ist in diesem Modell \(\mathcal{O}(1)\).
+
+Die imperative Variante könnte dagegen bei einem Startwert beginnen und mögliche Werte nacheinander testen:
+
+\begin{verbatim}
+  x = 0: 0 + 3 = 7? nein
+  x = 1: 1 + 3 = 7? nein
+  x = 2: 2 + 3 = 7? nein
+  x = 3: 3 + 3 = 7? nein
+  x = 4: 4 + 3 = 7? ja
+\end{verbatim}
+
+Jeder weitere Kandidat benötigt mindestens eine Berechnung, einen Vergleich und gegebenenfalls einen Schleifenschritt. Liegt die Lösung nach \(n\) zu prüfenden Kandidaten, wächst der Aufwand linear mit \(n\); die Suche besitzt dann die Laufzeitordnung \(\mathcal{O}(n)\).
+
+\begin{merksatz}[Struktur statt Ausprobieren]
+Eine bekannte Umkehrfunktion nutzt die Struktur der Gleichung und führt gezielt zur Lösung. Eine imperative Suche probiert mögliche Lösungen aus. Deshalb ist die algebraische Variante meist erheblich effizienter, besonders wenn der mögliche Wertebereich groß ist.
+\end{merksatz}
+
+Dieser Vergleich gilt für das hier gewählte Kostenmodell. Bei sehr großen Zahlen haben auch arithmetische Werkzeuge innere Kosten. Außerdem muss eine passende Umkehrfunktion bekannt und unter den gegebenen Bedingungen anwendbar sein. Fehlt sie oder lässt sich die Gleichung nicht direkt umstellen, kann ein iteratives oder näherungsweises Verfahren dennoch sinnvoll sein.
 
       \begin{uebung}{Eine Gleichungsumstellung programmatisch ausführen}
       Wähle eine einfache Gleichung wie \(x+3=7\). Beschreibe zunächst die algebraischen Umformungsschritte und lege für jeden Schritt Ausgangszustand, verwendetes Werkzeug und Zielzustand fest. Setze den Ablauf anschließend in einer Programmiersprache um. Das Programm soll die Gleichung nicht nur für die Zahl 7, sondern für verschiedene Werte auf der rechten Seite bearbeiten können.
